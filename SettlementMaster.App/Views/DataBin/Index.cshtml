@@ -1,0 +1,68 @@
+﻿<div id="toolbar">
+    <div class="col-lg-12">
+        <a id="btnNew" class="btn btn-success editor_createa" href="@Url.Action("Add","DataBin")"><i class="fa fa-plus"></i> Add New</a>
+        <a class="btn btn-default editor_createa" href="@Url.Action("BinUpload","DataBin")"><i class="fa fa-upload"></i> Upload</a>
+        
+    </div>
+</div>
+<div id="pnlGrid">
+    <input type="hidden" name="menuId" id="menuId" value="@ViewBag.MenuId" />
+    @*<div id="right_sidebar">
+
+    </div>*@
+    @*<div id="content_new">*@
+        <div class="row" style="margin:10px">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-list" style="color:#57ACE7;"></i>  Bin List
+                    </div>
+                    <div class="panel-body ">
+                        <div class="col-lg-122">
+                            <div style="background-color:#F4F4F4;margin-bottom:10px;padding-top:10px">
+                                @using (Html.BeginForm("", "", FormMethod.Post, new { id = "formSearch", }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="col-lg-4 col-lg-offset-8" style="margin-bottom:10px">
+                                        <div class="form-group">
+                                            <label class="control-label">Institution</label>
+                                            @Html.DropDownList("CBN_CODE", ViewBag.BankList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                }
+                            </div>
+                            <div class="table-responsiva divad2">
+                                <table id="example1" class="table table-striped datatable table-condensed table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="">Action? </th>
+                                            <th>CBN CODE</th>
+                                            <th>INSTITUION NAME</th>
+                                            <th>CARD SCHEME</th>
+                                            <th>BIN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div id="pnlForm" style="display:none" class="panel-form">
+
+</div>*@
+@section Scripts {
+@if (TempData["msg"] != null)
+{
+    var msg = @Html.Raw(Json.Encode(TempData["msg"]));
+    <script>
+        displayDialogNoty('Notification',@msg) ;
+    </script>
+}
+    @Scripts.Render("~/Scripts/app/bin.js")
+}

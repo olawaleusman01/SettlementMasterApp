@@ -1,0 +1,216 @@
+﻿@using Generic.Dapper.Model
+@model MCCObj
+<div id="toolbar">
+    <div class="col-lg-12">
+        <a id="btnCancel" class="btn btn-warning editor_returna" href="@Url.Action("Index","MCC",new {m = ViewBag.MenuId })"><i class="fa fa-long-arrow-left"></i> Return</a>
+
+    </div>
+</div>
+@*<div id="right_sidebar">
+    @if (Model != null && Model.ITBID != 0)
+    {
+        <div class="panel panel-warning">
+            <div class="panel-body widget">
+                <div style="">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Created By:</span>
+                </div>
+                <div style="margin-top:10px">
+                    <i class="fa fa-calendar"></i>
+                    <span class="light-grey">Date Created:</span>
+                </div>
+                <div style="margin-top:10px" class="div-authname">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Authorized By:</span>
+                </div>
+                <div style="margin-top:10px" class="div-authdate">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Modified Date:</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>*@
+@*<div id="content_new">*@
+    <div class="row" style="margin:10px">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+                    @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
+
+                </div>
+                <div class="panel-body ">
+                    @using (Html.BeginForm("Add", "MCC", FormMethod.Post, new { id = "formMCC" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="m" id="m" value="@ViewBag.MenuId" />
+                            <div class="form-horizontal">
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">MCC Code <span class="required"> *</span></label>
+                                    <div class="col-md-4">
+                                        @Html.HiddenFor(model => model.ITBID)
+                                        @if (Model.ITBID > 0)
+                                        {
+                                            @Html.TextBoxFor(model => model.MCC_CODE, new { @class = "form-control input-sm",maxlength="4",@readonly="readonly" })
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(model => model.MCC_CODE, new { @class = "form-control input-sm",maxlength="4" })
+
+                                        }
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                    
+                                    <label class="col-md-3 control-label">MCC Description <span class="required"> *</span></label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.MCC_DESC, new { @class = "form-control input-sm" })
+                                    </div>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Sector <span class="required"> *</span></label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.SECTOR_CODE, ViewBag.Sector as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                    </div>
+      
+                                </div>
+                                <div class="clearfix"></div>
+                                @if (ViewBag.StatusVisible == true)
+                                {
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Status</label>
+                                        <div class="col-md-2">
+                                            @*<select class="form-control select2" name="Status" id="Status">
+                                                <option value="ACTIVE">Active</option>
+                                                <option value="CLOSE">Close</option>
+                                            </select>*@
+                                            @Html.DropDownListFor(model => model.STATUS, ViewBag.RecordStatus as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+
+                                        </div>
+                                    </div>
+                                }
+                                <div class="clearfix"></div>
+                                <div style="border: 1px solid #CCC;background-color:#f7f7f7;margin-bottom:10px;margin-left:0px;margin-right:0px;padding:10px">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Set By</label>
+                                        <div class="col-lg-4">
+                                            @Html.DropDownList("CBN_CODE", ViewBag.Acquirer as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button type="button" class="btn btn-info" id="btnAddMsc" ><i class="fa fa-plus"></i> Add MSC</button>
+                                        </div>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="table-responsive">
+                                            <div id="divAcqMsc">
+                                                @{ 
+                                                    var mccObj = ViewBag.MCCMSC as List<MccMscObj>;
+                                                    if (mccObj == null)
+                                                    {
+                                                        mccObj = new List<MccMscObj>();
+                                                    }
+                                                   
+                                                    Html.RenderPartial("_ViewAcqMSC", mccObj);
+                                                }
+                                                @*<table id="example2" class="table table-striped table-condensed table-hover table-bordered">
+                                                  
+                                                    <colgroup span="3"></colgroup>
+                                                    <colgroup span="4" style="background-color:#ddd"></colgroup>
+                                                    <colgroup span="4" style="background-color:lightyellow"></colgroup>
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th colspan="3" style="text-align:center"></th>
+                                                            <th colspan="4" style="text-align:center">Domestic Settings</th>
+                                                            <th colspan="4" style="text-align:center">International Settings</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="width:10%;text-align:center">Action?</th>
+                                                            <th>
+                                                                Channel
+                                                            </th>
+                                                            <th>
+                                                                Card Scheme
+                                                            </th>
+                                                            <th>
+                                                                Calc. Basis
+                                                            </th>
+                                                            <th>Dom. MSC Value <i class="fa fa-info-circle" style="color:orangered" data-toggle="tooltip" title="Domestic MSC Value"></i></th>
+                                                            <th>Dom. CAP </th>
+                                                            <th> Dom. Sett. Currency</th>
+                                                            <th>
+                                                                Calc. Basis
+
+                                                            </th>
+                                                            <th>Intl. MSC Value</th>
+                                                            <th>Intl. CAP</th>
+
+                                                            <th> Intl. Sett. Currency</th>
+                                                           
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>*@
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+@if (Model.ITBID == 0 && ViewBag.CanAdd == true)
+{
+                                <div style="text-align:center">
+                                    <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+
+                                </div>
+}
+@if (Model.ITBID > 0 && ViewBag.CanEdit == true)
+{
+    <div style="text-align:center">
+        <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+
+    </div>
+}
+                            </div>
+                  
+
+                            }
+                        </div>
+               
+            </div>
+        </div>
+
+    </div>
+@*</div>*@
+<div class="clearfix"></div>
+                      
+<div class="modal fade" id="myModalMsc"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  
+</div>
+@*<script>
+    $('.select2').select2({
+        theme: "classic"
+    });
+   // $('a.editor_return').click();
+</script>*@
+@section Scripts {
+@if (ViewBag.Message != null)
+{
+
+    var msg = @Html.Raw(Json.Encode(ViewBag.Message));
+    <script>
+        displayDialogNoty('Notification',@msg) ;
+    </script>
+
+}
+    @Scripts.Render("~/Scripts/app/mcc.js")
+}

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3e4041e484814da48729aa2423b97b85" Name="Diagram1" ZoomLevel="58">
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_ROLES" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_ROLESTEMP" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_AUTHLIST" Width="1.5" PointX="3.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_AUTHCHECKER" Width="1.5" PointX="9.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_CARDSCHEME" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_CARDSCHEMETEMP" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_CURRENCY" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_CURRENCYTEMP" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_DEPARTMENT" Width="1.5" PointX="9.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_INSTITUTION" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_INSTITUTIONTEMP" Width="1.5" PointX="11.75" PointY="11.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_FREQUENCY" Width="1.5" PointX="5.375" PointY="13.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_FREQUENCYTEMP" Width="1.5" PointX="7.375" PointY="13.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_DEPARTMENTTEMP" Width="1.5" PointX="5.375" PointY="9.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_COMPANY_PROFILE" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_COMPANY_PROFILETEMP" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_COUNTRY" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_COUNTRYTEMP" Width="1.5" PointX="14.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_STATE" Width="1.5" PointX="14.75" PointY="10.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_STATETEMP" Width="1.5" PointX="14.75" PointY="14.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_ASPNETUSERSTEMP" Width="1.5" PointX="17.375" PointY="11.875" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MCC" Width="1.5" PointX="0.75" PointY="37.5" />
+        <EntityTypeShape EntityType="SettlementMasterModel.AspNetUser" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MCCTEMP" Width="1.5" PointX="17.75" PointY="17.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_SECTOR" Width="1.5" PointX="0.75" PointY="18.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_SECTORTEMP" Width="1.5" PointX="14.75" PointY="18.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_PARTYTYPE" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_PARTYTYPETEMP" Width="1.5" PointX="21.375" PointY="4.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_PARTY" Width="1.5" PointX="20.375" PointY="15" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_PARTYTEMP" Width="1.5" PointX="21.375" PointY="8.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_PARTYACCOUNT" Width="1.5" PointX="22.625" PointY="15.25" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_PARTYACCOUNT_SM_PARTY" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_PARTYACCOUNTTEMP" Width="1.5" PointX="20.375" PointY="20.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_BANKTYPE" Width="1.5" PointX="22.375" PointY="20.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_INSTITUTIONACCTTEMP" Width="1.5" PointX="17.375" PointY="21.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_INSTITUTIONACCT" Width="1.5" PointX="14" PointY="22" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_INSTITUTIONACCT_SM_INSTITUTION" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERCHANTACCT" Width="1.5" PointX="12.625" PointY="28.625" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERCHANTACCTTEMP" Width="1.5" PointX="23.375" PointY="7.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERCHANTDETAIL" Width="1.5" PointX="3" PointY="35.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERCHANTDETAILHIST" Width="1.5" PointX="24.375" PointY="20.75" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_MERCHANTDETAIL_SM_MCC" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_MERCHANTACCT_SM_MERCHANTDETAIL" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERCHANTDETAILTEMP" Width="1.5" PointX="10.375" PointY="21.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_TERMINAL" Width="1.5" PointX="16.875" PointY="27.375" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_TERMINAL_SM_FREQUENCY" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_TERMINAL_SM_MERCHANTACCT" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_TERMINAL_SM_MERCHANTDETAIL" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MAILGROUP" Width="1.5" PointX="23.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MAILGROUPTEMP" Width="1.5" PointX="25.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_REVENUEHEADTEMP" Width="1.5" PointX="21.375" PointY="25.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_REVENUEHEAD" Width="1.5" PointX="19.125" PointY="32.5" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_REVENUEHEAD_SM_MERCHANTACCT" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_REVENUEGROUP" Width="1.5" PointX="15.25" PointY="39" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_REVENUEGROUPTEMP" Width="1.5" PointX="0.75" PointY="26.75" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_REVENUEGROUP_SM_MERCHANTACCT" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_REVENUEGROUP_SM_MERCHANTDETAIL" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_REVENUEHEAD_SM_REVENUEGROUP" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERCHANTTERMINALUPLD" Width="1.5" PointX="26.375" PointY="19.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERTERUPLDGLO" Width="1.5" PointX="27.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_UPMER_UPLDGLO" Width="1.5" PointX="27.375" PointY="4.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_UPMERTERMUPLDREC" Width="1.5" PointX="27.375" PointY="8.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERCHANTCONFIG" Width="1.5" PointX="8.375" PointY="28.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERCHANTCONFIGTEMP" Width="1.5" PointX="28.375" PointY="19.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_SETTLEMENTOPTION" Width="1.5" PointX="28.375" PointY="25.125" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_SETTLEMENTOPTIONTEMP" Width="1.5" PointX="29.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_SETTLEMENTRULE" Width="1.5" PointX="30.625" PointY="25" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_SETTLEMENTRULETEMP" Width="1.5" PointX="29.375" PointY="4.75" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_SETTLEMENTRULE_SM_SETTLEMENTOPTION" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_CHANNELS" Width="1.5" PointX="7.375" PointY="17.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_CHANNELSTEMP" Width="1.5" PointX="7.375" PointY="21.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MCCMSC" Width="1.5" PointX="3" PointY="17.5" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MCCMSCTEMP" Width="1.5" PointX="29.375" PointY="8.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERCHANTMSC" Width="1.5" PointX="5.25" PointY="18.25" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERCHANTMSCTEMP" Width="1.5" PointX="23.375" PointY="29.75" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_MCCMSC_SM_CARDSCHEME" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_MERCHANTMSC_SM_CARDSCHEME" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_MCCMSC_SM_MCC" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_MERCHANTMSC_SM_MCC" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_MERCHANTMSC_SM_MERCHANTDETAIL" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_ROLEPRIV" Width="1.5" PointX="28.375" PointY="29.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_ROLEPRIVTEMP" Width="1.5" PointX="30.375" PointY="16.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERCHANTUPDATEUPLD" Width="1.5" PointX="25.75" PointY="30.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MERTERUPDUPLDGLO" Width="1.5" PointX="30.75" PointY="29.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_UPMERCHANTUPDATEUPLD" Width="1.5" PointX="31.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_UPMERUPDUPLDGLO" Width="1.5" PointX="0.75" PointY="31.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_RESETLOCKOUT_TEMP" Width="1.5" PointX="7.375" PointY="25.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_RESETPASSWORD_TEMP" Width="1.5" PointX="30.375" PointY="21.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_TERMINALTEMP" Width="1.5" PointX="7.375" PointY="33.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_DATABIN" Width="1.5" PointX="32.375" PointY="15.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_DATABIN_TEMP" Width="1.5" PointX="32.375" PointY="20.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_BILLER" Width="1.5" PointX="33.375" PointY="26.125" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_BILLERACCOUNT" Width="1.5" PointX="35.625" PointY="26" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_BILLERACCOUNTTEMP" Width="1.5" PointX="9.375" PointY="33.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_BILLERMSC" Width="1.5" PointX="30.375" PointY="33.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_BILLERMSCTEMP" Width="1.5" PointX="33.375" PointY="31.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_BILLERTEMP" Width="1.5" PointX="34.375" PointY="0.75" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_BILLERACCOUNT_SM_BILLER" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_BL_FEE1SHARINGPARTY" Width="1.5" PointX="32.625" PointY="38.875" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_BL_FEE1SHARINGPARTYTEMP" Width="1.5" PointX="34.375" PointY="5.75" />
+        <AssociationConnector Association="SettlementMasterModel.FK_BL_FEE1SHARINGPARTY_BL_FEE1SHARINGPARTY" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_NAPS_NIBSS" Width="1.5" PointX="34.375" PointY="18.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_NAPS_NIBSS_TEMP" Width="1.5" PointX="35.375" PointY="31.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_APPROVAL_ROUTE" Width="1.5" PointX="33.375" PointY="11.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_APPROVAL_ROUTE_OFFICER" Width="1.5" PointX="11.375" PointY="34.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_APPROVAL_ROUTE_OFFICER_TEMP" Width="1.5" PointX="13.375" PointY="34.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_APPROVAL_ROUTE_TEMP" Width="1.5" PointX="34.375" PointY="14.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_AUDIT" Width="1.5" PointX="36.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_EXCHANGERATE" Width="1.5" PointX="36.375" PointY="5.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_EXCHANGERATETEMP" Width="1.5" PointX="36.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_SHAREDMSC2DETAILTEMP" Width="1.5" PointX="38.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_SHAREDMSC2DETAIL" Width="1.5" PointX="7.5" PointY="45.625" />
+        <AssociationConnector Association="SettlementMasterModel.FK_SM_SHAREDMSC2DETAIL_SM_MERCHANTMSC" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_REVENUEBANKACCT" Width="1.5" PointX="3.375" PointY="29.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_REVENUEBANKACCTTEMP" Width="1.5" PointX="38.375" PointY="7.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SESS_SETRECONDUALUPLD" Width="1.5" PointX="37.375" PointY="37.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_SERVICECHANNELS" Width="1.5" PointX="36.375" PointY="15.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_SERVICECHANNELSTEMP" Width="1.5" PointX="36.375" PointY="20.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

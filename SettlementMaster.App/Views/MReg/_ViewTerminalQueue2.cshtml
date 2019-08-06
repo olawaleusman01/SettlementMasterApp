@@ -1,0 +1,47 @@
+﻿@model List<Generic.Dapper.Model.TerminalObj>
+@using (Html.BeginForm("EditMerchantTerminal", "Merchant", FormMethod.Post, new { id = "formMerchantTerminal", }))
+{
+    @Html.AntiForgeryToken()
+<table id="tableTid" class="table table-condensed table-hover table-striped table-bordered" style="width:100%">
+
+    <thead>
+        <tr><th colspan="8"><a id="btnAddTerminal" class="btn btn-info btn-xs"><i class="fa fa-plus"></i> Add Terminal</a></th></tr>
+
+        <tr>
+            <th style="text-align:center">Action?</th>
+            <th>Terminal ID</th>
+            <th>Frequency</th>
+            <th>Set. Currency</th>
+            <th>Trans. Currency</th>
+            <th>Account No</th>
+            <th>Account Name</th>
+            <th>Bank Name</th>
+            @*<th>Batch ID</th>*@
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var d in Model)
+        {
+            <tr>
+                <td style="text-align:center">
+                <a data-key="@d.PID" class="btn btn-info btn-xs edit" id="edit"><i class="fa fa-edit"></i></a>
+                <a data-key="@d.PID" class="btn btn-danger btn-xs delete" id="delete"><i class="fa fa-trash"></i></a>
+
+
+                </td>
+                <td>@d.TERMINALID</td>
+                <td>@d.FREQUENCY</td>
+                <td>@d.SET_CURRENCY</td>
+                <td>@d.TRANS_CURRENCY</td>
+                <td>@d.DEPOSIT_ACCOUNTNO</td>
+                <td>@d.DEPOSIT_ACCTNAME</td>
+                <td>@d.DEPOSIT_BANKNAME</td>
+                @*<td>@d.BATCHID</td>*@
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+}

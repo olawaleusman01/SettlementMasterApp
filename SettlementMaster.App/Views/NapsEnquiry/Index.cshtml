@@ -1,0 +1,92 @@
+﻿@*<div id="toolbar">
+
+</div>*@
+<div id="pnlGrid">
+    <input type="hidden" name="menuId" id="menuId" value="@ViewBag.MenuId" />
+    <input type="hidden" name="hidBatchId" id="hidBatchId" />
+    @*<div id="right_sidebar">
+
+    </div>*@
+    @*<div id="content_new">*@
+        <div class="row" style="margin:10px">
+            
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-list" style="color:#57ACE7;"></i>  Naps Enquiry
+                    </div>
+                    <div class="panel-body ">
+                        <div class="col-lg-122" id="divSummary">
+                            <div style="background-color:#F4F4F4;margin-bottom:10px;padding-top:10px">
+                                @using (Html.BeginForm("DownloadAudit", "Report", FormMethod.Post, new { id = "formDownload", }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="col-lg-2">
+                                        <label>From Date</label>
+                                        <div class="form-group input-group" style="width:150px">
+                                            <input type="text" name="fromDate" id="fromDate" value="@DateTime.Now.ToString("dd-MM-yyyy")" class="form-control datepicker input-sm" />                                        <span class="input-group-addon" style="color:red">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label>End Date</label>
+                                        <div class="form-group input-group" style="width:150px">
+                                            <input type="text" name="toDate" id="toDate" value="@DateTime.Now.ToString("dd-MM-yyyy")" class="form-control datepicker input-sm" />                                        <span class="input-group-addon" style="color:red">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>Batch ID</label>
+                                        <div class="form-group">
+                                            <input type="text" name="batchId" id="batchId" value="" class="form-control input-sm" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <label>&nbsp;</label>
+                                        <br />
+                                        <button id="btnSearch" type="button" class="btn btn-info input-sm">Search <i class="fa fa-search"></i></button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                }
+                            </div>
+                            <div class="table-responsiva divad2">
+                                <table id="tblSummary" class="table table-striped datatable table-condensed table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Action?</th>
+                                            <th>Batch Id</th>
+                                            <th>Request Type</th>
+                                            <th>Set. Date</th>
+                                            <th>Tranx Count</th>
+                                            <th>Created By</th>
+                                            <th>Create Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        
+                        </div>
+                        <div class="col-lg-122" id="divDetail">
+                           
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div id="pnlForm" style="display:none" class="panel-form">
+
+</div>*@
+@section Scripts {
+  
+    @Scripts.Render("~/Scripts/app/naps_enquiry.js")
+}
+
+

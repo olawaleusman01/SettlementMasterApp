@@ -1,0 +1,110 @@
+﻿<style>
+    .select2-container{
+        display:inline-block!important;
+        margin-right:10px;
+    }
+</style>
+
+    <input type="hidden" name="menuId" id="menuId" value="@ViewBag.MenuId" />
+    @*<div id="right_sidebar">
+
+        </div>*@
+    @*<div id="content_new">*@
+    <div class="row" style="margin:10px">
+        <div class="col-lg-12">
+            <div class="alert alert-dismissible fade in noty" role="alert" style="display:none">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                    <span aria-hidden="true">×</span>
+
+                </button>
+                <span class="notyMsg">
+
+                </span>
+            </div>
+
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-list" style="color:#57ACE7;"></i>  Merchant Update
+                </div>
+                <div class="panel-body ">
+                    <div class="col-lg-122">
+                        <div style="background-color:#F4F4F4;margin-bottom:10px;padding:10px">
+                            @using (Html.BeginForm("", "", FormMethod.Post, new { id = "formUpload", }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.DropDownList("INSTITUTION_ID", ViewBag.BankList as SelectList, "Select One", new { @class = "form-control select2", style = "width:300px;display:inline-block" })
+                                @Html.TextBox("upldfile","",new { @style = "display:inline",type="file" })
+                                @Html.Hidden("hidInstId")
+                                <button id="btnUpload" class="btn btn-default pull-righta"><i class="fa-upload fa"></i> Upload</button>
+                                <button id="btnValidate" class="btn btn-info pull-righta" disabled><i class="fa-cog fa"></i> Validate</button>
+                                <button id="btnSave" class="btn btn-success pull-righta" disabled><i class="fa-save fa"></i> Save</button>
+                                    <div class="clearfix"></div>
+                            }
+                        </div>
+                        <div id="divGrid">
+                            <div class="table-responsive divad2a">
+                                <table id="example1" class="table table-striped datatable table-condensed table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th> S/N</th>
+                                            <th>
+                                                VALIDATION STATUS
+                                            </th>
+                                            <th> MERCHANTID</th>
+                                            <th> MERCHANTNAME</th>
+                                            <th> CONTACTTITLE</th>
+                                            <th> CONTACTNAME</th>
+                                            <th> MOBILEPHONE</th>
+                                            <th> EMAIL</th>
+                                            <th> EMAILALERTS</th>
+                                            <th>PHYSICALADDR</th>
+                                            <th> TERMINALMODELCODE</th>
+                                            <th> TERMINALID</th>
+                                            <th> BANKCODE</th>
+                                            <th>BANKACCNO</th>
+                                            <th> BANKTYPE</th>
+                                            <th>SLIPHEADER</th>
+                                            <th>SLIPFOOTER</th>
+                                            <th>BUSINESSOCCUPATIONCODE</th>
+                                            <th> MERCHANTCATEGORYCODE</th>
+                                            <th> STATECODE</th>
+                                            <th> VISAACQUIRERIDNUMBER</th>
+                                            <th> VERVEACQUIRERIDNUMBER</th>
+                                            <th> MASTERCARDACQUIRERIDNUMBER</th>
+                                            <th> TERMINALOWNERCODE</th>
+                                            <th> LGA/LDA</th>
+                                            <th> URL</th>
+                                            <th> ACCOUNTNAME</th>
+                                            <th> PTSP</th>
+                                            <th> TRANS CURRENCY</th>
+                                            <th> PTSA</th>
+                                            @*<th> PAYATTITUDE ACCEPTANCE</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*</div>*@
+    </div>
+    @*<div id="pnlForm" style="display:none" class="panel-form">
+
+        </div>*@
+    @section Scripts {
+        @if (TempData["msg"] != null)
+        {
+            var msg = @Html.Raw(Json.Encode(TempData["msg"]));
+            <script>
+        displayDialogNoty('Notification',@msg) ;
+            </script>
+        }
+        @Scripts.Render("~/Scripts/app/merchant_update.js")
+    }

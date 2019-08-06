@@ -1,0 +1,139 @@
+﻿@using Generic.Dapper.Model
+@model SettlementOptionObj
+<div id="toolbar">
+    <div class="col-lg-12">
+        <a id="btnCancel" class="btn btn-warning editor_returna" href="@Url.Action("Index","SettlementRule",new {m = ViewBag.MenuId })"><i class="fa fa-long-arrow-left"></i> Return</a>
+    </div>
+</div>
+@*<div id="right_sidebar">
+    @if (Model != null && Model.ITBID != 0)
+    {
+        <div class="panel panel-warning">
+            <div class="panel-body widget">
+                <div style="">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Created By:</span>
+                </div>
+                <div style="margin-top:10px">
+                    <i class="fa fa-calendar"></i>
+                    <span class="light-grey">Date Created:</span>
+                </div>
+                <div style="margin-top:10px" class="div-authname">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Authorized By:</span>
+                </div>
+                <div style="margin-top:10px" class="div-authdate">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Modified Date:</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>*@
+@*<div id="content_new">*@
+    <div class="row" style="margin:10px">
+        <div class="col-lg-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+
+                </div>
+                <div class="panel-body ">
+                    @using (Html.BeginForm("Add", "SettlementRule", FormMethod.Post, new { id = "formRule" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="m" id="m" value="@ViewBag.MenuId" />
+                            <div class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Rule Name</label>
+                                                    <div class="col-md-5">
+                                                        @Html.HiddenFor(model=> model.ITBID)
+                                                        @Html.TextBoxFor(m=> m.DESCRIPTION, new { @class="form-control input-sm"})                                   
+                                                    </div>
+                                                   
+                                                    </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Channel</label>
+                                    <div class="col-md-5">
+                                        @Html.DropDownListFor(model => model.CHANNEL, ViewBag.ChannelList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    @if (ViewBag.StatusVisible == true)
+                                    {
+                                        <label class="col-md-3 control-label">Status</label>
+                                        <div class="col-md-2">
+                                            @Html.DropDownListFor(model => model.STATUS, ViewBag.RecordStatus as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                        </div>
+                                    }
+                                    </div>
+                                    <div class="clearfix"></div>
+                              <h4>MSC1 Sharing Configuration</h4>
+                                    <div style="margin-bottom:5px">
+                                       
+                                        <div class="table-responsive " style="border: 1px solid #f4f4f4;background-color:#f7f7f7;margin-bottom:10px;padding:20px">
+                 
+                                            <div class="divadu">
+                                                <div id="divAcct">
+                                                    @{
+                                                        var mccObj = ViewBag.PartyAcct as List<SettlementRuleObj>;
+                                                        if (mccObj == null)
+                                                        {
+                                                            
+                                                            mccObj = new List<SettlementRuleObj>();
+                                                        }
+
+                                                        Html.RenderPartial("_ViewRule", mccObj);
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="clearfix"></div>
+                                    <hr />
+@if (Model.ITBID == 0 && ViewBag.CanAdd == true)
+{
+                                    <div style="text-align:center">
+                                        <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+
+                                    </div>
+}
+@if (Model.ITBID > 0 && ViewBag.CanEdit == true)
+{
+    <div style="text-align:center">
+        <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+
+    </div>
+}
+                                </div>
+                            }
+                        </div>
+            </div>
+        </div>
+
+    </div>
+@*</div>*@
+<div class="modal fade" id="myModalAcct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+<div class="clearfix"></div>
+                      
+
+
+@section Scripts {
+@if (ViewBag.Message != null)
+{
+
+    var msg = @Html.Raw(Json.Encode(ViewBag.Message));
+    <script>
+        displayDialogNoty('Notification',@msg) ;
+    </script>
+
+}
+    @Scripts.Render("~/Scripts/app/sett_rule.js")
+}

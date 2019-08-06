@@ -1,0 +1,52 @@
+﻿@model Generic.Dapper.Model.ApprovalRouteOffObj
+    <div class="modal-dialog" style="width:450px">
+        <div class="modal-content">
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "formRouteOfficer" }))
+{
+    @Html.AntiForgeryToken()
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5 class="modal-title" id="myModalLabel"><i class="fa fa-plus"></i> @ViewBag.HeaderTitle</h5>
+            </div>
+            
+            <div class="modal-body">
+                <div class="col-lg-12">
+                    <div class="alert alert-dismissable alert-warning" style="display:none" id="notyMsc">
+                        <div id="notyMscMsg">
+                        </div>
+                    </div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+
+                            <label class="col-lg-4 control-label">Approving Officer <span class="required">*</span></label>
+                            <div class="col-lg-8 ">
+                                <div class="form-group input-groupa" style="margin:0px">
+                                   
+                                    @Html.DropDownListFor(model => model.APPROVER_ID, ViewBag.UserList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                    @Html.HiddenFor(model => model.ITBID)
+                                    @Html.HiddenFor(model => model.DB_ITBID)
+                                    @Html.HiddenFor(model => model.PID)
+                                    @Html.HiddenFor(model => model.MENUID)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button Id="btnAddAcctGrid" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
+            </div>
+}
+        </div>
+        <!-- /.modal-content -->
+    </div>
+
+<script>
+    $('.select2').select2({
+        theme: "classic"
+    });
+   // $('a.editor_return').click();
+</script>

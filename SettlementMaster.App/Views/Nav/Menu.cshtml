@@ -1,0 +1,35 @@
+﻿@model Generic.Dapper.Model.MenuViewModel
+
+
+    
+        @{
+            foreach (var p in Model.ParNode)
+            {
+    <li>
+        <a href="#"><i class="@p.ResourceKey fa-fw  blues"></i> @p.ParentName<span class="fa arrow"></span></a>
+
+
+        <ul class="nav nav-second-level">
+            @{
+            var rst = Model.ChildNode.Where(f => f.ParentId == @p.ParentId);
+            if (rst != null)
+            {
+            foreach (var m in rst)
+            {
+
+            <li>
+                <a href="@Url.Content("~" + m.Url + "?m=" + m.MenuIdEncrypt)"><i class="@m.ResourceKey fa-fw"></i> @m.MenuName</a>
+            </li>
+            }
+            }
+            }
+
+
+        </ul>
+
+    </li>
+                                }
+                            }
+
+
+    

@@ -1,0 +1,86 @@
+﻿@model List<Generic.Dapper.Model.SetReconDualUpldObj>
+<style>
+    #tblUpld td{
+        white-space:nowrap; 
+    }
+     .popover{
+              max-width:500px !important
+         }
+</style>
+<div class="table-responsive divad2a">
+    <table id="tblUpld" class="table table-striped table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th style="width:10%"> S/N</th>
+                <th style="width:15%">STATUS</th>
+                <th style="width:25%">REFERENCE NO.</th>
+                <th style="width:25%"> CARDTYPE</th>
+                <th style="width:20%"> TRANSACTION TYPE</th>
+                <th style="width:20%"> TRANSACTION DATE  </th>
+                <th style="width:25%"> SETTLEMENT DATE</th>
+                <th style="width:40%"> MASKEDPAN</th>
+                <th style="width:20%"> MERCHANTID</th>
+                <th style="width:20%"> MERCHANT ACCT  </th>
+                <th style="width:20%"> MERCHANT NAME  </th>
+                <th style="width:20%"> MERCHANT LOCATION  </th>
+                <th style="width:30%"> TERMINALID</th>
+                <th style="width:20%"> TRANSACTION AMOUNT</th>
+                <th style="width:20%"> AMOUNT CHARGED  </th>
+                <th style="width:30%"> SET AMOUNT</th>
+                <th style="width:20%"> MSC RATE</th>
+                @*<th style="width:20%"> BATCH TYPE</th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @*@{
+    var cnt = 0;
+    foreach (var d in Model)
+    {
+        cnt++;
+    <tr>
+        <td style="text-align:center"> @cnt </td>
+        <td style="text-align:center">
+
+            <a class="@d.ValidationStatusClass" data-toggle="popover" data-trigger="hover" data-html="true" data-content="@d.VALIDATIONERRORMESSAGE">
+                <i class="@d.ValidationStatusIcon"></i>
+            </a>
+        </td>
+        <td>
+            @d.REFERENCENO
+        </td>
+        <td> @d.CARDTYPE</td>
+        <td>
+            @d.TRANSACTIONTYPE
+        </td>
+        <td>
+         @if(d.TRANSACTIONDATETIME != null)
+         {
+            @d.TRANSACTIONDATETIME.GetValueOrDefault().ToString("dd-MM-yyyy HH:MM:ss")
+         }
+        </td>
+        <td>
+            @if (d.SETTLEMENTDATE != null)
+            {
+                @d.SETTLEMENTDATE.GetValueOrDefault().ToString("dd-MM-yyyy")
+         }
+        </td>
+        <td> @d.MASKEDPAN</td>
+        <td> @d.MERCHANTID</td>
+        <td> @d.MERCHANTACCOUNT</td>
+        <td> @d.MERCHANTNAME</td>
+        <td> @d.MERCHANTLOCATION</td>
+        <td> @d.TERMINALID</td>
+        <td> @d.TRANAMOUNT</td>
+        <td> @d.AMOUNTCHARGED</td>
+        <td> @d.SETTLEMENTAMOUNT</td>
+        <td> @d.MSCRATE</td>
+        <td> @d.BATCHTYPE</td>
+    </tr>
+        }
+    }*@
+        </tbody>
+    </table>
+</div>
+<script>
+    $("[data-toggle=popover]").popover();
+</script>

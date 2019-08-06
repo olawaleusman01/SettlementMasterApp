@@ -1,0 +1,32 @@
+﻿@model List<Generic.Dapper.Model.RvHeadObj>
+<table id="tableAcct" class="table table-condensed table-hover table-bordered" style="width:100%">
+   
+    <tbody>
+
+        @foreach(var d in Model)
+        {
+            <tr>
+                <td>
+                    @if (!d.Deleted)
+                    {
+                    <a class="btn btn-info btn-xs" id="edit" data-key="@d.PID" title="Edit Record"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" id="delete" data-key="@d.PID" title="Delete Record"><i class="fa fa-trash"></i></a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-warning btn-xs" id="undo" title="Undo Delete" data-key="@d.PID"><i class="fa fa-undo"></i></a>
+
+                    }
+                </td>
+                <td>@d.CODE</td>
+                <td>@d.DESCRIPTION</td>
+                @*<td>@d.PAYMENTITEMID</td>*@
+                <td>@d.BANKACCOUNT</td>
+                <td>@d.ACCT_NAME</td>
+                <td>@d.BANK_NAME</td>
+                <td>@d.FREQUENCY_DESC</td>
+            </tr>
+            
+        }
+    </tbody>
+</table>

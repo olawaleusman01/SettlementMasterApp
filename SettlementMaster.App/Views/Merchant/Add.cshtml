@@ -1,0 +1,247 @@
+﻿@using Generic.Dapper.Model
+@model MerchantObj
+<div id="toolbar">
+    <div class="col-lg-12">
+        <a id="btnCancel" class="btn btn-warning editor_returna" href="@Url.Action("Index","Merchant",new {m = ViewBag.MenuId })"><i class="fa fa-long-arrow-left"></i> Return</a>
+    </div>
+</div>
+@*<div id="right_sidebar">
+    @if (Model != null && Model.ITBID != 0)
+    {
+        <div class="panel panel-warning">
+            <div class="panel-body widget">
+                <div style="">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Created By:</span>
+                </div>
+                <div style="margin-top:10px">
+                    <i class="fa fa-calendar"></i>
+                    <span class="light-grey">Date Created:</span>
+                </div>
+                <div style="margin-top:10px" class="div-authname">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Authorized By:</span>
+                </div>
+                <div style="margin-top:10px" class="div-authdate">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Modified Date:</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>*@
+@*<div id="content_new">*@
+    <div class="row" style="margin:10px">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @*<i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle*@
+                    <h3 class="" id="hdname" style="display:inline">@Model.MERCHANTNAME (@Model.MERCHANTID)
+                    
+                    </h3>
+                    @*<a id="btnReturn" class="btn btn-warning editor_return pull-right"><i class="fa fa-chevron-left"></i> Return to List</a>
+                    <div class="clearfix"></div>*@
+                </div>
+                <div class="panel-body ">
+                    <div class="tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tabmd" id="tablinka" class="taba" data-toggle="tabs"><i class="fa fa-info"></i> MERCHANT DETAIL</a></li>
+                            <li><a href="#tabmsc" id="tablinkb" data-toggle="tabs" class="tabb"><i class="fa fa-cog"></i> MERCHANT MSC</a></li>
+                            <li><a href="#tabma" id="tablinkc" data-toggle="tabs" class="tabc"><i class="fa fa-money"></i> MERCHANT ACCOUNT</a></li>
+                            <li><a href="#tabmt" id="tablinkd" data-toggle="tabs" class="tabd"><i class="fa fa-list"></i> MERCHANT TERMINAL</a></li>
+
+                        </ul>
+                        <div class="panel-body tab-content" style="background-color:#fff">
+                            <div class="tab-pane active" id="tabmd">
+    @using (Html.BeginForm("AddMerchant", "Merchant", FormMethod.Post, new { id = "formMerchant", }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-11">
+            <input type="hidden" name="m" value="@ViewBag.MenuId" />
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Merchant ID<span style="color:red">*</span></label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.MERCHANTID, new { @class = "form-control input-sm",@readonly="readonly" })
+                        @Html.HiddenFor(model => model.ITBID)
+                    </div>
+                    <label class="col-md-2 control-label">Merchant Name<span style="color:red">*</span></label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.MERCHANTNAME, new { @class = "form-control input-sm" })
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Acquiring Institution<span style="color:red">*</span></label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.INSTITUTION_CBNCODE, ViewBag.AcquirerList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                    </div>
+
+                    <label class="col-md-2 control-label">Mcc Description<span style="color:red">*</span></label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.MCC_CODE, ViewBag.MCCList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Contact Title</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.CONTACTTITLE, new { @class = "form-control input-sm", style = "width:150px" })
+
+                    </div>
+                    <label class="col-md-2 control-label">Contact Name<span style="color:red">*</span></label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.CONTACTNAME, new { @class = "form-control input-sm" })
+
+
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <label class="col-md-2 control-label">Business Code<span style="color:red">*</span></label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.BUSINESS_CODE, new { @class = "form-control input-sm", style = "width:150px" })
+
+                    </div>
+                    <label class="col-md-2 control-label">Old Merchant ID</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.OLD_MID, new { @class = "form-control input-sm" })
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Email<span style="color:red">*</span></label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control input-sm" })
+
+                    </div>
+                    <label class="col-md-2 control-label">Phone No</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.PHONENO, new { @class = "form-control input-sm", style = "width:150px" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Address<span style="color:red">*</span></label>
+                    <div class="col-md-4">
+                        @Html.TextAreaFor(model => model.ADDRESS, new { @class = "form-control input-sm" })
+
+                    </div>
+                    <label class="col-md-2 control-label">Country<span style="color:red">*</span></label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.COUNTRY_CODE, ViewBag.CountryList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">State<span style="color:red">*</span></label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.STATE_CODE, ViewBag.StateList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                    </div>
+                    <label class="col-md-2 control-label">LGA</label>
+                   
+                    <div class="col-md-4">
+                        @*@Html.DropDownListFor(model => model.CITY_NAME, ViewBag.CityList as SelectList, "--Select City--", new { @class = "form-control select2", style = "width:100%" })*@
+                        @Html.TextBoxFor(model => model.CITY_NAME, new { @class = "form-control input-sm" })
+
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Status</label>
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.STATUS, ViewBag.RecordStatus as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                    </div>
+                </div>
+                <hr />
+@if (Model.ITBID > 0 && ViewBag.CanEdit == true)
+{
+                <div style="text-align:right">
+                    <button type="submit" class="btn btn-primary btn_disable" id="btnSaveMerchant" value="2"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+                </div>
+}
+            </div>
+        </div>
+    }
+            </div>
+            <div class="tab-pane" id="tabmsc">
+                <div id="pnlMscGrid">
+                    
+                @using (Html.BeginForm("MerchantMsc", "Merchant", FormMethod.Post, new { id = "formMerchantMsc", }))
+                                {
+                                @Html.AntiForgeryToken()
+                    <div id="divMSC">
+                        
+                    </div>
+                }
+                    </div>
+                <div id="pnlMscForm" style="display:none"></div>
+            </div>
+            <div class="tab-pane" id="tabma">
+                @using (Html.BeginForm("AddMerchantAcct", "Merchant", FormMethod.Post, new { id = "formMerchantAcct", }))
+                {
+                                @Html.AntiForgeryToken()
+                    <div class="table-responsive">
+                        <div id="divMA">
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div style="text-align:right">
+                        @Html.Hidden("pt", 2)
+                        @Html.Hidden("MID", "")
+                        @if (ViewBag.CanEdit == true)
+                        {
+                            <button type="submit" class="btn btn-primary btn_disable" id="btnSaveAcct" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="tab-pane" id="tabmt">
+                @using (Html.BeginForm("", "", FormMethod.Post, new { id = "formMerchantTerminal", }))
+                                {
+                                @Html.AntiForgeryToken()
+                    <div class="table-responsive">
+                        <div id="divMT">
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+@*</div>*@
+<div class="modal fade" id="myModalAcct" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+<div class="modal fade" id="myModalTerm" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+<div class="clearfix"></div>
+                      
+
+
+@section Scripts {
+@if (ViewBag.Message != null)
+{
+
+    var msg = @Html.Raw(Json.Encode(ViewBag.Message));
+    <script>
+        displayDialogNoty('Notification',@msg) ;
+    </script>
+
+}
+
+    @Scripts.Render("~/Scripts/app/merchant.js")
+}

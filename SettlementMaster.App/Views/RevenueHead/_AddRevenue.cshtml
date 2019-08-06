@@ -1,0 +1,91 @@
+﻿@model Generic.Dapper.Model.RvHeadObj
+    <div class="modal-dialog" style="width:500px">
+        <div class="modal-content">
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "formRvCode" }))
+{
+    @Html.AntiForgeryToken()
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5 class="modal-title" id="myModalLabel"><i class="fa fa-plus"></i> @ViewBag.HeaderTitle</h5>
+            </div>
+            
+            <div class="modal-body">
+                <div class="col-lg-12">
+                    <div class="alert alert-dismissable alert-warning" style="display:none" id="notyMsc">
+                        <div id="notyMscMsg">
+                        </div>
+                    </div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+
+                            <label class="col-lg-4 control-label">Revenue Code <span class="required">*</span></label>
+                            <div class="col-lg-8 ">
+                                <div class="form-group input-groupa" style="margin:0px">
+                                    @if (Model.DB_ITBID > 0)
+                                    {
+                                        @Html.TextBoxFor(model => model.CODE, new { @class = "form-control input-sm",@readonly="rreadonly" })
+
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(model => model.CODE, new { @class = "form-control input-sm",  })
+
+                                    }
+                                    @Html.Hidden("MID",@Model.MID)
+                                    @Html.Hidden("RVGROUPCODE", @Model.RVGROUPCODE)
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Revenue Name <span class="required">*</span></label>
+                            <div class="col-lg-8 ">
+                                <div class="form-group input-groupa" style="margin:0px">
+                                    @Html.TextBoxFor(model => model.DESCRIPTION, new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Payment Item ID <span class="required">*</span></label>
+                            <div class="col-lg-8 ">
+                                <div class="form-group input-groupa" style="margin:0px">
+                                    @Html.TextBoxFor(model => model.PAYMENTITEMID, new { @class = "form-control input-sm"})
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label"> Account No</label>
+                            <div class="col-lg-8">
+                                @Html.HiddenFor(model => model.ITBID)
+                                @Html.HiddenFor(model => model.DB_ITBID)
+                                @Html.HiddenFor(model => model.PID)
+                                @Html.DropDownListFor(model => model.ACCOUNT_ID, ViewBag.MAcctList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label"> Frequency</label>
+                            <div class="col-lg-8">
+                                @Html.DropDownListFor(model => model.SETTLEMENT_FREQUENCY, ViewBag.FrequencyList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button Id="btnAddAcctGrid" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
+            </div>
+}
+        </div>
+        <!-- /.modal-content -->
+    </div>
+
+<script>
+    $('.select2').select2({
+        theme: "classic"
+    });
+   // $('a.editor_return').click();
+</script>

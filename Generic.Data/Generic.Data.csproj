@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0D36788A-A2E2-46F7-A259-ACEE951674EF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Generic.Data</RootNamespace>
+    <AssemblyName>Generic.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Management\GeneralSettings.cs" />
+    <Compile Include="Model\GenericObject.cs" />
+    <Compile Include="Model\MerchantObj2.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repo\IMyContext.cs" />
+    <Compile Include="Repo\IRepository.cs" />
+    <Compile Include="Repo\IUnitOfWork.cs" />
+    <Compile Include="Repo\MyContext.cs" />
+    <Compile Include="Repo\Repository.cs" />
+    <Compile Include="Repo\UnitOfWork.cs" />
+    <Compile Include="SESS_GET_SETRECONUPLD_Result.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SESS_SETRECONDUALUPLD.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SMModel1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SMModel1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SMModel1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SMModel1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SMModel1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="SM_APPROVAL_ROUTE.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_APPROVAL_ROUTE_OFFICER.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_APPROVAL_ROUTE_OFFICER_TEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_APPROVAL_ROUTE_TEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_ASPNETUSERSTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_AUDIT.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_AUTHCHECKER.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_AUTHLIST.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_BANKTYPE.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_BILLER.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_BILLERACCOUNT.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_BILLERACCOUNTTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_BILLERMSC.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_BILLERMSCTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_BILLERTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_BL_FEE1SHARINGPARTY.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_BL_FEE1SHARINGPARTYTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_CARDSCHEME.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_CARDSCHEMETEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_CHANNELS.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_CHANNELSTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_COMPANY_PROFILE.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_COMPANY_PROFILETEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_COUNTRY.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_COUNTRYTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_CURRENCY.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_CURRENCYTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_DATABIN.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_DATABIN_TEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_DEPARTMENT.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_DEPARTMENTTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_EXCHANGERATE.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_EXCHANGERATETEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_FREQUENCY.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_FREQUENCYTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_INSTITUTION.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_INSTITUTIONACCT.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_INSTITUTIONACCTTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_INSTITUTIONTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MAILGROUP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MAILGROUPTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MCC.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MCCMSC.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MCCMSCTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MCCTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERCHANTACCT.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERCHANTACCTTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERCHANTCONFIG.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERCHANTCONFIGTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERCHANTDETAIL.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERCHANTDETAILHIST.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERCHANTDETAILTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERCHANTMSC.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERCHANTMSCTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERCHANTTERMINALUPLD.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERCHANTUPDATEUPLD.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERTERUPDUPLDGLO.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MERTERUPLDGLO.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_NAPS_NIBSS.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_NAPS_NIBSS_TEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_PARTY.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_PARTYACCOUNT.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_PARTYACCOUNTTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_PARTYTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_PARTYTYPE.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_PARTYTYPETEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_RESETLOCKOUT_TEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_RESETPASSWORD_TEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_REVENUEBANKACCT.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_REVENUEBANKACCTTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_REVENUEGROUP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_REVENUEGROUPTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_REVENUEHEAD.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_REVENUEHEADTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_ROLEPRIV.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_ROLEPRIVTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_ROLES.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_ROLESTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_SECTOR.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_SECTORTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_SERVICECHANNELS.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_SERVICECHANNELSTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_SETTLEMENTOPTION.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_SETTLEMENTOPTIONTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_SETTLEMENTRULE.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_SETTLEMENTRULETEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_SHAREDMSC2DETAIL.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_SHAREDMSC2DETAILTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_STATE.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_STATETEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_TERMINAL.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_TERMINALTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_UPMERCHANTUPDATEUPLD.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_UPMERTERMUPLDREC.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_UPMERUPDUPLDGLO.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_UPMER_UPLDGLO.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <EntityDeploy Include="SMModel1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SMModel1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SMModel1.edmx.diagram">
+      <DependentUpon>SMModel1.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SMModel1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SMModel1.edmx</DependentUpon>
+      <LastGenOutput>SMModel1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SMModel1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SMModel1.edmx</DependentUpon>
+      <LastGenOutput>SMModel1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

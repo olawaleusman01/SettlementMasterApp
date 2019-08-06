@@ -1,0 +1,96 @@
+﻿@*<div id="toolbar">
+   
+</div>*@
+<style>
+    td{
+        font-size:10.5px;
+        white-space:nowrap
+        
+    }
+</style>
+<div id="pnlGrid">
+  
+    <div id="content_new" style="margin-right:0px">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 style="display:inline">
+                            <i class="fa fa-list" style="color:#57ACE7;"></i>  Audit Trail - Approving Officers Details
+                        </h4>
+                        <a  class="btn  btn-warning editor_returna btn-sm" href="@Url.Action("Audit","Report",new {m = ViewBag.MenuId })" style="float:right;text-decoration:none; margin-top:-8px"><i class="fa fa-long-arrow-left"></i> Return</a>
+                    </div>
+                    <div class="panel-body ">
+
+                        <div class="col-lg-122">
+                            <div class="table-responsive divad2">
+                                
+                                <table id="example" class="table table-bordered table-striped datatable table-hover table-condensed">
+                                    <thead>
+                                        <tr style="text-align:left;">
+                                            <th class="auto-style1">USER NAME</th>
+                                            <th>FULL NAME </th>
+                                            <th>INSTITUTION NAME</th>
+                                            <th>CREATE DATE </th>
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    
+                                </table>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/Scripts/app/authlist.js")*@
+    <script>
+        $(document).ready(function () {
+            //var fromdate = $('#fromDate').val();
+            //var todate = $('#toDate').val();
+            //var userid = $('#UserId').val();
+
+           var table = $('#example').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "pageLength": 100,
+                "bFilter": false,
+                dom: 'Bfrtip',
+                "info": true,
+                "stateSave": true,
+                "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+                "ajax": {
+                    "url": "@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))/Report/GetApprovalDetail",
+                    "type": "GET",
+                },
+                "columns": [
+                    { "data": "USERNAME", "orderable": false },
+                    { "data": "FULLNAME", "orderable": false },
+                    { "data": "INSTITUTION_NAME", "orderable": false },
+                   { "data": "CREATEDATE", "orderable": false },
+                    
+
+                ],
+                //"order": [[0, "asc"]]
+            });
+
+            @*$('#btnSearch').on('click', function (e) {
+                e.preventDefault();
+                 fromdate = $('#fromDate').val();
+                 todate = $('#toDate').val();
+                 userid = $('#UserId').val();
+                //console.log(table);
+                 var urlP = "@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))/Report/GetAuditTrail?fromdate=" + fromdate + '&todate=' + todate + '&userid=' + userid;
+                table.ajax.url(urlP).load();
+            })*@
+        });
+    </script>
+}

@@ -1,0 +1,76 @@
+﻿@model List<Generic.Dapper.Model.NapsObj>
+    <style>
+        #tblNaps td{
+            font-size:10.5px
+        }
+    </style>
+<div class="divad2d">
+    <table id="tblNaps" class="table table-condensed table-hover table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <td colspan="12" >
+                    @if (ViewBag.DisplayButton == true)
+                    {
+                    <button class="btn btn-success" id="btnReprocess"><i class="fa fa-refresh"></i> Reprocess</button>
+                    }
+                    <a id="btnCancel" class="btn btn-warning return pull-right" href="#"><i class="fa fa-long-arrow-left"></i> Return</a>
+                </td>
+            </tr>
+            <tr>
+                <th style="width:3%;text-align:center">
+@if (ViewBag.DisplayButton == true)
+{
+                <input type="checkbox" id="chkAll" name="chkAll" checked="checked" />
+}
+                </th>
+                <th style="width:5%">S/N</th>
+                <th style="width:9%">Debit Acct</th>
+                <th style="width:5%">Debit Bank Code</th>
+                <th style="width:15%">Ben. Name</th>
+                <th style="width:9%">Ben. Acct</th>
+                <th style="width:5%">Ben. Bank Code</th>
+                <th style="width:10%;text-align:right">Credit Amount</th>
+                <th style="width:14%">Ben. Narration</th>
+                <th style="width:6%">Schedule ID</th>
+                <th style="width:5%">Resp Code</th>
+                <th style="">Resp Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+            var cnt = 0;
+
+            foreach (var d in Model)
+            {
+                    cnt = cnt + 1;
+        <tr>
+            <th style="text-align:center">
+                @if (d.DisplayForReprocess)
+                {
+                    <input type="checkbox" id="chkSingle" value="@d.ITBID" name="chkSingle" data-key="@d.ITBID" checked="checked" />
+                }
+            </th>
+            <td style="text-align:center">
+
+                @cnt
+
+            </td>
+            <td>@d.DEBITACCTNO</td>
+            <td>@d.DEBITBANKCODE</td>
+            <td>@d.BENEFICIARYNAME</td>
+            <td>@d.BENEFICIARYACCTNO</td>
+            <td>@d.BENEFICIARYBANKCODE</td>
+            <td style="text-align:right">@d.CREDITAMOUNT.GetValueOrDefault().ToString("F")</td>
+            <td>@d.BENEFICIARYNARRATION</td>
+            <td>@d.SCHEDULEID</td>
+          <td>@d.RESPCODE</td>
+            <td>@d.RESPMESSAGE</td>
+        </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+ </div>
+
+

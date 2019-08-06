@@ -1,0 +1,126 @@
+﻿@model Generic.Dapper.Model.RolesObj
+<div id="right_sidebar">
+    @if(Model != null && Model.ROLEID != 0)
+    {
+    <div class="panel panel-warning">
+        <div class="panel-body widget">
+            <div style="">
+                <i class="fa fa-user"></i>
+                <span class="light-grey">Created By:</span>
+            </div>
+            <div style="margin-top:10px">
+                <i class="fa fa-calendar"></i>
+                <span class="light-grey">Date Created:</span>
+            </div>
+            <div style="margin-top:10px" class="div-authname">
+                <i class="fa fa-user"></i>
+                <span class="light-grey">Last Authorized By:</span>
+            </div>
+            <div style="margin-top:10px" class="div-authdate">
+                <i class="fa fa-user"></i>
+                <span class="light-grey">Last Modified Date:</span>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+<div id="content_new">
+    <div class="row2">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+                    @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
+
+
+                </div>
+                <div class="panel-body ">
+                    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "formRoles" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                       
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"> Role Base</label>
+                                <div class="col-md-5">
+                           
+                                    @Html.DropDownListFor(model => model.ROLEBASE, ViewBag.BaseRole as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Role<span class="required"> *</span></label>
+                                <div class="col-md-5">
+                                    <div class="">
+                                      
+                                        @Html.TextBoxFor(model => model.ROLENAME, new { @class = "form-control input-sm" })
+
+                                        @Html.HiddenFor(model => model.ROLEID)
+                                        <input type="hidden" name="m" value="@ViewBag.MenuId" />
+                                    </div>
+
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        
+                            <div class="form-group divDept">
+                                <label class="col-md-3 control-label"> Department</label>
+                                <div class="col-md-5">
+                                    @*<select id="DEPARRTMENT_CODE" name="DEPARRTMENT_CODE" class="form-control select2">
+
+                </select>*@
+                                    @Html.DropDownListFor(model => model.DEPARRTMENT_CODE, ViewBag.Department as SelectList, "Select Department", new { @class = "form-control select2", style = "width:100%" })
+
+
+                                </div>
+
+                            </div>
+                            @if (ViewBag.StatusVisible)
+                            {
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Status</label>
+                                <div class="col-md-5">
+                                    @Html.DropDownListFor(model => model.STATUS, ViewBag.RecordStatus as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+
+                                </div>
+                            </div>
+                            }
+                            <div class="clearfix"> </div>
+                            <hr />
+@if (Model.ROLEID > 0 && ViewBag.CanEdit == true)
+{
+                            <div style="text-align:right">
+                                <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+                                @*<a class="btn btn-default editor_return" id="btnRefresh"><i class="fa fa-refresh"></i> Reset</a>*@
+
+                            </div>
+}
+@if (Model.ROLEID == 0 && ViewBag.CanEdit == true)
+{
+    <div style="text-align:right">
+        <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+        @*<a class="btn btn-default editor_return" id="btnRefresh"><i class="fa fa-refresh"></i> Reset</a>*@
+
+    </div>
+}
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="clearfix"></div>
+<script>
+    $('.select2').select2({
+        theme: "classic"
+    });
+   // $('a.editor_return').click();
+</script>
+

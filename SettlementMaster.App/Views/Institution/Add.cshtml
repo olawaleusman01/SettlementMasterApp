@@ -1,0 +1,246 @@
+﻿@using Generic.Dapper.Model
+@model InstitutionObj
+<div id="toolbar">
+    <div class="col-lg-12">
+        <a id="btnCancel" class="btn btn-warning editor_returna" href="@Url.Action("Index","Institution",new {m = ViewBag.MenuId })"><i class="fa fa-long-arrow-left"></i> Return</a>
+    </div>
+</div>
+@*<div id="right_sidebar">
+    @if (Model != null && Model.ITBID != 0)
+    {
+        <div class="panel panel-warning">
+            <div class="panel-body widget">
+                <div style="">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Created By:</span>
+                </div>
+                <div style="margin-top:10px">
+                    <i class="fa fa-calendar"></i>
+                    <span class="light-grey">Date Created:</span>
+                </div>
+                <div style="margin-top:10px" class="div-authname">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Authorized By:</span>
+                </div>
+                <div style="margin-top:10px" class="div-authdate">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Modified Date:</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>*@
+@*<div id="content_new">*@
+    <div class="row" style="margin:10px">
+        <div class="col-lg-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+
+                </div>
+                <div class="panel-body ">
+                    @using (Html.BeginForm("Add", "Institution", FormMethod.Post, new { id = "formInstitution" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="m" id="m" value="@ViewBag.MenuId" />
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    Institution Name
+                                    <span class="required"> *</span>
+                                </label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.INSTITUTION_NAME, new { @class = "form-control input-sm" })
+                                    @Html.HiddenFor(model=> model.ITBID)
+                                </div>
+                                <label class="col-md-2 control-label"> ShortCode <span class="required"> *</span></label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.INSTITUTION_SHORTCODE, new { @class = "form-control input-sm" })
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <label class="col-md-2 control-label">CBN Code</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.CBN_CODE, new { @class = "form-control input-sm",style="width:150px" })
+
+                                </div>
+                                <label class="col-md-2 control-label">Issuer Nibss A/C</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.ISSUER_NIBSSACCOUNT, new { @class = "form-control input-sm" })
+
+                                </div>
+                              
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">PTSP <i class="fa fa-info-circle" data-toggle="tooltip" style="color:orange" title="Check this box if institution is a PTSP"></i> </label>
+                                <div class="col-md-4">
+                                    @Html.CheckBoxFor(model => model.chkPtsp)
+                                </div>
+                                <label class="col-md-2 control-label">ACQUIRER <i class="fa fa-info-circle" data-toggle="tooltip" style="color:orange" title="Check this box if institution is an Acquirer"></i> </label>
+                                <div class="col-md-4">
+                                    @Html.CheckBoxFor(model => model.chkAcquirer)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Bank <i class="fa fa-info-circle" data-toggle="popover" style="color:orange" title="Check this box if institution is a Bank"></i></label>
+                                <div class="col-md-4">
+                                    @Html.CheckBoxFor(model => model.chkIsBank)
+                                </div>
+                                @Html.HiddenFor(model=> model.IS_BANK)
+                                @Html.HiddenFor(model => model.IS_ACQUIRER)
+                                @Html.HiddenFor(model => model.PTSP)
+                                @if (Model.chkIsBank)
+                                {
+                                <div id="divBank">
+                                    <label class="col-md-2 control-label">Bank Sector</label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.BANK_SECTOR, ViewBag.BType as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                    </div>
+                                </div>
+                                }
+                                else
+                                {
+                                    <div id="divBank" style="display:none">
+                                        <label class="col-md-2 control-label">Bank Sector</label>
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(model => model.BANK_SECTOR, ViewBag.BType as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Email <span class="required"> *</span></label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control input-sm" })
+
+                                </div>
+                                <label class="col-md-2 control-label">Phone</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.PHONENO, new { @class = "form-control input-sm" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Institution URL</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.INSTITUTION_URL, new { @class = "form-control input-sm" })
+
+                                </div>
+                                <label class="col-md-2 control-label">Address <span class="required"> *</span></label>
+                                <div class="col-md-4">
+                                    @Html.TextAreaFor(model => model.INSTITUTION_ADDRESS, new { @class = "form-control input-sm" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Country<span class="required"> *</span></label>
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.INSTITUTION_COUNTRY, ViewBag.CountryList as SelectList, "--Select Country--", new { @class = "form-control select2", style = "width:100%" })
+
+
+                                </div>
+                                <label class="col-md-2 control-label">State <span class="required"> *</span></label>
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.INSTITUTION_STATE, ViewBag.StateList as SelectList, "--Select State--", new { @class = "form-control select2", style = "width:100%" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">City</label>
+                                <div class="col-md-4">
+                                    @*@Html.DropDownListFor(model => model.INSTITUTION_CITY, ViewBag.CityList as SelectList, "--Select City--", new { @class = "form-control select2", style = "width:100%" })*@
+                                    @Html.TextBoxFor(model => model.INSTITUTION_CITY, new { @class = "form-control input-sm" })
+
+
+                                </div>
+                               
+                            <label class="col-md-2 control-label">Slogan</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.INSTITUTION_SLOGAN, new { @class = "form-control input-sm" })
+
+                            </div>
+                        </div>
+
+                                            
+                                <div class="form-group">
+                                    @if (ViewBag.StatusVisible == true)
+                                    {
+                                        <label class="col-md-2 control-label">Status</label>
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(model => model.STATUS, ViewBag.RecordStatus as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                        </div>
+                                    }
+                                    </div>
+                                    <div class="clearfix"></div>
+                              <h4>Account Detail</h4>
+                                    <div style="margin-bottom:5px">
+                                       
+                                        <div class="table-responsive " style="border: 1px solid #f4f4f4;background-color:#f7f7f7;margin-bottom:10px;padding:20px">
+                 
+                                            <div class="divadu">
+                                                <div id="divAcct">
+                                                    @{
+                                                        var mccObj = ViewBag.InstitutionAcct as List<InstitutionAcctObj>;
+                                                        if (mccObj == null)
+                                                        {
+                                                            mccObj = new List<InstitutionAcctObj>();
+                                                        }
+
+                                                        Html.RenderPartial("_ViewAcct", mccObj);
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="clearfix"></div>
+                                    <hr />
+@if (Model.ITBID == 0 && ViewBag.CanAdd == true)
+{
+                                    <div style="text-align:center">
+                                        <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+
+                                    </div>
+}
+@if (Model.ITBID > 0 && ViewBag.CanEdit == true)
+{
+    <div style="text-align:center">
+        <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+
+    </div>
+}
+                                </div>
+                            }
+                        </div>
+            </div>
+        </div>
+
+    </div>
+@*</div>*@
+<div class="modal fade" id="myModalAcct"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+<div class="clearfix"></div>
+                      
+
+
+@section Scripts {
+@if (ViewBag.Message != null)
+{
+
+    var msg = @Html.Raw(Json.Encode(ViewBag.Message));
+    <script>
+        displayDialogNoty('Notification',@msg) ;
+    </script>
+
+}
+    @Scripts.Render("~/Scripts/app/institution.js")
+}

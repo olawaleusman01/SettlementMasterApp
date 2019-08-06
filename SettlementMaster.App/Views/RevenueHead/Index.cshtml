@@ -1,0 +1,96 @@
+﻿<div id="toolbar">
+@if (ViewBag.CanAdd == true)
+{
+    <div class="col-lg-12">
+        <a id="btnNew" class="btn btn-success editor_createa" href="@Url.Action("Add", "RevenueHead", new { m = ViewBag.MenuId })"><i class="fa fa-plus"></i> Add New</a>
+        @*<a id="btnCancel" class="btn btn-default editor_return" style="display:none"><i class="fa fa-long-arrow-left"></i> Cancel</a>*@
+        <a class="btn btn-default editor_createa" href="@Url.Action("RvHeadUpld","RevenueHead")"><i class="fa fa-upload"></i> Upload Revenue Head</a>
+        <a class="btn btn-info editor_createa" href="@Url.Action("RvDebitAcctUpld","RevenueHead")"><i class="fa fa-upload"></i> Upload Debit Account</a>
+    </div>
+}
+</div>
+<div id="pnlGrid">
+    <input type="hidden" name="menuId" id="menuId" value="@ViewBag.MenuId" />
+    @*<div id="right_sidebar">
+
+    </div>
+    <div id="content_new">*@
+    <div class="row" style="margin:10px">
+        <div class="col-lg-12">
+            <div class="alert alert-dismissible fade in noty" role="alert" style="display:none">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                    <span aria-hidden="true">×</span>
+
+                </button>
+                <span class="notyMsg">
+
+                </span>
+            </div>
+
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-list" style="color:#57ACE7;"></i>  Revenue Code List
+
+                </div>
+                <div class="panel-body ">
+                    <div class="col-lg-122">
+                        <div style="background-color:#F4F4F4;margin-bottom:10px;padding-top:10px">
+                            @using (Html.BeginForm("", "", FormMethod.Post, new { id = "formSearch", }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="col-lg-5 col-lg-offset-7" style="margin-bottom:10px">
+
+                                    <div class="form-group input-group" style="margin:0px">
+                                        <input type="text" name="q" id="q" placeholder="Merchant ID" class="form-control" />
+                                        <span class="input-group-btn">
+                                            <button id="btnSearch" class="btn btn-default">Search <i class="fa fa-search"></i></button>
+
+                                        </span>
+
+                                    </div>
+                                   
+                                </div>
+                                    <div class="clearfix"></div>
+                            }
+                        </div>
+
+                        <div class="table-responsiva divad2">
+                            <table id="example1" class="table table-striped datatable table-condensed table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="">Action? </th>
+                                        <th>Group Code</th>
+                                        <th>Group Name</th>
+                                        <th>Merchant Id</th>
+                                        <th>Merchant Name</th>
+                                        <th>Account No</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*</div>*@
+</div>
+@*<div id="pnlForm" style="display:none" class="panel-form">
+
+</div>*@
+@section Scripts {
+@if (TempData["msg"] != null)
+{
+    var msg = @Html.Raw(Json.Encode(TempData["msg"]));
+    <script>
+        displayDialogNoty('Notification',@msg) ;
+    </script>
+}
+    @Scripts.Render("~/Scripts/app/rv_head.js")
+}

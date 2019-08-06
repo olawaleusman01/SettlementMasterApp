@@ -1,0 +1,391 @@
+﻿@using  Generic.Dapper.Model
+@model List<NapsObj>
+
+
+<div id="toolbar">
+    <div class="col-lg-12">
+        @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
+            <a id="btnCancel" href="@Url.Action("Index","AuthList")" class="btn btn-default editor_return"><i class="fa fa-long-arrow-left"></i> Return to Authorization Queue</a>
+
+    </div>
+</div>
+
+@if (Model != null)
+{
+    var auth = ViewBag.Auth as AuthViewObj;
+    if (auth == null)
+    {
+        auth = new AuthViewObj();
+    }
+    
+<div id="right_sidebar">
+   
+        <div class="panel panel-warning">
+
+            <div class="panel-body widget">
+                @*@if (ViewBag.DisplayAuth == true)
+                {
+                    <div class="divAuth">
+                        <div style="text-align:center">
+                            @using (Html.BeginForm("Approve", "Institution", FormMethod.Post, new { id = "formApprove", style = "display:inline" }))
+{
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="AuthId" value="@auth.AuthId" />
+                    <input type="hidden" name="PostType" value="@auth.PostType" />
+                    <input type="hidden" name="RecordId" value="@auth.RecordId" />
+                    <input type="hidden" name="BatchId" value="@auth.BatchId" />
+                    <input type="hidden" name="m" value="@auth.MenuId" />
+                    <button type="submit" class="btn btn-success btn_disable editor_approve" id="btnApprove"><i class="fa fa-check"></i> Approve</button>
+}
+
+                            <button type="submit" class="btn btn-danger btn_disable editor_reject" id="btnReject"><i class="fa fa-times"></i> Reject</button>
+
+                        </div>
+                        <hr />
+                    </div>
+                }*@
+                <div style="">
+                    <i class="fa fa-chevron-right"></i>
+                    <span class="light-grey">Status:<span class="label label-default status">@auth.Status</span> </span>
+                </div>
+                <input id="hidAuthId" type="hidden" value="@auth.AuthId"/>
+                        <div style="margin-top:10px">
+                        <i class="fa fa-user"></i>
+                        <span class="light-grey">Created By: @auth.User</span>
+                    </div>
+                <div style="margin-top:10px">
+                    <i class="fa fa-calendar"></i>
+                    <span class="light-grey">Date Created: @auth.DateCreated</span>
+                </div>
+                <div style="margin-top:10px" class="div-authname">
+                    <i class="fa fa-map-marker"></i>
+                    <span class="light-grey">Event Type: @auth.EventType</span>
+                </div>
+                <div style="margin-top:10px" class="div-authdate">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Batch ID: @auth.BatchId</span>
+                </div>
+            </div>
+
+            
+        </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <i class="fa fa-check"></i> Approver line
+        </div>
+        <div class="panel-body widget">
+            <div id="divApproverLine">
+
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div id="content_new">
+    <div class="row2">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+                    @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
+
+
+                </div>
+                <div class="panel-body ">
+                    @using (Html.BeginForm("Approve", "NAPS", FormMethod.Post, new { id = "formApprove", }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div style="width:500px;">
+                            <table class="table table-bordered table-condense">
+                                <tr>
+                                    <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Request Type <span class="required">*</span></label></td>
+                                    <td>
+                                        
+                                            @if (ViewBag.ReqType == "A")
+                                            {
+                                                <span class="label label-info" style="font-size:100%">Auto</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-info" style="font-size:100%">Upload</span>
+                                            }
+                                    </td>
+                                </tr>
+                                @if (ViewBag.ReqType == "A")
+                                {
+                                <tr>
+                                    <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Settlement Date <span class="required">*</span></label></td>
+                                    <td>
+                                        <div class="input-group" style="width:150px">
+                                            <input type="text" name="SetDate" id="SetDate" value="@ViewBag.SetDate" class="form-control input-sm" readonly />                                        <span class="input-group-addon" style="color:red">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                }
+                                @if (ViewBag.DisplayAppoval == true)
+                                {
+                                <tr>
+                                    <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Approver Route <span class="required">*</span></label></td>
+                                    <td>
+                                        @Html.DropDownList("ApproverId", ViewBag.ApproverList as SelectList, "Select Approving Officer", new { @class = "form-control select2 input-sm", style = "width:100%" })
+
+                                    </td>
+                                </tr>
+                                }
+                                
+@if (ViewBag.DisplayAuth == true)
+{
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                            <div class="divAuth">
+                                                <div style="text-align:center">
+                                                  
+                                                        <input type="hidden" name="AuthId" value="@auth.AuthId" />
+                                                        <input type="hidden" name="PostType" value="@auth.PostType" />
+                                                        <input type="hidden" name="RecordId" value="@auth.RecordId" />
+                                                        <input type="hidden" name="BatchId" value="@auth.BatchId" />
+                                                        <input type="hidden" name="m" value="@auth.MenuId" />
+                                                    @if (ViewBag.DisplayAppoval == true)
+                                                    {
+                                                        <button type="submit" class="btn btn-success btn_disable editor_approve" id="btnApprove" disabled><i class="fa fa-check"></i> Approve</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="submit" class="btn btn-success btn_disable editor_approve" id="btnApprove"><i class="fa fa-check"></i> Approve</button>
+                                                    }
+
+                                                    <button type="submit" class="btn btn-danger btn_disable editor_reject" id="btnReject"><i class="fa fa-times"></i> Reject</button>
+
+                                                </div>
+                                            </div>
+                                    </td>
+                                </tr>
+                                 }
+                            </table>
+                        </div>
+                    }
+                    <div class="table-responsive">
+                        <table id="tblNaps" class="table table-condensed table-hover table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th style="width:5%">S/N</th>
+                                    <th style="width:9%">Debit Acct</th>
+                                    <th style="width:5%">Debit Bank Code</th>
+                                    <th style="width:23%">Ben. Name</th>
+                                    <th style="width:9%">Ben. Acct</th>
+                                    <th style="width:5%">Ben. Bank Code</th>
+                                    <th style="width:15%;text-align:right">Credit Amount</th>
+                                    <th style="width:22%">Ben. Narration</th>
+                                    <th style="width:22%">Modification Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                var cnt = 0;
+
+                                foreach (var d in Model)
+                                {
+                                    cnt = cnt + 1;
+                                        <tr>
+                                           
+                                            <td style="text-align:center">
+
+                                                @cnt
+
+                                            </td>
+                                            <td>@d.DEBITACCTNO</td>
+                                            <td>@d.DEBITBANKCODE</td>
+                                            <td>@d.BENEFICIARYNAME</td>
+                                            <td>@d.BENEFICIARYACCTNO</td>
+                                            <td>@d.BENEFICIARYBANKCODE</td>
+                                            <td style="text-align:right">@d.CREDITAMOUNT.GetValueOrDefault().ToString("F")</td>
+                                            <td>@d.BENEFICIARYNARRATION</td>
+                                            <td>@d.REASON</td>
+                                        </tr>
+
+                                }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="myModalReject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:450px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalRejectLabel"><i class="fa fa-plus"></i> Rejection Reason</h4>
+            </div>
+
+            @using (Html.BeginForm("Reject", "NAPS", FormMethod.Post, new { id = "formReject", style = "display:inline" }))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="AuthId" value="@auth.AuthId" />
+                <input type="hidden" name="PostType" value="@auth.PostType" />
+                    <input type="hidden" name="RecordId" value="@auth.RecordId" />
+                    <input type="hidden" name="BatchId" value="@auth.BatchId" />
+                    <input type="hidden" name="m" value="@auth.MenuId" />
+                    <div class="modal-body">
+                        <div class="alert alert-dismissable alert-warning notyModal" style="display:none" id="notyModal">
+                            <div id="notyModalMsg" class="notyModalMsg">
+                            </div>
+                        </div>
+                        <div class="form-horizontala">
+                            <div class="form-group">
+                                <label class="control-label">Rejection Reason<span style="color:red">*</span></label>
+                                <div class="">
+                                    <textarea name="Narration" id="Narration" class="form-control"></textarea>
+                                    <label class="error error_reject" style="display:none">Please enter rejection reason.</label>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="editor_reject_final" class="btn btn-danger editor_reject_final btn_disable"><i class="fa fa-times"></i> Reject</button>
+                    </div>
+            }
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+}
+<div class="clearfix"></div>
+
+
+    @section Scripts {
+    @if (ViewBag.Message != null)
+    {
+        var msg = @Html.Raw(Json.Encode(ViewBag.Message));
+        <script>
+        displayDialogNoty('Notification',@msg) ;
+        </script>
+    }
+                                      <script>
+                                          bindApproverLine();
+                                          $(document).on('change', '#ApproverId', function () {
+                                              if ($(this).val() != '') {
+                                                  //alert('not empty');
+                                                  $('.editor_approve').removeAttr('disabled');
+                                              } else {
+                                                  //alert('empty');
+                                                  $('.editor_approve').prop('disabled','disabled');
+                                              }
+                                          });
+                                          //$('form').submit(function(e){  loaderSpin2(true);});
+                                          $(document).on('click', '.editor_approve', function (e) {
+                                             e.preventDefault();
+                                              loaderSpin2(true);
+                                              // $(this).submit();
+                                             console.log($('#formApprove').serialize());
+                                             //alert('approve');
+
+                                              var $reqLogin = {
+                                                  url: '@Url.Action("Approve","NAPS")',
+
+                                                  data: $('#formApprove').serialize(),
+                                                  type: 'POST',
+                                                  contentType: "application/x-www-form-urlencoded"
+                                              };
+                                              //console.log($('#formApprove').serialize());
+                                              //return;
+                                              disableButton(true);
+                                              var ajax = new Ajax();
+                                              ajax.send($reqLogin).done(function (response) {
+                                                  loaderSpin2(false);
+                                                  disableButton(false);
+                                                  if (response.RespCode === 0) {
+                                                      bindApproverLine();
+                                                      $('.status').html(response.status);
+                                                      $('.divAuth').hide();
+                                                      displayDialogNoty('Notification', response.RespMessage);
+                                                  }
+                                                  else {
+                                                      displayDialogNoty('Notification', response.RespMessage);
+                                                  }
+                                              }).fail(function (xhr, status, err) {
+                                                  loaderSpin2(false);
+                                                  disableButton(false);
+                                                  displayDialogNoty('Notification', 'No network connectivity. Please check your network connections.', true);
+                                              });
+                                          })
+
+
+                                          $(document).on('click', '.editor_reject', function (e) {
+                                              e.preventDefault();
+
+                                              $('#myModalReject').modal({ backdrop: 'static', keyboard: false });
+                                          })
+                                        $(document).on('click', '.editor_reject_final', function (e) {
+                                            e.preventDefault();
+                                            //console.log($('#formReject').serialize());
+                                            //return;
+                                              loaderSpin();
+                                              if ($.trim($('#Narration').val()) == '') {
+                                                  $('.error_reject').show();
+                                                  return;
+                                              }
+                                              $('.error_reject').hide();
+                                              var $reqLogin = {
+                                                  url: '@Url.Action("Reject","NAPS")',
+                                                  data: $('#formReject').serialize(),
+                                                  type: 'POST',
+                                                  contentType: "application/x-www-form-urlencoded"
+                                              };
+                                              //console.log($reqLogin.url);
+                                              //console.log($('#formReject').serialize());
+                                              //return;
+                                              loaderSpin(true);
+                                              disableButton2(true, 'editor_reject_final');
+                                              var ajax = new Ajax();
+                                              ajax.send($reqLogin).done(function (response) {
+                                                  loaderSpin2(false);
+                                                  disableButton2(false, 'editor_reject_final');
+                                                  if (response.RespCode === 0) {
+                                                      bindApproverLine();
+                                                      $('.status').html(response.status);
+                                                      $('.divAuth').hide();
+                                                      $('#myModalReject').modal('hide');
+                                                      displayDialogNoty('Notification', response.RespMessage);
+                                                  }
+                                                  else {
+                                                      displayModalNoty('alert-info',response.RespMessage,false);
+                                                  }
+                                              }).fail(function (xhr, status, err) {
+                                                  loaderSpin(false);
+                                                  disableButton2(false, 'editor_reject_final');
+                                                  displayModalNoty('alert-info', 'No network connectivity. Please check your network connections.', true);
+                                              });
+
+                                        });
+
+                                          function bindApproverLine() {
+                                              try{
+                                                  var authId = $('#hidAuthId').val();
+                                                  var urlR = '@Url.Action("ApprovalRouteLine", "Nav")';
+                                                  console.log(urlR + '/' + authId);
+                                                  $.get(urlR + '/' + authId, function (data) {
+                                                      loaderSpin2(false);
+                                                      $('#divApproverLine').replaceWith(data);
+                                                  });
+                                              }
+                                              catch(err){
+
+                                              }
+                                          }
+</script>
+
+        }
+

@@ -1,0 +1,55 @@
+﻿ 
+<div id="pnlGrid">
+    <input type="hidden" name="menuId" id="menuId" value="@ViewBag.MenuId" />
+    
+    <div class="row" style="margin:10px">
+
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-key" style="color:#57ACE7;"></i>Reset Process
+                </div>
+                <div class="panel-body ">
+                    <div class="col-lg-122">
+                   
+
+                            @using (Html.BeginForm("updProcess", "ResetProcess", FormMethod.Post, new { id = "formReset", }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button class="btn btn-success" id="btnReset" data-id="@ViewBag.ProcessFlag"><i class="fa fa-key"></i> Reset Settlement Process</button>
+                            }
+
+                            @using (Html.BeginForm("updProcess2", "ResetProcess", FormMethod.Post, new { id = "formReset2", }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button class="btn btn-success" id="btnReset2" data-id="@ViewBag.ProcessFlag"><i class="fa fa-key"></i> Reset NAP Process</button>
+                            }
+
+                            @using (Html.BeginForm("updProces3", "ResetProcess", FormMethod.Post, new { id = "formReset3", }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button class="btn btn-success" id="btnReset3" data-id="@ViewBag.ProcessFlag"><i class="fa fa-key"></i> Reset to Primary Settlement</button>
+                            }
+
+                        <label class="switch switch-text switch-primary switch-pill switch-handle" data-id="@ViewBag.Success">
+                        </label>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+@section Scripts {
+    @if (TempData["msg"] != null)
+    {
+        var msg = @Html.Raw(Json.Encode(TempData["msg"]));
+        <script>
+        displayDialogNoty('Notification',@msg) ;
+        </script>
+    }
+    @Scripts.Render("~/Scripts/app/reset_process.js")
+}

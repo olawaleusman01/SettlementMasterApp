@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="BalanceEnquiry">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PAN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransRefNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TranCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BalanceEnquiryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BalanceEnquiryResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MiniStatement">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PAN" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransRefNo" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="TranCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MiniStatementResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MiniStatementResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TransactionPostingISO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PAN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransRefNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DebitAccountNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreditAccountNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TranCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ValueDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TransactionPostingISOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionPostingISOResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TransactionPostingCC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TransRefNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TranCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TellerNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DebitAccountNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Narration" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="TranCharge" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="ValueDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TransactionPostingCCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionPostingCCResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustomerDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AcctNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustomerDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerDetailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserPasswordAuthLocal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserPasswordAuthLocalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserPasswordAuthLocalResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserAuthLocal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserAuthLocalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserAuthLocalResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SMSPosting">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CASAAcct" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SMSPostingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SMSPostingResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="BalanceEnquirySoapIn">
+    <wsdl:part name="parameters" element="tns:BalanceEnquiry" />
+  </wsdl:message>
+  <wsdl:message name="BalanceEnquirySoapOut">
+    <wsdl:part name="parameters" element="tns:BalanceEnquiryResponse" />
+  </wsdl:message>
+  <wsdl:message name="MiniStatementSoapIn">
+    <wsdl:part name="parameters" element="tns:MiniStatement" />
+  </wsdl:message>
+  <wsdl:message name="MiniStatementSoapOut">
+    <wsdl:part name="parameters" element="tns:MiniStatementResponse" />
+  </wsdl:message>
+  <wsdl:message name="TransactionPostingISOSoapIn">
+    <wsdl:part name="parameters" element="tns:TransactionPostingISO" />
+  </wsdl:message>
+  <wsdl:message name="TransactionPostingISOSoapOut">
+    <wsdl:part name="parameters" element="tns:TransactionPostingISOResponse" />
+  </wsdl:message>
+  <wsdl:message name="TransactionPostingCCSoapIn">
+    <wsdl:part name="parameters" element="tns:TransactionPostingCC" />
+  </wsdl:message>
+  <wsdl:message name="TransactionPostingCCSoapOut">
+    <wsdl:part name="parameters" element="tns:TransactionPostingCCResponse" />
+  </wsdl:message>
+  <wsdl:message name="CustomerDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:CustomerDetail" />
+  </wsdl:message>
+  <wsdl:message name="CustomerDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:CustomerDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserPasswordAuthLocalSoapIn">
+    <wsdl:part name="parameters" element="tns:UserPasswordAuthLocal" />
+  </wsdl:message>
+  <wsdl:message name="UserPasswordAuthLocalSoapOut">
+    <wsdl:part name="parameters" element="tns:UserPasswordAuthLocalResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserAuthLocalSoapIn">
+    <wsdl:part name="parameters" element="tns:UserAuthLocal" />
+  </wsdl:message>
+  <wsdl:message name="UserAuthLocalSoapOut">
+    <wsdl:part name="parameters" element="tns:UserAuthLocalResponse" />
+  </wsdl:message>
+  <wsdl:message name="SMSPostingSoapIn">
+    <wsdl:part name="parameters" element="tns:SMSPosting" />
+  </wsdl:message>
+  <wsdl:message name="SMSPostingSoapOut">
+    <wsdl:part name="parameters" element="tns:SMSPostingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CoreBankProcessSoap">
+    <wsdl:operation name="BalanceEnquiry">
+      <wsdl:input message="tns:BalanceEnquirySoapIn" />
+      <wsdl:output message="tns:BalanceEnquirySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MiniStatement">
+      <wsdl:input message="tns:MiniStatementSoapIn" />
+      <wsdl:output message="tns:MiniStatementSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TransactionPostingISO">
+      <wsdl:input message="tns:TransactionPostingISOSoapIn" />
+      <wsdl:output message="tns:TransactionPostingISOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TransactionPostingCC">
+      <wsdl:input message="tns:TransactionPostingCCSoapIn" />
+      <wsdl:output message="tns:TransactionPostingCCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CustomerDetail">
+      <wsdl:input message="tns:CustomerDetailSoapIn" />
+      <wsdl:output message="tns:CustomerDetailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserPasswordAuthLocal">
+      <wsdl:input message="tns:UserPasswordAuthLocalSoapIn" />
+      <wsdl:output message="tns:UserPasswordAuthLocalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserAuthLocal">
+      <wsdl:input message="tns:UserAuthLocalSoapIn" />
+      <wsdl:output message="tns:UserAuthLocalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SMSPosting">
+      <wsdl:input message="tns:SMSPostingSoapIn" />
+      <wsdl:output message="tns:SMSPostingSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CoreBankProcessSoap" type="tns:CoreBankProcessSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BalanceEnquiry">
+      <soap:operation soapAction="http://tempuri.org/BalanceEnquiry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MiniStatement">
+      <soap:operation soapAction="http://tempuri.org/MiniStatement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransactionPostingISO">
+      <soap:operation soapAction="http://tempuri.org/TransactionPostingISO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransactionPostingCC">
+      <soap:operation soapAction="http://tempuri.org/TransactionPostingCC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerDetail">
+      <soap:operation soapAction="http://tempuri.org/CustomerDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserPasswordAuthLocal">
+      <soap:operation soapAction="http://tempuri.org/UserPasswordAuthLocal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserAuthLocal">
+      <soap:operation soapAction="http://tempuri.org/UserAuthLocal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SMSPosting">
+      <soap:operation soapAction="http://tempuri.org/SMSPosting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CoreBankProcessSoap12" type="tns:CoreBankProcessSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BalanceEnquiry">
+      <soap12:operation soapAction="http://tempuri.org/BalanceEnquiry" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MiniStatement">
+      <soap12:operation soapAction="http://tempuri.org/MiniStatement" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransactionPostingISO">
+      <soap12:operation soapAction="http://tempuri.org/TransactionPostingISO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransactionPostingCC">
+      <soap12:operation soapAction="http://tempuri.org/TransactionPostingCC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerDetail">
+      <soap12:operation soapAction="http://tempuri.org/CustomerDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserPasswordAuthLocal">
+      <soap12:operation soapAction="http://tempuri.org/UserPasswordAuthLocal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserAuthLocal">
+      <soap12:operation soapAction="http://tempuri.org/UserAuthLocal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SMSPosting">
+      <soap12:operation soapAction="http://tempuri.org/SMSPosting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CoreBankProcess">
+    <wsdl:port name="CoreBankProcessSoap" binding="tns:CoreBankProcessSoap">
+      <soap:address location="http://localhost/EChannel/corebankprocess.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CoreBankProcessSoap12" binding="tns:CoreBankProcessSoap12">
+      <soap12:address location="http://localhost/EChannel/corebankprocess.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

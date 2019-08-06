@@ -1,0 +1,203 @@
+﻿@*<div id="toolbar">
+   
+</div>*@
+<style>
+    #tblNaps td{
+        font-size:10.5px;
+        white-space:nowrap
+    }
+    .table-condensed > thead > tr > th,.table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > tbody > tr > td, .table-condensed > tfoot > tr > td {
+    padding: 2px 5px !important;
+}
+</style>
+<div id="pnlGrid">
+  
+    <div id="content_new" style="margin-right:0px">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-share" style="color:#57ACE7;"></i>  NAPS<a style="color:#E67819" class="btn btn-default btn-xs" href="@Url.Content("~/Uploadtemplate/NapsUploadFile.xlsx")"><i class="fa fa-file-excel-o"></i>  Download Naps Upload Template</a> 
+                    </div>
+                    <div class="panel-body ">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#auto" data-toggle="tab"><i class="fa fa-desktop"></i> AUTO</a>
+                            </li>
+                            <li>
+                                <a href="#upload" data-toggle="tab"><i class="fa fa-upload"></i> MANUAL UPLOAD</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="auto">
+                            <div style="background-color:#fff;margin-bottom:10px;padding-top:10px">
+                            @using (Html.BeginForm("GenerateNaps", "NAPS", FormMethod.Post, new { id = "formGenerate", }))
+                            {
+                            @Html.AntiForgeryToken()
+                            <div style="width:500px;">
+                                <table class="table table-bordered table-condense">
+                                    <tr>
+                                        <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Settlement Date<span class="required">*</span></label></td>
+                                        <td>
+                                            <div class="input-group" style="width:150px">
+                                                <input type="text" name="SetDate" id="SetDate" value="" class="form-control datepicker input-sm" /> 
+                                                <span class="input-group-addon" style="color:red">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Select Process Type<span class="required">*</span></label></td>
+                                        <td>
+                                            @Html.DropDownList("navtype", new List<SelectListItem>
+                                                {
+                                                   new SelectListItem{ Text="NAPS", Value = "1" },
+                                                   new SelectListItem{ Text="NEFT", Value = "2" },
+                                                  
+                                                }, "Select Process Type", new { @class = "form-control select2 input-sm", style = "width:100%" })
+                                           </td>
+                                         
+                                    </tr>
+                                    <tr>
+                                        <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Select Channel<span class="required">*</span></label></td>
+                                        <td>
+                                            @Html.DropDownList("Code", ViewBag.ChannelList as SelectList, "Select Channel", new { @class = "form-control select2 input-sm", style = "width:100%" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Approver Route <span class="required">*</span></label></td>
+                                        <td>
+                                            @Html.DropDownList("ApproverId", ViewBag.ApproverList as SelectList, "Select Approving Officer", new { @class = "form-control select2 input-sm", style = "width:100%" })
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align:center">
+                                            <button id="btnGenerate" class="btn btn-info input-sm">Generate <i class="fa fa-spinner"></i></button>
+                                            <button id="btnProcess" class="btn btn-success input-sm" disabled>Process <i class="fa fa-check"></i></button>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            }
+                                </div>
+                                <div id="divGrid">
+                                    <div class="divad25">
+                                        <div class="table-responsive">
+                                            <table id="tblNaps" class="table table-condensed table-striped table-hover table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th style="text-align:center"><input type="checkbox" id="chkAll" name="chkAll" /></th>
+                                                        <th>S/N</th>
+                                                        <th>Debit Acct No</th>
+                                                        <th>Debit Bank Code</th>
+                                                        <th>Ben. Name</th>
+                                                        <th>Ben. Acct No</th>
+                                                        <th>Ben. Bank Code No</th>
+                                                        <th>Credit Amount</th>
+                                                        <th>Ben. Narration</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade in" id="upload">
+                                <div style="background-color:#fff;margin-bottom:10px;padding-top:10px">
+                                    @using (Html.BeginForm("UploadNaps", "NAPS", FormMethod.Post, new { id = "formUpload", }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <div style="width:500px;">
+                                            <table class="table table-bordered table-condense">
+                                                <tr>
+                                                    <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Select File <span class="required">*</span></label></td>
+                                                    <td>
+                                                            <input type="file" name="upldfile" id="upldfile" value="" class="form-control" />                            
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Select Process Type<span class="required">*</span></label></td>
+                                                    <td>
+                                                   @Html.DropDownList("navtype3", new List<SelectListItem>
+                                                  {
+                                                   new SelectListItem{ Text="NAPS", Value = "1" },
+                                                   new SelectListItem{ Text="NEFT", Value = "2" },
+
+                                                   }, "Select Process Type", new { @class = "form-control select2 input-sm", style = "width:100%" , onchange = "GetSelected();" } )
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Approver Route <span class="required">*</span></label></td>
+                                                    <td>
+                                                        @Html.DropDownList("ApproverId", ViewBag.ApproverList as SelectList, "Select Approving Officer", new { @class = "form-control select2 input-sm", style = "width:100%" })
+
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center">
+                                                        <button id="btnUpload" class="btn btn-default input-sm">Upload <i class="fa fa-upload"></i></button>
+                                                        <button id="btnProcessUpld" class="btn btn-info input-sm" disabled>Process <i class="fa fa-check"></i></button>
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    }
+                                </div>
+                                <div id="divGridUpld">
+                                    <div class="divad25">
+                                        <div class="table-responsive">
+                                            <table id="tblNapsUpld" class="table table-condensed table-striped table-hover table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                       
+                                                        <th>S/N</th>
+                                                        <th>Debit Acct No</th>
+                                                        <th>Debit Bank Code</th>
+                                                        <th>Ben. Name</th>
+                                                        <th>Ben. Acct No</th>
+                                                        <th>Ben. Bank Code No</th>
+                                                        <th>Credit Amount</th>
+                                                        <th>Ben. Narration</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/naps.js")
+    <script>
+        //alert('true');
+       
+    </script>
+}
+
+<div class="modal fade" id="myModalNaps" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>

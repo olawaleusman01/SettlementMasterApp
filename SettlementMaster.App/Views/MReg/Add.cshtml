@@ -1,0 +1,206 @@
+﻿@model Generic.Dapper.Model.mRegObj
+
+<div id="toolbar">
+    <div class="col-lg-12">
+        <a id="btnCancel" class="btn btn-warning editor_returna" href="@Url.Action("Index","Merchant",new {m = ViewBag.MenuId })"><i class="fa fa-long-arrow-left"></i> Return</a>
+    </div>
+</div>
+ <div class="row" style="margin:10px">
+
+    <div class="panel panel-default" id="divForm">
+        <div class="panel-heading">
+            Add New Merchant
+            @*<a id="btnReturna" class="btn btn-warning editor_returna pull-right" href="@Url.Action("Index","Merchant")"><i class="fa fa-chevron-left"></i> Return to List</a>*@
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("Add", "MReg", FormMethod.Post, new { id = "formMReg", @style = "display:inline" }))
+{
+            @Html.AntiForgeryToken()
+            
+                   
+                        <div class="form-horizontal" style="padding:15px;background:#f4f4f4">
+                            <fieldset style="">
+                                <legend><i class="fa-info-circle fa"></i> Merchant Detail</legend>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Merchant ID<span style="color:red">*</span></label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.mObj.MERCHANTID, new { @class = "form-control input-sm" })
+                                        @Html.HiddenFor(model => model.mObj.ITBID)
+                                    </div>
+                                    <label class="col-md-2 control-label">Merchant Name<span style="color:red">*</span></label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.mObj.MERCHANTNAME, new { @class = "form-control input-sm" })
+
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Acquiring Institution<span style="color:red">*</span></label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.mObj.INSTITUTION_CBNCODE, ViewBag.AcquirerList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                    </div>
+
+                                    <label class="col-md-2 control-label">Mcc Description<span style="color:red">*</span></label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.mObj.MCC_CODE, ViewBag.MCCList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Contact Title</label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.mObj.CONTACTTITLE, new { @class = "form-control input-sm", style = "width:150px" })
+
+                                    </div>
+                                    <label class="col-md-2 control-label">Contact Name<span style="color:red">*</span></label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.mObj.CONTACTNAME, new { @class = "form-control input-sm" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="col-md-2 control-label">Business Code<span style="color:red">*</span></label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.mObj.BUSINESS_CODE, new { @class = "form-control input-sm", style = "width:150px" })
+
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Email<span style="color:red">*</span></label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.mObj.EMAIL, new { @class = "form-control input-sm" })
+
+                                    </div>
+                                    <label class="col-md-2 control-label">Phone No</label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.mObj.PHONENO, new { @class = "form-control input-sm", style = "width:150px" })
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Address<span style="color:red">*</span></label>
+                                    <div class="col-md-4">
+                                        @Html.TextAreaFor(model => model.mObj.ADDRESS, new { @class = "form-control input-sm" })
+
+                                    </div>
+                                    <label class="col-md-2 control-label">Country<span style="color:red">*</span></label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.mObj.COUNTRY_CODE, ViewBag.CountryList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">State<span style="color:red">*</span></label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.mObj.STATE_CODE, ViewBag.StateList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                    </div>
+                                    <label class="col-md-2 control-label">LGA</label>
+
+                                    <div class="col-md-4">
+                                        @*@Html.DropDownListFor(model => model.CITY_NAME, ViewBag.CityList as SelectList, "--Select City--", new { @class = "form-control select2", style = "width:100%" })*@
+                                        @Html.TextBoxFor(model => model.mObj.CITY_NAME, new { @class = "form-control input-sm" })
+
+
+                                    </div>
+                                </div>
+                                </fieldset>
+                                <fieldset style="margin-bottom:20px">
+                                    <legend><i class="fa-money fa"></i> Merchant Account</legend>
+                                    <div class="col-lg-12" style="padding-top: 10px;background:#fff;    border-radius: 4px;-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.075);box-shadow: 0 1px 2px rgba(0,0,0,.075);">
+                                        <div class="table-responsive">
+                                            <div id="divMA">
+                                                <table id="tableAcct" class="table table-condensed table-hover table-bordered table-striped" style="width:100%">
+
+                                                    <thead>
+                                                        <tr><th colspan="5"><a id="btnAddAcct" class="btn btn-info btn-xs"><i class="fa fa-plus"></i> Add Account</a></th></tr>
+                                                        <tr>
+                                                            <th style="width:10%;text-align:center">Action?</th>
+                                                            <th>
+                                                                Account No.
+                                                            </th>
+                                                            <th>
+                                                                Account Name
+                                                            </th>
+                                                            <th>
+                                                                Bank Name
+                                                            </th>
+                                                            <th>
+                                                                Currency
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend><i class="fa-list fa"></i> Merchant Terminal</legend>
+                                    <div class="col-lg-12" style="padding-top: 10px;background:#fff;    border-radius: 4px;-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.075);box-shadow: 0 1px 2px rgba(0,0,0,.075);">
+                                        <div style="margin-bottom:5px">
+                                            <div class="table-responsive">
+                                                <div id="divTermQueue">
+                                                    <table id="tableTid" class="table table-condensed table-hover table-striped table-bordered" style="width:100%">
+                                                        <thead>
+                                                            <tr><th colspan="8"><a id="btnAddTerminal" class="btn btn-info btn-xs"><i class="fa fa-plus"></i> Add Terminal</a></th></tr>
+
+                                                            <tr>
+                                                                <th style="text-align:center">Action?</th>
+                                                                <th>Terminal ID</th>
+                                                                <th>Frequency</th>
+                                                                <th>Set. Currency</th>
+                                                                <th>Trans. Currency</th>
+                                                                <th>Account No</th>
+                                                                <th>Account Name</th>
+                                                                <th>Bank Name</th>
+                                                                @*<th>Batch ID</th>*@
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            <hr />
+                            <div style="text-align:right">
+                                <button class="btn btn-info"><i class="fa fa-save"></i> Save</button>
+                            </div>
+</div>
+}
+        </div>
+
+    </div>
+
+</div>
+<div class="modal fade" id="myModalAcct" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+<div class="modal fade" id="myModalTerm" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+
+@section Scripts {
+@if (ViewBag.Message != null)
+{
+
+
+    <script>
+                    displayDialogNoty('Notification', '@ViewBag.Message');
+
+    </script>
+
+}
+
+    @Scripts.Render("~/Scripts/app/mreg.js")
+}

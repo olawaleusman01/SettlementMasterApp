@@ -1,0 +1,49 @@
+﻿@model List<Generic.Dapper.Model.InstitutionAcctObj>
+<table id="tableAcct" class="table table-condensed table-hover table-bordered" style="width:100%">
+   
+    <thead>
+       <tr><th colspan="5"><a id="btnAddAcct" class="btn btn-info btn-xs"><i class="fa fa-plus"></i> Add Account</a></th></tr>
+        <tr>
+            <th style="width:10%;text-align:center">Action?</th>
+            <th>
+                Card Sceme
+            </th>
+            <th>
+                Account No.
+            </th>
+            <th>
+                Account Name
+            </th>
+            <th>
+                Bank Name
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach(var d in Model)
+        {
+            <tr>
+                <td style="text-align:center">
+                    @if (!d.Deleted)
+                    {
+                    <a class="btn btn-info btn-xs" id="edit" data-key="@d.ITBID" title="Edit Record"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" id="delete" data-key="@d.ITBID" title="Delete Record"><i class="fa fa-trash"></i></a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-warning btn-xs" id="undo" title="Undo Delete" data-key="@d.ITBID"><i class="fa fa-undo"></i></a>
+
+                    }
+                </td>
+                <td>@d.CARDSCHEME</td>
+                <td>@d.DEPOSIT_ACCOUNTNO</td>
+                <td>@d.DEPOSIT_ACCTNAME</td>
+                <td>@d.DEPOSIT_BANKNAME</td>
+               
+            </tr>
+            
+        }
+    </tbody>
+</table>

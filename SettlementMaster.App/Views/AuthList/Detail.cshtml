@@ -1,0 +1,21 @@
+﻿
+@{ 
+    string controller = ViewBag.Controller;
+}
+
+<div id="toolbar">
+    <div class="col-lg-12">
+        @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>
+        <a id="btnCancel" class="btn btn-default editor_return" style="display:none"><i class="fa fa-long-arrow-left"></i> Cancel</a>*@
+
+    </div>
+</div>
+
+<div id="pnlForm" class="panel-form">
+    @{Html.RenderAction("DetailAuth", controller,new {id= ViewBag.Key});}
+</div>
+@*@section Scripts {
+    @Scripts.Render("~/bundles/roles")
+}*@
+
+

@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" style="background-image: url(/Img/bg.jpg);background-repeat: no-repeat;">
+<head>
+    <title></title>
+    <base href='@Url.Content("~/")'>
+    @*<link href="Content/style.css" rel="stylesheet" />
+    <link href="Content/reset.css" rel="stylesheet" />
+    <link href="Content/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />*@
+    @Styles.Render("~/Content/login")
+</head>
+<body style="">
+ 
+        <div class="container">
+            <div class="login">
+                <div style="text-align:center">
+                    <h1 class="login-heading">
+                        <i class="fa fa-shopping-cart"></i> Central Drug Mart
+                    </h1>
+                </div>
+                <div style="text-align:center">
+                    <h4 class="login-headings">
+
+                        <strong>Welcome.</strong> Please login.
+                    </h4>
+                </div>
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "formLogin" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="alert alert-dismissible noty" role="alert" style="display:none">
+       
+        <span class="notyMsg">
+
+        </span>
+    </div>
+                <input type="text" name="UserName" id="UserName"  placeholder="UserName"  class="input-txt" />
+                <input type="password" name="Password" id="Password"  placeholder="Password"  class="input-txt" />
+                <div class="login-footer">
+                   
+                    <button type="submit" class="btn btn--right" id="btnSave" style="cursor:pointer" ><i class="fa fa-sign-in"></i> Sign in  </button>
+                    @*<button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-sign-in"></i> Create User</button>*@
+                    <div class="modal_loader loader btn--right" style="display:none">
+                        <i class="fa fa-spinner fa-spin fa-1x"></i>
+                    </div>
+                    <div class="clearfix">   </div>
+                </div>
+}
+
+            </div>
+        </div>
+
+  
+
+</body>
+</html>
+
+
+    @Scripts.Render("~/bundles/login")

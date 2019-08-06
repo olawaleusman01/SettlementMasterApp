@@ -1,0 +1,151 @@
+﻿@model Generic.Dapper.Model.MccMscObj
+    <div class="modal-dialog" style="width:550px">
+        <div class="modal-content">
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "formMSC" }))
+{
+    @Html.AntiForgeryToken()
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5 class="modal-title" id="myModalLabel"><i class="fa fa-plus"></i>Add MSC</h5>
+            </div>
+            <input type="hidden" name="CBN_CODE" id="CBN_CODE" value="" />
+            <div class="modal-body">
+                <div class="col-lg-12">
+                    <div class="alert alert-dismissable alert-warning" style="display:none" id="notyMsc">
+                        <div id="notyMscMsg">
+                        </div>
+                    </div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Channel</label>
+                            <div class="col-lg-8">
+                                @Html.HiddenFor(model => model.ITBID)
+                                @Html.DropDownListFor(model => model.CHANNEL, ViewBag.ChannelList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Card Scheme</label>
+                            <div class="col-lg-8">
+                                @Html.DropDownListFor(model => model.CARDSCHEME, ViewBag.CardSchemeList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div style="">
+                            <h6 style="margin-top:0px;margin-bottom:0px;font-weight:400;font-size:14px;color:#D94F00">Domestic Setup</h6>
+                            <hr style="margin-top:10px;margin-bottom:10px" />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Calculation Basis</label>
+                            <div class="col-lg-8">
+                                @Html.DropDownListFor(model => model.MSC_CALCBASIS, ViewBag.CalcBasis as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-lg-3 control-label">MSC Value</label>
+                            <div class="col-lg-3 ">
+                             <div class="form-group input-groupa" style="margin:0px">
+                                @Html.TextBoxFor(model => model.DOM_MSCVALUE, "{0:0.00}", new { @class = "form-control input-sm" })                                </div>
+                            </div>
+                            <label class="col-lg-3 control-label">CAP</label>
+                            <div class="col-lg-3 ">
+                                <div class="form-group" style="margin:0px">
+                                    @Html.TextBoxFor(model => model.DOMCAP, "{0:0.00}", new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Settlement Currency<span style="color:indianred"> *</span></label>
+                            <div class="col-lg-8">
+                                @Html.DropDownListFor(model => model.DOM_SETTLEMENT_CURRENCY, ViewBag.CurrencyList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                @*<asp:HiddenField ID="hidMscItbid" runat="server" />
+                                    <asp:HiddenField ID="hidBankSelected" runat="server" />*@
+                            </div>
+
+
+                        </div>
+                        @*<div class="form-group">
+                                <label class="col-lg-4 control-label">Frequency<span style="color:indianred"> *</span></label>
+                                <div class="col-lg-8">
+                                </div>
+                            </div>*@
+                        <div>
+                            <label style="color:red">
+                                @Html.CheckBoxFor(model=> model.SET_INTL)
+                                <i>check this to set international MSC.</i>
+                            </label>
+                        </div>
+                        @{ 
+                        <div class="intlmsc" style="display:@Model.DisplayIntL">
+                            
+                        <div style="">
+                            <h6 style="margin-top:0px;margin-bottom:0px;font-weight:400;font-size:14px;color:#D94F00">International Setup</h6>
+                            <hr style="margin-top:10px;margin-bottom:10px" />
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Calculation Basis</label>
+                            <div class="col-lg-8">
+                                @Html.DropDownListFor(model => model.INTMSC_CALCBASIS, ViewBag.CalcBasis as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">MSC Value</label>
+                            <div class="col-lg-3 ">
+                                <div class="form-group input-groupa" style="margin:0px">
+                                    @Html.TextBoxFor(model => model.INT_MSCVALUE, "{0:0.00}", new { @class = "form-control input-sm" })
+                                </div>
+
+                            </div>
+                            <label class="col-lg-3 control-label">CAP</label>
+                            <div class="col-lg-3 ">
+                                <div class="form-group" style="margin:0px">
+                                    @Html.TextBoxFor(model => model.INTLCAP, "{0:0.00}", new { @class = "form-control input-sm" })
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Settlement Currency<span style="color:indianred"> *</span></label>
+                            <div class="col-lg-8">
+                                @Html.DropDownListFor(model => model.INT_SETTLEMENT_CURRENCY, ViewBag.CurrencyList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+
+                            </div>
+
+
+                        </div>
+                        @*<div class="form-group">
+                                <label class="col-lg-4 control-label">Frequency<span style="color:indianred"> *</span></label>
+                                <div class="col-lg-8">
+                                </div>
+                            </div>*@
+                       </div>
+                            }
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button Id="btnAddMscGrid" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
+            </div>
+}
+        </div>
+        <!-- /.modal-content -->
+    </div>
+
+<script>
+    $('.select2').select2({
+        theme: "classic"
+    });
+   // $('a.editor_return').click();
+</script>

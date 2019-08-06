@@ -1,0 +1,59 @@
+﻿@model List<Generic.Dapper.Model.RvDrAcctUpldObj>
+<style>
+    #example1 td{
+        white-space:nowrap; 
+    }
+     #tblUpld th{
+       font-size:11px;
+    }
+     .popover{
+              max-width:500px !important
+         }
+</style>
+<div class="table-responsive divad2a">
+    <table id="tblUpld" class="table table-striped table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th style="width:5%"> S/N</th>
+                <th style="width:7%">
+                     STATUS
+                </th>
+
+                <th style="width:15%"> MERCHANT ID</th>
+                <th style="width:10%"> GROUP CODE</th>
+                <th style="width:10%"> AGENT CODE</th>
+                <th style="width:10%"> BANK CODE</th>
+                <th style="width:15%"> BANK ACCOUNT NO</th>
+                <th style="width:25%"> BANK ACCOUNT NAME</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ 
+                var cnt = 0;
+                foreach (var d in Model)
+                {
+                    cnt++;
+                <tr data-toggle="popover" data-trigger="hover" data-html="true" data-content="@d.VALIDATIONERRORMESSAGE">
+                    <td style="text-align:center"> @cnt </td>
+                    <td style="text-align:center">
+
+                        <a class="@d.ValidationStatusClass">
+                            <i class="@d.ValidationStatusIcon"></i>
+                        </a>
+
+                    </td>
+                    <td> @d.MERCHANTID</td>
+                    <td> @d.RVGROUPCODE</td>
+                    <td> @d.AGENT_CODE</td>
+                    <td> @d.BANKCODE</td>
+                    <td> @d.BANKACCTNO</td>
+                    <td> @d.BANKACCTNAME</td>
+                </tr>
+                    }
+                }
+        </tbody>
+    </table>
+</div>
+<script>
+    $("[data-toggle=popover]").popover();
+</script>

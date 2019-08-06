@@ -1,0 +1,366 @@
+﻿@using  Generic.Dapper.Model
+@model MCCObj
+
+
+<div id="toolbar">
+    <div class="col-lg-12">
+        @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
+            <a id="btnCancel" href="@Url.Action("Index","AuthList")" class="btn btn-default editor_return"><i class="fa fa-long-arrow-left"></i> Return to Authorization Queue</a>
+
+    </div>
+</div>
+
+@if (Model != null)
+{
+    var auth = ViewBag.Auth as AuthViewObj;
+    if (auth == null)
+    {
+        auth = new AuthViewObj();
+    }
+    var mccObj = ViewBag.MCCMSC as List<MccMscObj>;
+    if (mccObj == null)
+    {
+        mccObj = new List<MccMscObj>();
+    }
+<div id="right_sidebar">
+   
+        <div class="panel panel-warning">
+
+            <div class="panel-body widget">
+                @if (ViewBag.DisplayAuth == true)
+                {
+                    <div class="divAuth">
+                        <div style="text-align:center">
+                            @using (Html.BeginForm("Approve", "MCC", FormMethod.Post, new { id = "formApprove", style = "display:inline" }))
+{
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="AuthId" value="@auth.AuthId" />
+                    <input type="hidden" name="PostType" value="@auth.PostType" />
+                    <input type="hidden" name="RecordId" value="@auth.RecordId" />
+                    <input type="hidden" name="BatchId" value="@auth.BatchId" />
+                    <input type="hidden" name="m" value="@auth.MenuId" />
+                    <button type="submit" class="btn btn-success btn_disable editor_approve" id="btnApprove"><i class="fa fa-check"></i> Approve</button>
+}
+
+                            <button type="submit" class="btn btn-danger btn_disable editor_reject" id="btnReject"><i class="fa fa-times"></i> Reject</button>
+
+                        </div>
+                        <hr />
+                    </div>
+                }
+                <div style="">
+                    <i class="fa fa-chevron-right"></i>
+                    <span class="light-grey">Status:<span class="label label-default status">@auth.Status</span> </span>
+                </div>
+                        <div style="margin-top:10px">
+                        <i class="fa fa-user"></i>
+                        <span class="light-grey">Created By: @auth.User</span>
+                    </div>
+                <div style="margin-top:10px">
+                    <i class="fa fa-calendar"></i>
+                    <span class="light-grey">Date Created: @auth.DateCreated</span>
+                </div>
+                <div style="margin-top:10px" class="div-authname">
+                    <i class="fa fa-map-marker"></i>
+                    <span class="light-grey">Event Type: @auth.EventType</span>
+                </div>
+                @*<div style="margin-top:10px" class="div-authdate">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Modified Date:</span>
+                </div>*@
+            </div>
+        </div>
+    
+</div>
+<div id="content_new">
+    <div class="row2">
+
+        <div class="col-lg-12">
+            <div class="alert alert-dismissible fade in noty" role="alert" style="display:none">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                    <span aria-hidden="true">×</span>
+
+                </button>
+                <span class="notyMsg">
+
+                </span>
+            </div>
+
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+                    @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
+
+
+                </div>
+                <div class="panel-body ">
+                    @using (Html.BeginForm("AddMCC", "MCC", FormMethod.Post, new { id = "formMCC" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="m" id="m" value="@ViewBag.MenuId" />
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">MCC Code <span class="required"> *</span></label>
+                                <div class="col-md-4">
+
+                                    @Html.TextBoxFor(model => model.MCC_CODE, new { @class = "form-control input-sm" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+
+                                <label class="col-md-3 control-label">MCC Description <span class="required"> *</span></label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.MCC_DESC, new { @class = "form-control input-sm" })
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Sector <span class="required"> *</span></label>
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.SECTOR_CODE, ViewBag.Sector as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                </div>
+
+                            </div>
+                            @if (ViewBag.StatusVisible == true)
+                            {
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Status</label>
+                                    <div class="col-md-4">
+                                        @*<select class="form-control select2" name="Status" id="Status">
+                                            <option value="ACTIVE">Active</option>
+                                            <option value="CLOSE">Close</option>
+                                        </select>*@
+                                        @Html.DropDownListFor(model => model.STATUS, ViewBag.RecordStatus as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+
+                                    </div>
+                                </div>
+                            }
+                            <div class="clearfix"></div>
+                            <div style="border: 1px solid #CCC;background-color:#f7f7f7;margin-bottom:10px;margin-left:0px;margin-right:0px;padding:10px">
+                                <div class="form-group">
+                                    <label class="col-lg-3" style="text-align:right">Acquirer</label>
+                                    <div class="col-lg-4">
+                                      <label class="label label-success">@ViewBag.AcquirerName</label>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div>
+                                    <table id="tableMsc" class="table  table-condensed table-hover table-bordered" style="width:100%">
+                                        @*<colgroup span="1"></colgroup>*@
+                                        <colgroup span="3"></colgroup>
+                                        <colgroup span="4" style="background-color:#ddd"></colgroup>
+                                        <colgroup span="4" style="background-color:lightyellow"></colgroup>
+                                        <thead>
+                                            <tr>
+                                                @*<th colspan="1" style="text-align:center"></th>*@
+                                                <th colspan="3" style="text-align:center"></th>
+                                                <th colspan="4" style="text-align:center">Domestic Settings</th>
+                                                <th colspan="4" style="text-align:center">International Settings</th>
+                                            </tr>
+                                            <tr>
+                                               <th>Action</th>
+                                                <th>
+                                                    Channel
+                                                </th>
+                                                <th>
+                                                    Card Scheme
+                                                </th>
+                                                <th>
+                                                    Calc. Basis
+                                                </th>
+                                                <th>Dom. MSC Value <i class="fa fa-info-circle" style="color:orangered" data-toggle="tooltip" title="Domestic MSC Value"></i></th>
+                                                <th>Dom. CAP </th>
+                                                <th> Dom. Sett. Currency</th>
+                                                @*<th> Dom. Frequency</th>*@
+                                                <th>
+                                                    Calc. Basis
+                                                </th>
+                                                <th>Intl. MSC Value</th>
+                                                <th>Intl. CAP</th>
+
+                                                <th> Intl. Sett. Currency</th>
+                                                @*<th data-toggle="tooltip" title="International Frequency"> Int. Frequency</th>*@
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var d in mccObj)
+                                            {
+                                                <tr>
+                                                   <td>@d.EVENTTYPE</td>
+                                                    <td>@d.ChannelDesc</td>
+                                                    <td>@d.CARDSCHEME</td>
+                                                    <td>@d.MSC_CALCBASIS</td>
+                                                    <td>@d.DOM_MSCVALUE</td>
+                                                    <td>@d.DOMCAP</td>
+                                                    <td>@d.DomCurrencyDesc</td>
+                                                    @*<td>@d.DomFrequencyDesc</td>*@
+                                                    <td>@d.INTMSC_CALCBASIS</td>
+                                                    <td>@d.INT_MSCVALUE</td>
+                                                    <td>@d.INTLCAP</td>
+                                                    <td>@d.IntCurrencyDesc</td>
+                                                    @*<td>@d.IntFrequencyDesc</td>*@
+                                                </tr>
+
+                                            }
+                                        </tbody>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="myModalReject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:450px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalRejectLabel"><i class="fa fa-plus"></i> Rejection Reason</h4>
+            </div>
+
+            @using (Html.BeginForm("Reject", "MCC", FormMethod.Post, new { id = "formReject", style = "display:inline" }))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="AuthId" value="@auth.AuthId" />
+                <input type="hidden" name="PostType" value="@auth.PostType" />
+                    <input type="hidden" name="RecordId" value="@auth.RecordId" />
+                    <input type="hidden" name="BatchId" value="@auth.BatchId" />
+                    <input type="hidden" name="m" value="@auth.MenuId" />
+                    <div class="modal-body">
+
+                        <div class="form-horizontala">
+                            <div class="form-group">
+                                <label class="control-label">Rejection Reason<span style="color:red">*</span></label>
+                                <div class="">
+                                    <textarea name="Narration" id="Narration" class="form-control"></textarea>
+                                    <label class="error error_reject" style="display:none">Please enter rejection reason.</label>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="editor_reject_final" class="btn btn-danger editor_reject_final btn_disable"><i class="fa fa-times"></i> Reject</button>
+                    </div>
+            }
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+}
+<div class="clearfix"></div>
+
+
+    @section Scripts {
+    @if (ViewBag.Message != null)
+    {
+        var msg = @Html.Raw(Json.Encode(ViewBag.Message));
+        <script>
+        displayDialogNoty('Notification',@msg) ;
+        </script>
+    }
+                                      <script>
+                                            $(document).on('click', '.editor_approve', function (e) {
+                                                //e.preventDefault();
+                                                loaderSpin2(true);
+
+                                            @*var $reqLogin = {
+                                                url: '@Url.Action("Approve","Roles")',
+
+                                                data: $('#formApprove').serialize(),
+                                                type: 'POST',
+                                                contentType: "application/x-www-form-urlencoded"
+                                            };
+                                            //console.log($reqLogin.url);
+                                            //console.log($('#formApprove').serialize());
+                                            //return;
+                                            loaderSpin2(true);
+                                            //disableButton(true);
+                                            var ajax = new Ajax();
+                                            ajax.send($reqLogin).done(function (response) {
+                                                loaderSpin2(false);
+                                                //disableButton(false);
+                                                if (response.RespCode === 0) {
+                                                    $('.status').html(response.status);
+                                                    $('.divAuth').hide();
+                                                    displayDialogNoty('Notification', response.RespMessage);
+                                                }
+                                                else {
+                                                    displayDialogNoty('Notification', response.RespMessage);
+                                                }
+                                            }).fail(function (xhr, status, err) {
+                                                loaderSpin2(false);
+                                                //disableButton(false);
+                                                displayDialogNoty('Notification', 'No network connectivity. Please check your network connections.', true);
+                                            });*@
+                                        })
+
+
+                                        $(document).on('click', '.editor_reject', function (e) {
+                                            e.preventDefault();
+
+                                            $('#myModalReject').modal({ backdrop: 'static', keyboard: false });
+                                        })
+  $(document).on('click', '.editor_reject_final', function (e) {
+                                              //e.preventDefault();
+                                              loaderSpin();
+                                              if ($.trim($('#Narration').val()) == '') {
+                                                  $('.error_reject').show();
+                                                  return;
+                                              }
+                                              $('.error_reject').hide();
+                                              var $reqLogin = {
+                                                  url: '@Url.Action("Reject","MCC")',
+                                                  data: $('#formReject').serialize(),
+                                                  type: 'POST',
+                                                  contentType: "application/x-www-form-urlencoded"
+                                              };
+                                              //console.log($reqLogin.url);
+                                              loaderSpin(true);
+                                              disableButton2(true, 'editor_reject_final');
+                                              var ajax = new Ajax();
+                                              ajax.send($reqLogin).done(function (response) {
+                                                  loaderSpin2(false);
+                                                  disableButton2(false, 'editor_reject_final');
+                                                  if (response.RespCode === 0) {
+                                                      $('.status').html(response.status);
+                                                      $('.divAuth').hide();
+                                                      $('#myModalReject').modal('hide');
+                                                      displayDialogNoty('Notification', response.RespMessage);
+                                                  }
+                                                  else {
+                                                      displayDialogNoty('Notification', response.RespMessage);
+                                                  }
+                                              }).fail(function (xhr, status, err) {
+                                                  loaderSpin(false);
+                                                  disableButton2(false, 'editor_reject_final');
+                                                  displayDialogNoty('Notification', 'No network connectivity. Please check your network connections.', true);
+                                              });
+
+                                          });
+</script>
+
+        }
+

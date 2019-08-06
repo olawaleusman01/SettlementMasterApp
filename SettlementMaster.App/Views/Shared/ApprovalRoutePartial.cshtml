@@ -1,0 +1,10 @@
+﻿<div class="form-group">
+    <label class="@ViewBag.ColA control-label">Approving Route <span class="required"> *</span></label>
+    <div class="@ViewBag.ColB">
+        <div class="input-groupa">
+            @Html.DropDownList("ApproverId", ViewBag.ApproverList as SelectList, "Select Approving Officer", new { @class = "form-control select2 input-sm", style = "width:100%" })
+
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>

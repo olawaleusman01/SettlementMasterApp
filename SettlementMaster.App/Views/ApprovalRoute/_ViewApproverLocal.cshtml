@@ -1,0 +1,44 @@
+﻿@model List<Generic.Dapper.Model.MApproverObj>
+<div class="divad2d">
+    <table id="tblRouteLocal" class="table table-condensed table-hover table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <a id="btnAddRoute" class="btn btn-info btn-xs"><i class="fa fa-plus"></i> Add Approver</a>
+                </th>
+            </tr>
+            <tr>
+                <th style="width:10%"></th>
+                <th style="width:10%">S/N</th>
+                <th style="">Full Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+            var cnt = 0;
+
+            foreach (var d in Model)
+            {
+                    cnt = cnt + 1;
+        <tr>
+            <td style="text-align:center">
+                @*<a data-key="@d.PID" class="btn btn-info btn-xs editor_edit" style="padding:1px 3px;font-size:10.5px"><i class="fa fa-edit"></i></a>*@
+                <a data-key="@d.ITBID" class="btn btn-danger btn-xs editor_delete" style=""><i class="fa fa-trash"></i></a>
+            </td>
+          
+            <td style="text-align:center">
+
+                @cnt
+
+            </td>
+            <td>@d.FULLNAME</td>
+           
+        </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+ </div>
+
+

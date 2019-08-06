@@ -1,0 +1,204 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html class="html--signin" style="background-image:url(@Url.Content("~/Img/bg3.jpg")">
+
+
+<head>
+    <!-- Google authentication snippet (to prove that vaughn's google account legitimately owns secure.vendhq.com) -->
+    <base href='@Url.Content("~/")'>
+    <!-- End of Google Analytics Content Experiment code -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Sign in to Xpress Settlement</title>
+    @*<link rel="stylesheet" type="text/css" media="screen" href="/css/signin.67836268c91c124b5b31fe621d890568.min.css" />*@
+    @Styles.Render("~/Content/login.css")
+    <!--[if IE]> <link href="/css/ie-signup.css" rel="stylesheet" type="text/css"> <![endif]-->
+
+    <meta name="title" content="Sign in to Xpress Settlement" />
+    <meta name="description" content="Sign in to Xpress Settlement" />
+    <meta name="robots" content="index, follow" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <style>
+        .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+            pointer-events: none;
+            cursor: not-allowed;
+            filter: alpha(opacity=65);
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            opacity: .65;
+        }
+    </style>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+</head>
+<body class="landscape page page--signin" id="home">
+    @*<header class="header-signin">
+        <div id="top-bar">
+            <div class="content">
+                <ul>
+                    <li><a href="http://www.vendhq.com/">VendHQ</a></li>
+                    <li><a href="/signin">Sign in</a></li>
+                </ul>
+                <ul>
+                    <li><a href="http://support.vendhq.com">Help</a></li>
+                    <li><a href="//blog.vendhq.com">Blog</a></li>
+                    <li class="icons js-sales-chat">
+                        <a href="http://www.vendhq.com/contact" class="js-live-chat icon xmini">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 12" enable-background="new 0 0 14 12" xml:space="preserve">
+                            <g>
+                            <path fill="#DFDFDF" d="M14,7V3c0,0,0-3-3-3H3c0,0-3,0-3,3v4c0,0,0,3,3,3h3l5,2l-1-2h1C11,10,14,10,14,7" />
+  </g>
+</svg>
+                        </a>
+                    </li>
+                    <li class="icons">
+                        <a href="#" class="js-phone-icon icon xmini">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 14" enable-background="new 0 0 14 14" xml:space="preserve">
+                            <g>
+                            <defs>
+                            <rect id="SVGID_1_" y="0" width="14" height="14" />
+    </defs>
+                            <clipPath id="SVGID_2_">
+                            <use xlink:href="#SVGID_1_" overflow="visible" />
+    </clipPath>
+                            <path clip-path="url(#SVGID_2_)" fill="#DFDFDF" d="M9.6,4.9C10.4,5.8,13.8,3,14,2.2c0.2-0.9-3.1-3-5.3-1.8
+      C6.4,1.6,1.9,6.2,0.4,8.5c-1.3,2.2,0.6,5.7,2,5.5S6,10.4,5.1,9.4C4.3,8.5,3.6,8.7,4.3,7.6C5,6.2,6.7,4.5,7.8,4
+      C8.9,3.5,8.7,4,9.6,4.9" />
+  </g>
+</svg>
+                        </a>
+                        <div class="js-phone-number phone-number">
+                            1-844-814-5409
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>*@
+
+    <div id="main">
+
+        <section class="as-table">
+            <div class="content as-table-cell as-table-cell--middle">
+                <div class="signin-panel" style="width:625px">
+                    <div class="signin-panel-form-wrapper">
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "formLogin",@class= "form form--signin credential-form" }))
+{
+    @Html.AntiForgeryToken()
+                            <input type="hidden" name="return" value="" id="return">
+
+
+                            <div class="cv-signin-header" xmlns="http://www.w3.org/1999/html">
+                                <img class="cv-signin-header-image" src="@Url.Content("~/Img/xpresslogo.png")" height="57">
+                                <h1 class="cv-signin-header-text">Sign in</h1>
+                            </div>
+
+                            @*<div class="form-row mb-10">
+                                <h5 class="form-heading">Sign in</h5>
+                                <a href="/change_store" class="grey-text form-control form-control--link form-control--right hide-mobile">Not your store?</a>
+                            </div>*@
+
+    @*<div class="alert alert-dismissible noty" role="alert" style="display:none">
+
+        <span class="notyMsg">
+
+        </span>
+    </div>*@
+    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+    <div class="form-row form-row--error login-error" style="display:none">
+        <div class="form-row-feedback-global noty">
+            
+
+        </div>
+    </div>
+                             <div class="form-row">
+                                <div class="form-row-group form-row-group--inline">
+                                    <label class="form-label form-label--type-reveal" for="signin_username">Email or Username</label>
+                                    @*<input type="text" name="signin[username]" autocorrect="off" autocapitalize="off" placeholder="Email or Username"  id="signin_username" />*@
+                                    <input type="text" name="UserName" id="UserName" class="credential-form-field form-field grid-12" autocorrect="off" autocapitalize="off" placeholder="Email or Username" />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-row-group form-row-group--inline">
+                                    <label class="form-label form-label--type-reveal" for="signin_password">Password</label>
+                                    <input type="password" name="Password" autocorrect="off" autocomplete="off" autocapitalize="off" placeholder="Password" class="credential-form-field form-field grid-12" id="Password" />
+                                </div>
+                            </div>
+
+                            <div class="form-row mt-15 mb-0">
+                                <div class="form-row-group form-row-group--inline form-row--collapse-mobile">
+                                    <button type="submit" class="form-control form-control--green form-control--large form-control--xlong form-control--right btn" id="btnSave" name="signin_submit" value="1">Sign in</button>
+                                    @*<button type="submit" class="btn btn--right" id="btnSave" style="cursor:pointer" id="btnSave"><i class="fa fa-sign-in"></i> Sign in  </button>*@
+                                    @*<button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-sign-in"></i> Create User</button>*@
+                                    <div class="modal_loader loader btn--right" style="display:none">
+                                        <i class="fa fa-spinner fa-spin fa-1x"></i>
+                                    </div>
+                                    <a class="form-control form-control--full-width form-control--link form-control--left" href="@Url.Action("ForgotPassword","Account")">Forgot your Sign in?</a>
+                                </div>
+                            </div>
+}
+                    </div>
+                    @*<div class="signin-panel-features">
+                        <h5>
+                            <a class="external" href="http://blog.vendhq.com/post/category/whats-new" target="_blank">
+                                New in Vend 
+                                <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                  
+                                    <title>external-icon</title>
+                                    <desc>Created with Sketch.</desc>
+                                    <defs></defs>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                        <g id="external-icon" sketch:type="MSLayerGroup" fill="#000000">
+                                            <g id="Page-1" sketch:type="MSShapeGroup">
+                                                <g id="Shape">
+                                                    <path d="M8.33333333,8.33333333 L1.66666667,8.33333333 L1.66666667,1.69148437 L3.33333333,1.66666667 L3.33333333,0 L0,0 L0,10 L10,10 L10,5.83333333 L8.33333333,5.83333333 L8.33333333,8.33333333 L8.33333333,8.33333333 Z" id="Path"></path>
+                                                    <path d="M5,0 L6.66666667,1.66666667 L4.16666667,4.16666667 L5.83333333,5.83333333 L8.33333333,3.33333333 L10,5 L10,0 L5,0 L5,0 Z" id="Path"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>
+                        </h5>
+                        <div class="signin-panel-feature-wrapper--slideshow cycle-slideshow"
+                             data-cycle-log="false"
+                             data-cycle-hide-non-active="true"
+                             data-cycle-fx="scrollHorz"
+                             data-cycle-pager=".signin-panel-feature-selector"
+                             data-cycle-slides="> div"
+                             data-cycle-pager-template="<span></span>"
+                             data-cycle-pager-active-class="selected"
+                             data-cycle-speed="400"
+                             data-cycle-timeout="7000">
+                            <div class="signin-panel-feature">
+                                <a href="https://blog.vendhq.com/post/64901829302/set-advanced-user-permissions-get-store-top-shape-holidays?utm_source=vendsignin&amp;utm_campaign=advanceduserpermissions&amp;utm_medium=referral" target="_blank"><img src="https://s3.amazonaws.com/vendfiles/corp-images/new_features/sign-in-user-permissions.gif"></a>
+                                <a href="https://blog.vendhq.com/post/64901829302/set-advanced-user-permissions-get-store-top-shape-holidays?utm_source=vendsignin&amp;utm_campaign=advanceduserpermissions&amp;utm_medium=referral" target="_blank"><h6>Advanced user permissions</h6></a>
+                                <p><a href="https://blog.vendhq.com/post/64901829302/set-advanced-user-permissions-get-store-top-shape-holidays?utm_source=vendsignin&amp;utm_campaign=advanceduserpermissions&amp;utm_medium=referral" target="_blank">Get even more control over what your employees can see and do in Vend.</a></p>
+                            </div>
+                        </div>
+                        <div class="signin-panel-feature-selector"></div>
+                        <div class="signin-panel-feature-wrapper--no-slideshow">
+                            <div class="grid-12">
+                                <div class="signin-panel-feature grid-4-12">
+                                    <a href="https://blog.vendhq.com/post/64901829302/set-advanced-user-permissions-get-store-top-shape-holidays?utm_source=vendsignin&amp;utm_campaign=advanceduserpermissions&amp;utm_medium=referral" target="_blank"><img src="https://s3.amazonaws.com/vendfiles/corp-images/new_features/sign-in-user-permissions.gif" class="resp-img"></a>
+                                    <a href="https://blog.vendhq.com/post/64901829302/set-advanced-user-permissions-get-store-top-shape-holidays?utm_source=vendsignin&amp;utm_campaign=advanceduserpermissions&amp;utm_medium=referral" target="_blank"><h6>Advanced user permissions</h6></a>
+                                    <p><a href="https://blog.vendhq.com/post/64901829302/set-advanced-user-permissions-get-store-top-shape-holidays?utm_source=vendsignin&amp;utm_campaign=advanceduserpermissions&amp;utm_medium=referral" target="_blank">Get even more control over what your employees can see and do in Vend.</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+                @*<div class="signin-footer mt-20">
+                    <p>Don&rsquo;t have an account? <a href="https://secure.vendhq.com/signup">Try Vend for free</a></p>
+                </div>*@
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
+@Scripts.Render("~/bundles/login")

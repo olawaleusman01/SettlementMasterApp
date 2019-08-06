@@ -1,0 +1,60 @@
+﻿@model List<Generic.Dapper.Model.RvHeadObj>
+<table id="tableAcct" class="table table-condensed table-hover table-bordered" style="width:100%">
+   
+    <thead>
+       @*<tr><th colspan="6"><a id="btnAddAcct" class="btn btn-info btn-xs"><i class="fa fa-plus"></i> Add Revenue</a></th></tr>*@
+        <tr>
+            <th style="width:10%;text-align:center">Action?</th>
+            
+            <th>
+                Revenue Code
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Payment ItemID
+            </th>
+            <th>
+                Account No.
+            </th>
+            <th>
+                Account Name
+            </th>
+            <th>
+                Bank Name
+            </th>
+            <th>
+                Set. Frequency
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach(var d in Model)
+        {
+            <tr>
+                <td style="text-align:center">
+                    @if (!d.Deleted)
+                    {
+                    <a class="btn btn-info btn-xs" id="edit" data-key="@d.PID" title="Edit Record"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" id="delete" data-key="@d.PID" title="Delete Record"><i class="fa fa-trash"></i></a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-warning btn-xs" id="undo" title="Undo Delete" data-key="@d.PID"><i class="fa fa-undo"></i></a>
+
+                    }
+                </td>
+                <td>@d.CODE</td>
+                <td>@d.DESCRIPTION</td>
+                <td>@d.PAYMENTITEMID</td>
+                <td>@d.BANKACCOUNT</td>
+                <td>@d.ACCT_NAME</td>
+                <td>@d.BANK_NAME</td>
+                <td>@d.FREQUENCY_DESC</td>
+            </tr>
+            
+        }
+    </tbody>
+</table>

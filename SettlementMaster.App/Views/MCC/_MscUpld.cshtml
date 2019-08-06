@@ -1,0 +1,100 @@
+﻿@model List<Generic.Dapper.Model.MerchantUpldObj>
+<style>
+    #example1 td{
+        white-space:nowrap; 
+    }
+     .popover{
+              max-width:500px !important
+         }
+</style>
+<div class="table-responsive divad2a">
+    <table id="example1" class="table table-striped datatable table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th> S/N</th>
+                <th>
+                    VALIDATION STATUS
+                </th>
+                <th> MERCHANTID</th>
+                <th> MERCHANTNAME</th>
+                <th> CONTACTTITLE</th>
+                <th> CONTACTNAME</th>
+                <th> MOBILEPHONE</th>
+                <th> EMAIL</th>
+                <th> EMAILALERTS</th>
+                <th>PHYSICALADDR</th>
+                <th> TERMINALMODELCODE</th>
+                <th> TERMINALID</th>
+                <th> BANKCODE</th>
+                <th>BANKACCNO</th>
+                <th> BANKTYPE</th>
+                <th>SLIPHEADER</th>
+                <th>SLIPFOOTER</th>
+                <th>BUSINESSOCCUPATIONCODE</th>
+                <th> MERCHANTCATEGORYCODE</th>
+                <th> STATECODE</th>
+                <th> VISAACQUIRERID</th>
+                <th> VERVEACQUIRERID</th>
+                <th> MASTERCARDACQUIRERID</th>
+                <th> TERMINALOWNERCODE</th>
+                <th> LGA/LDA</th>
+                <th> URL</th>
+                <th> ACCOUNTNAME</th>
+                <th> PTSP</th>
+                <th> TRANS CURRENCY</th>
+                <th> PTSA</th>
+                @*<th> PAYATTITUDE ACCEPTANCE</th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @{ 
+                var cnt = 0;
+                foreach (var d in Model)
+                {
+                    cnt++;
+                <tr>
+                    <td> @cnt </td>
+                    <td style="text-align:center">
+
+                        <a class="@d.ValidationStatusClass" data-toggle="popover" data-trigger="hover" data-html="true" data-content="@d.VALIDATIONERRORMESSAGE">
+                            <i class="@d.ValidationStatusIcon"></i>
+                        </a>
+
+                    </td>
+                    <td> @d.MERCHANTID</td>
+                    <td> @d.MERCHANTNAME</td>
+                    <td> @d.CONTACTTITLE</td>
+                    <td> @d.CONTACTNAME</td>
+                    <td> @d.MOBILEPHONE</td>
+                    <td> @d.EMAIL</td>
+                    <td> @d.EMAILALERTS</td>
+                    <td>@d.PHYSICALADDR</td>
+                    <td> @d.TERMINALMODELCODE</td>
+                    <td> @d.TERMINALID</td>
+                    <td> @d.BANKCODE</td>
+                    <td>@d.BANKACCNO @Html.Raw(d.WARNINGMESSAGE)</td>
+                    <td> @d.BANKTYPE</td>
+                    <td>@d.SLIPHEADER</td>
+                    <td>@d.SLIPFOOTER</td>
+                    <td>@d.BUISNESSOCCUPATIONCODE</td>
+                    <td> @d.MERCHANTCATEGORYCODE</td>
+                    <td> @d.STATECODE</td>
+                    <td> @d.VISAACQUIRERID</td>
+                    <td> @d.VERVEACQUIRERID</td>
+                    <td> @d.MASTERCARDACQUIRERID</td>
+                    <td> @d.TERMINALOWNERCODE</td>
+                    <td> @d.LGA_LCDA</td>
+                    <td> @d.BANK_URL</td>
+                    <td> @d.ACCOUNTNAME</td>
+                    <td> @d.PTSP</td>
+                    <td> @d.TRANSCURRENCY</td>
+                    <td> @d.PTSA</td>
+                </tr>
+                    }
+                }
+        </tbody>
+    </table>
+</div>
+<script>
+    $("[data-toggle=popover]").popover();
+</script>

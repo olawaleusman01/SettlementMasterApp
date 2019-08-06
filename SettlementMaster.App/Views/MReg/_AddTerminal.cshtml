@@ -1,0 +1,134 @@
+﻿@model Generic.Dapper.Model.TerminalObj
+<div class="modal-dialog" style="width:1000px">
+    <div class="modal-content">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "formTerminal" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5 class="modal-title" id="myModalLabel"><i class="fa fa-plus"></i> @ViewBag.HeaderTitle</h5>
+            </div>
+
+            <div class="modal-body">
+                <div class="col-lg-12">
+                    <div class="alert alert-dismissable alert-warning" style="display:none" id="notyTerm">
+                        <div id="notyTermMsg">
+                        </div>
+                    </div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"> Terminal ID <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.HiddenFor(model => model.ITBID)
+                                @Html.HiddenFor(model => model.DB_ITBID)
+                                @Html.HiddenFor(model => model.PID)
+                                @Html.TextBoxFor(model => model.TERMINALID, new { @class = "form-control input-sm" })
+                                @Html.HiddenFor(model=> model.MERCHANTID)
+                            </div>
+                            <label class="col-lg-2 control-label"> Settlement Frequency <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.DropDownListFor(model => model.SETTLEMENT_FREQUENCY, ViewBag.FrequencyList as SelectList, "Select Frequency", new { @class = "form-control select2", style = "width:100%" })
+                            </div>
+                            @*<label class="col-lg-2 control-label"> Merchant ID <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.MERCHANTID, new { @class = "form-control input-sm", @readonly = "readonly" })
+                                <label class="label label-info">@Model.MERCHANTNAME </label>
+
+                            </div>*@
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"> Settlement Currency <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.DropDownListFor(model => model.SETTLEMENT_CURRENCY, ViewBag.CurrencyList as SelectList, "Select Currency", new { @class = "form-control select2", style = "width:100%" })
+                            </div>
+                            <label class="col-lg-2 control-label"> Transaction Currency <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.DropDownListFor(model => model.TRANSACTION_CURRENCY, ViewBag.CurrencyList as SelectList, "Select Currency", new { @class = "form-control select2", style = "width:100%" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"> PTSP <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @*@Html.TextBoxFor(model => model.PTSP, new { @class = "form-control input-sm" })*@
+                                @Html.DropDownListFor(model => model.PTSP, ViewBag.PTSPList as SelectList, "Select PTSP", new { @class = "form-control select2", style = "width:100%" })
+                            </div>
+                            <label class="col-lg-2 control-label"> PTSA <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @*@Html.TextBoxFor(model => model.PTSA, new { @class = "form-control input-sm"})*@
+                                @Html.DropDownListFor(model => model.PTSA, ViewBag.PTSAList as SelectList, "Select PTSA", new { @class = "form-control select2", style = "width:100%" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"> Account No <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.DropDownListFor(model => model.ACCOUNTID, ViewBag.AccountList as SelectList, "Select Account", new { @class = "form-control select2", style = "width:100%" })
+                                <div>
+                                    <label class="label label-info">Account Name:<span class="lblAcctName">@Model.DEPOSIT_ACCTNAME</span> </label>
+                                </div>
+                                <div>
+                                    <label class="label label-info">Bank:<span class="lblBankName"> @Model.DEPOSIT_BANKCODE - @Model.DEPOSIT_BANKNAME</span></label>
+                                </div>
+                            </div>
+                            <label class="col-lg-2 control-label"> Email Alert <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.CheckBoxFor(model => model.EmailAlert, new {  })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"> Term Owner Code <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.TERMINALOWNER_CODE, new { @class = "form-control input-sm" })
+                            </div>
+                            <label class="col-lg-2 control-label"> Term Model Code <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.TERMINALMODEL_CODE, new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"> Slip Header <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.SLIP_HEADER, new { @class = "form-control input-sm" })
+                            </div>
+                            <label class="col-lg-2 control-label"> Slip Footer <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.SLIP_FOOTER, new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"> MAST Acquirer ID <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.MASTACQUIRERIDNO, new { @class = "form-control input-sm" })
+                            </div>
+                            <label class="col-lg-2 control-label"> VISA Acquirer ID <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.VISAACQUIRERIDNO, new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"> VERV Acquirer ID <span class="required">*</span></label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.VERVACQUIRERIDNO, new { @class = "form-control input-sm" })
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button Id="btnAddTermGrid" class="btn btn-primary"><i class="fa fa-plus"></i> @ViewBag.ButtonText</button>
+            </div>
+        }
+    </div>
+    <!-- /.modal-content -->
+</div>
+
+<script>
+    $('.select2').select2({
+        theme: "classic"
+    });
+   // $('a.editor_return').click();
+</script>

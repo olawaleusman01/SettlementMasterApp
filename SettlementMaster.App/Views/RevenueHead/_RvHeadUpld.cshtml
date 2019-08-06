@@ -1,0 +1,59 @@
+﻿@model List<Generic.Dapper.Model.RvHeadUpldObj>
+<style>
+    #example1 td{
+        white-space:nowrap; 
+    }
+     .popover{
+              max-width:500px !important
+         }
+</style>
+<div class="table-responsive divad2a">
+    <table id="tblUpld" class="table table-striped table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th style="width:10%"> S/N</th>
+                <th style="width:15%">
+                    VALIDATION STATUS
+                </th>
+                <th style="width:20%">REVENUE CODE </th>
+                <th style="width:40%"> RV HEAD NAME</th>
+                <th style="width:30%">RV GROUP CODE</th>
+                <th style="width:25%">PAYMENT ITEM ID</th>
+                <th style="width:15%">BANK CODE</th>
+                <th style="width:25%">ACCOUNT NUMBER</th>
+                <th style="width:25%">SET. FREQUENCY</th>		
+
+            </tr>
+        </thead>
+        <tbody>
+            @{ 
+                var cnt = 0;
+                foreach (var d in Model)
+                {
+                    cnt++;
+                <tr data-toggle="popover" data-trigger="hover" data-html="true" data-content="@d.VALIDATIONERRORMESSAGE">
+                    <td style="text-align:center"> @cnt </td>
+                    <td style="text-align:center">
+
+                        <a class="@d.ValidationStatusClass">
+                            <i class="@d.ValidationStatusIcon"></i>
+                        </a>
+
+                    </td>
+                    <td> @d.RVCODE</td>
+                    <td> @d.DESCRIPTION</td>
+                    <td> @d.GROUPCODE</td>
+                    <td> @d.PAYMENTITEMID</td>
+                    <td> @d.BANKCODE</td>
+                    <td> @d.BANKACCOUNT</td>
+                    <td> @d.SETTLEMENT_FREQUENCY</td>
+                
+                </tr>
+                    }
+                }
+        </tbody>
+    </table>
+</div>
+<script>
+    $("[data-toggle=popover]").popover();
+</script>

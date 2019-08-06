@@ -1,0 +1,80 @@
+﻿@model List<Generic.Dapper.Model.SetReconUpldObj>
+<style>
+    #tblUpld td{
+        white-space:nowrap; 
+    }
+     .popover{
+              max-width:500px !important
+         }
+</style>
+<div class="table-responsive divad2a">
+    <table id="tblUpld" class="table table-striped table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th style="width:10%"> S/N</th>
+                <th style="width:15%">
+                    STATUS
+                </th>
+                <th style="width:15%">
+                    PAYREF. NO.
+                </th>
+                <th style="width:25%"> AMOUNT</th>
+                <th style="width:20%"> PAYMENT DATE</th>
+                <th style="width:20%"> VALUE DATE  </th>
+                @*<th style="width:25%"> RECEIPT NO.</th>*@
+                <th style="width:40%"> CUSTOMER NAME</th>
+                <th style="width:20%"> PAYMENT METHOD</th>
+                @*<th style="width:20%"> TRANS STATUS  </th>*@
+                @*<th style="width:30%"> DEPOSIT SLIP NO</th>*@
+                <th style="width:20%"> BANK NAME</th>
+                @*<th style="width:20%"> BRANCH NAME  </th>
+                <th style="width:30%"> PAYER ID</th>
+                <th style="width:20%"> VALUE GARANTED</th>*@
+            </tr>
+        </thead>
+        <tbody>
+           @* @{
+        var cnt = 0;
+        foreach (var d in Model)
+        {
+            cnt++;
+            <tr>
+                <td style="text-align:center"> @cnt </td>
+                <td style="text-align:center">
+
+                    <a class="@d.ValidationStatusClass" data-toggle="popover" data-trigger="hover" data-html="true" data-content="@d.VALIDATIONERRORMESSAGE">
+                        <i class="@d.ValidationStatusIcon"></i>
+                    </a>
+                </td>
+                <td> @d.PAYREFNO</td>
+                <td> @d.AMOUNT</td>
+                <td>
+                    @if (d.PAYMENTDATE != null)
+                    {
+                        @d.PAYMENTDATE.GetValueOrDefault().ToString("dd-MM-yyyy HH:MM:ss")
+             }
+                </td>
+                <td>
+                    @if (d.VALUEDATE != null)
+                    {
+                        @d.VALUEDATE.GetValueOrDefault().ToString("dd-MM-yyyy HH:MM:ss")
+             }
+                </td>
+                @*<td> @d.RECEIPTNO</td>
+                <td> @d.CUSTOMERNAME</td>
+                <td> @d.PAYMENTMETHOD</td>
+                @*<td> @d.TRANSACTIONSTATUS</td>
+                <td> @d.DEPOSITSLIPNO</td>
+                <td> @d.BANKNAME</td>
+                @*<td> @d.BRANCHNAME</td>
+                <td> @d.PAYERID</td>
+                <td> @d.VALUEGRANTED</td>
+            </tr>
+        }
+    }*@
+    </tbody>
+    </table>
+</div>
+<script>
+    $("[data-toggle=popover]").popover();
+</script>

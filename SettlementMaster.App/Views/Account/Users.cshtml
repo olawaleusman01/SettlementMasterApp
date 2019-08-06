@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "View";
+
+}
+<div id="toolbar">
+    <div class="col-lg-12">
+        @if (ViewBag.CanAdd == true)
+        {
+            <a id="btnNew" class="btn btn-success editor_create"><i class="fa fa-plus"></i> Add New</a>
+        }
+        <a id="btnCancel" class="btn btn-warning editor_return" style="display:none"><i class="fa fa-long-arrow-left" ></i> Return</a>
+       
+    </div>
+</div>
+<div id="pnlGrid">
+    <input type="hidden" name="menuId" id="menuId" value="@ViewBag.MenuId" />
+    <div id="right_sidebar">
+        
+    </div>
+    <div id="content_new" style="margin-right:0px">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-list" style="color:#57ACE7;"></i>  User List
+                        @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
+
+
+                    </div>
+                    <div class="panel-body ">
+
+                        <div class="table-responsive divad2">
+                            <table id="example1" class="table table-striped datatable table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+
+                                        @*<th>Id</th>*@
+                                        <th>Login ID</th>
+                                        <th>Full Name</th>
+                                        <th>Email</th>
+                                        <th>Institution</th>
+                                        <th>Status</th>
+                                        <th style="">Action? </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+
+                            </table>
+                        </div>
+
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" style="width:450px">
+                                <div class="modal-content">
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- END DEFAULT DATATABLE -->
+                        <!-- START FORM -->
+                        <!-- END FORM -->
+                    </div>
+                </div>
+            </div>
+          
+
+        </div>
+    </div>
+
+</div>     
+<div id="pnlForm" style="display:none"  class="panel-form">
+   
+</div> 
+@section Scripts {
+    @Scripts.Render("~/bundles/users")
+}

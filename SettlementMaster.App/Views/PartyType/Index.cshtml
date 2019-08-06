@@ -1,0 +1,72 @@
+﻿<div id="toolbar">
+@if (ViewBag.CanAdd == true)
+{
+    <div class="col-lg-12">
+        <a id="btnNew" class="btn btn-success editor_createa" href="@Url.Action("Add", "PartyType", new { m = ViewBag.MenuId })"><i class="fa fa-plus"></i> Add New</a>
+        @*<a id="btnCancel" class="btn btn-default editor_return" style="display:none"><i class="fa fa-long-arrow-left"></i> Cancel</a>*@
+
+    </div>
+}
+</div>
+<div id="pnlGrid">
+    <input type="hidden" name="menuId" id="menuId" value="@ViewBag.MenuId" />
+    <div id="right_sidebar">
+
+    </div>
+    <div id="content_new">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-dismissible fade in noty" role="alert" style="display:none">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                        <span aria-hidden="true">×</span>
+
+                    </button>
+                    <span class="notyMsg">
+
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-list" style="color:#57ACE7;"></i>  Party Type List
+
+                    </div>
+                    <div class="panel-body ">
+                        <div class="col-lg-122">
+                            <div class="table-responsiva divad2">
+                                <table id="example1" class="table table-striped datatable table-condensed table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>CODE</th>
+                                            <th>NAME</th>
+                                            <th>STATUS</th>
+                                            <th style="">ACTION? </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div id="pnlForm" style="display:none" class="panel-form">
+
+</div>*@
+@section Scripts {
+@if (TempData["msg"] != null)
+{
+    var msg = @Html.Raw(Json.Encode(TempData["msg"]));
+    <script>
+        displayDialogNoty('Notification',@msg) ;
+    </script>
+}
+    @Scripts.Render("~/Scripts/app/party_type.js")
+}

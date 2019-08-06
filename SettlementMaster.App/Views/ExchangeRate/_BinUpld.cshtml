@@ -1,0 +1,49 @@
+﻿@model List<Generic.Dapper.Model.DataBinUpldObj>
+<style>
+    #example1 td{
+        white-space:nowrap; 
+    }
+     .popover{
+              max-width:500px !important
+         }
+</style>
+<div class="table-responsive divad2a">
+    <table id="tblUpld" class="table table-striped table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th style="width:10%"> S/N</th>
+                <th style="width:15%">
+                    VALIDATION STATUS
+                </th>
+                <th style="width:20%"> CBN CODE</th>
+                <th style="width:25%"> CARD SCHEME</th>
+                <th style="width:30%"> BIN</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ 
+                var cnt = 0;
+                foreach (var d in Model)
+                {
+                    cnt++;
+                <tr data-toggle="popover" data-trigger="hover" data-html="true" data-content="@d.VALIDATIONERRORMESSAGE">
+                    <td style="text-align:center"> @cnt </td>
+                    <td style="text-align:center">
+
+                        <a class="@d.ValidationStatusClass">
+                            <i class="@d.ValidationStatusIcon"></i>
+                        </a>
+
+                    </td>
+                    <td> @d.CBNCODE</td>
+                    <td> @d.CARDSCHEME</td>
+                    <td> @d.BIN</td>
+                </tr>
+                    }
+                }
+        </tbody>
+    </table>
+</div>
+<script>
+    $("[data-toggle=popover]").popover();
+</script>

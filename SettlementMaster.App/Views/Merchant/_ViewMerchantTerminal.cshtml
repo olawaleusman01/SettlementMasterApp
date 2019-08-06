@@ -1,0 +1,66 @@
+﻿@model List<Generic.Dapper.Model.TerminalObj>
+<table id="tableTidLocal" class="table table-condensed table-hover table-striped table-bordered" style="width:100%">
+   
+    <thead>
+        <tr>
+            <th style="text-align:center">Action?</th>
+            <th>Terminal ID</th>
+            <th>Frequency</th>
+            <th>Set. Currency</th>
+            <th>Trans. Currency</th>
+            <th>Account No</th>
+            <th>Account Name</th>
+            <th>Bank Name</th>
+            <th>Batch ID</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach(var d in Model)
+        {
+            <tr>
+                <td style="text-align:center" ><a data-key="@d.ITBID" class="btn btn-info btn-xs editor_edit"><i class="fa fa-edit"></i></a></td>
+                <td>@d.TERMINALID</td>
+                <td>@d.FREQUENCY</td>
+                <td>@d.SET_CURRENCY</td>
+                <td>@d.TRANS_CURRENCY</td>
+                <td>@d.DEPOSIT_ACCOUNTNO</td>
+                <td>@d.DEPOSIT_ACCTNAME</td>
+                <td>@d.DEPOSIT_BANKNAME</td>
+                <td>@d.BATCHID</td>
+            </tr>
+            
+        }
+    </tbody>
+</table>
+
+<h4>
+    <label>Terminal Queue</label>
+    <small style="color:indianred">Items to be forwarded for aauthorization </small>
+</h4>
+<div style="margin-bottom:5px">
+        <div class="table-responsive">
+            <div class="divadu">
+                <div id="divTermQueue">
+                    <table id="tableTid" class="table table-condensed table-hover table-striped table-bordered" style="width:100%">
+
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">Action?</th>
+                                <th>Terminal ID</th>
+                                <th>Frequency</th>
+                                <th>Set. Currency</th>
+                                <th>Trans. Currency</th>
+                                <th>Account No</th>
+                                <th>Account Name</th>
+                                <th>Bank Name</th>
+                                @*<th>Batch ID</th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>

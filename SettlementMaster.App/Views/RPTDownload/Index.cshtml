@@ -1,0 +1,198 @@
+﻿ @*<div id="toolbar">
+
+    </div>*@
+<style>
+    /*td{
+        font-size:10.5px;
+        white-space:nowrap
+
+    }*/
+</style>
+<div id="pnlGrid">
+
+    <div id="content_new" style="margin-right:0px">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-download" style="color:#57ACE7;"></i>  Settlement Report Download
+                    </div>
+                    <div class="panel-body ">
+                        <div style="background-color:#fff;margin-bottom:10px;padding-top:10px">
+                            @if (ViewBag.InstId == 1)
+                            {
+                                using (Html.BeginForm("RunPdf", "RPTDownload", FormMethod.Post, new { id = "formDownload", }))
+                                {
+                                @Html.AntiForgeryToken()
+                                <div style="width:500px;margin:auto">
+                                    <table class="table table-bordered table-striped table-condensed">
+                                        <tr>
+                                            <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Settlement Date <span class="required">*</span></label></td>
+                                            <td>
+                                                <div class="input-group" style="width:150px">
+                                                    <input type="text" name="SetDate" id="SetDate" value="" class="form-control datepicker input-sm" />                                        <span class="input-group-addon" style="color:red">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Report Type <span class="required">*</span></label></td>
+                                            <td>
+                                                @Html.DropDownList("ReportType", ViewBag.ReportList as SelectList, "--Select Report Type--", new { @class = "form-control select2", style = "width:100%", id = "ReportType" })
+
+                                            </td>
+                                        </tr>
+                                        <tr id="cardscheme" style="display:none;" class="rptSet">
+                                            <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Channel</label></td>
+                                            <td>
+                                                @Html.DropDownList("Channel", ViewBag.ChannelList as SelectList, "All", new { @class = "form-control select2", style = "width:100%" })
+                                            </td>
+                                        </tr>
+                                        <tr id="cardscheme" style="display:none;" class="rptSet" >
+                                            <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Card Scheme <span class="required">*</span></label></td>
+                                            <td>
+                                                @Html.DropDownList("CardScheme", ViewBag.CardSchemeList as SelectList, "All", new { @class = "form-control select2", style = "width:100%" })
+                                            </td>
+                                        </tr>
+
+                                        <tr id="drBank" style="display:none;" class="rptSet">
+                                            <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Collection Bank <span class="required">*</span></label></td>
+                                            <td>
+                                                @Html.DropDownList("DrBank", ViewBag.InstitutionList as SelectList, "All", new { @class = "form-control select2", style = "width:100%" })
+                                            </td>
+                                        </tr> 
+                                        <tr id="mid" style="display:none;" class="rptSet">
+                                            <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Merchant Id <span class="required">*</span></label></td>
+                                            <td>
+                                                @Html.TextBox("MerchantId", "", new { @class = "form-control input-sm", style = "width:100%" })
+                                            </td>
+                                        </tr>  
+                                        <tr>
+                                            <td colspan="2" style="text-align:right">
+                                                <button id="btnDownload" class="btn btn-info input-sm">Download Excel <i class="fa fa-file-excel-o"></i></button>
+                                                <button id="btnPdf" class="btn btn-warning input-sm">Download PDf <i class="fa fa-download"></i></button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                }
+                            }
+                            else
+                            {
+                                using (Html.BeginForm("DownloadReport", "RPTDownload", FormMethod.Post, new { id = "formDownload", }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div style="width:500px;margin:auto">
+                                        <table class="table table-bordered table-striped table-condensed">
+                                            <tr>
+                                                <td style="width:35%;text-align:right;vertical-align:middle"><label class="control-label">Settlement Date <span class="required">*</span></label></td>
+                                                <td>
+                                                    <div class="input-group" style="width:150px">
+                                                        <input type="text" name="SetDate" id="SetDate" value="" class="form-control datepicker input-sm" />                                        <span class="input-group-addon" style="color:red">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:right">
+                                                    <button id="btnDownload" class="btn btn-info input-sm">Download <i class="fa fa-file-excel-o"></i></button>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/Scripts/app/authlist.js")*@
+    <script>
+        //$(document).ready(function () {
+            $("#ReportType").change(function () {
+                if ($(this).val() === '1') {
+                    //$('#CardScheme').val('').trigger('change');
+                    $("#cardscheme").show();
+                    $('#DrBank').val('').trigger('change');
+                    //$("#drBank").show();
+                    $(".rptSet").show();
+                } else {
+                    //$("#cardscheme").hide();
+                    $(".rptSet").show();
+                }
+            });
+
+        //alert('true');
+        $('#btnDownload').click(function (e) {
+
+            e.preventDefault();
+            var dt = $.trim($('#SetDate').val());
+            var rt = $.trim($('#ReportType').val());
+            //alert(rt);
+            if (dt === '' || rt === '') {
+                //loaderSpin2(true);
+                displayDialogNoty('Validation Nofification', 'All Fields are Compulsory.');
+                return;
+            }
+            //loaderSpin2(true);
+            //$('#formDownload').submit();
+           // var url = BaseUrl() + "RPTDownload/RunReport?SetDate=" + dt + '&ReportType=' + rt;
+            var url = BaseUrl() + "RPTDownload/RunReport";
+
+            //console.log(url);
+            loaderSpin2(true);
+           // var reqData = JSON.stringify($('#formDownload').serialize());
+          //  console.log(reqData);
+            //$.post(url,reqData, function (data) {
+            //    loaderSpin2(false);
+            //    if (data.RespCode == '0') {
+            //        var urlD = BaseUrl() + "RPTDownload/DownloadReport?fileGuid=" + data.FileGuid + '&fileName=' + data.FileName;
+            //        console.log(urlD);
+            //        window.location = urlD;
+            //        //window.open(urlD, '_blank');
+            //    }
+            //})
+
+                var $reqLogin = {
+                    url: url,
+                    data: $('#formDownload').serialize(),
+                    type: 'post',
+                    contentType: "application/x-www-form-urlencoded"
+                };
+               // console.log($('#formDownload').serialize());
+                //return;
+                var ajax = new Ajax();
+            ajax.send($reqLogin).done(function (data) {
+                loaderSpin2(false);
+                        if (data.RespCode == '0') {
+                            var urlD = BaseUrl() + "RPTDownload/DownloadReport?fileGuid=" + data.FileGuid + '&fileName=' + data.FileName;
+                            //console.log(urlD);
+                            window.location = urlD;
+                            //window.open(urlD, '_blank');
+                        }
+                        else {
+                            displayDialogNoty('Notification', data.RespMessage);
+                        }
+                }).fail(function (xhr, status, err) {
+                    loaderSpin2(false);
+                    displayDialogNoty('Notification', 'No network connectivity. Please check your network connections.', true);
+                });
+        });
+        //$('#btnPdf').click(function (e) {
+        //    e.preventDefault();
+        //});
+        //});
+    </script>
+}
+
+

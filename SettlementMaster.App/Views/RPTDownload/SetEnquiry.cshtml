@@ -1,0 +1,308 @@
+
+@{
+    ViewBag.Title = "Grid";
+}
+
+<style>
+    td {
+        font-size: 10.5px;
+        white-space: nowrap;
+    }
+</style>
+<div id="pnlGrid">
+
+    <div id="content_new" style="margin-right:0px">
+        <div class="row" style="margin:10px">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-question-circle" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @using (Html.BeginForm("DownloadSettEnquiry", "RPTDownload", FormMethod.Post, new { id = "formDownload", }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" style="text-align:right;" title="Settlement Date">Sett. Date</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.TextBox("settDate", @DateTime.Now.ToString("dd-MM-yyyy"), new { @class = "form-control datepicker input-sm filterItem" }) <span class="input-group-addon" style="color:red"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Tran From Date</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.TextBox("fromDate", @DateTime.Now.ToString("dd-MM-yyyy"), new { @class = "form-control datepicker input-sm c", }) <span class="input-group-addon" style="color:red"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Tran To Date</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+
+                                                    @Html.TextBox("toDate", @DateTime.Now.ToString("dd-MM-yyyy"), new { @class = "form-control datepicker input-sm filterItem" }) <span class="input-group-addon" style="color:red"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                          
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" style="text-align:right;">Pay Ref.</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.TextBox("payRef", null, new { @class = "form-control input-sm filterItem", placeholder = "Payment Reference", style = "width:17em;" })
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Tran Ref.</label>
+                                            <div class="col-md-3">
+                                                @Html.TextBox("tranRef", null, new { @class = "form-control input-sm filterItem", placeholder = "Transaction Reference", style = "width:17em;" })
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Tran ID</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+
+                                                    @Html.TextBox("tranID", null, new { @class = "form-control input-sm filterItem", placeholder = "Transaction ID", style = "width:17em;" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" style="text-align:right;">Credit Bank</label>
+                                            <div class="col-md-3">
+                                                <div id="">
+                                                    @Html.DropDownList("crBank", ViewBag.InstitutionList as SelectList, "--Select--", new { @class = "form-control select2 filterItem", style = "width:100%;" })
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Debit Bank</label>
+                                            <div class="col-md-3">
+                                                <div id="">
+                                                    @Html.DropDownList("drBank", ViewBag.InstitutionList as SelectList, "--Select--", new { @class = "form-control select2 filterItem", style = "width:100%;" })
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Merchant ID</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.TextBox("merchantID", null, new { @class = "form-control input-sm filterItem", placeholder = "Merchant ID", style = "width:17em;" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" style="text-align:right;">Merchant Name</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.TextBox("merchantName", null, new { @class = "form-control input-sm filterItem", placeholder = "Merchant Name", style = "width:17em;" })
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Card Scheme</label>
+                                            <div class="col-md-3">
+                                                <div id="CardScheme">
+                                                    @Html.DropDownList("cardScheme", ViewBag.CardSchemeList as SelectList, "All", new { @class = "form-control select2 filterItem", style = "width:100%;" })
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Tran Amt</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.TextBox("tranAmt", null, new { @class = "form-control input-sm filterItem", placeholder = "Transaction Amount", style = "width:17em;" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" style="text-align:right;">Acquirer</label>
+                                            <div class="col-md-3">
+                                                <div id="Acquirer">
+                                                    @Html.DropDownList("acquirer", ViewBag.AcquirerList as SelectList, "All", new { @class = "form-control select2 filterItem", style = "width:100%;" })
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Issuer</label>
+                                            <div class="col-md-3">
+                                                <div id="Issuer">
+                                                    @Html.DropDownList("issuer", ViewBag.IssuerList as SelectList, "All", new { @class = "form-control select2 filterItem", style = "width:100%;" })
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Sett Acct</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+
+                                                    @Html.TextBox("settAcct", null, new { @class = "form-control input-sm filterItem", placeholder = "Settlement Account", style = "width:17em;" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" style="text-align:right;">Channel</label>
+                                            <div class="col-md-3">
+                                                <div id="Channel">
+                                                    @Html.DropDownList("channel", ViewBag.ChannelList as SelectList, "All", new { @class = "form-control select2 filterItem", style = "width:100%;" })
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Mask Pan</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.TextBox("maskPan", null, new { @class = "form-control input-sm filterItem", placeholder = "Mask Pan", style = "width:17em;" })
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Terminal ID</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.TextBox("terminalID", null, new { @class = "form-control input-sm filterItem", placeholder = "Terminal ID", style = "width:17em;" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" style="text-align:right;">Merchant Location</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.TextBox("mlocation", null, new { @class = "form-control input-sm filterItem", placeholder = "Merchant Location", style = "width:17em;" })
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label" style="text-align:right;">Invoice No.</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.TextBox("invoiceNo", null, new { @class = "form-control input-sm filterItem", placeholder = "Invoice No.", style = "width:17em;" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 success" style="background-color:#F4F4F4; padding:2px; margin-right:1px; width:30%;border-radius:7px; border:2px solid #808080">
+                                                <button id="btnSearch" type="button" class="btn btn-info input-sm" style="margin: 7px">Search <i class="fa fa-search"></i></button>
+                                                <button id="btnDownload" class="btn btn-success input-sm" style="margin: 5px">Download Excel <i class="fa fa-file-excel-o"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12">
+                        <div class="table-responsive divad2">
+
+                            <table id="example" class="table table-bordered table-striped datatable table-hover table-condensed">
+                                <thead>
+                                    <tr style="text-align:left;">
+                                        <th>SETTLEMENT ID</th>
+                                        <th>TRANSACTION ID </th>
+                                        <th>PAYMENT REFERENCE </th>
+                                        <th>TRAN DATE</th>
+                                        <th>SETT. DATE</th>
+                                        <th>VALUE DATE</th>
+                                        <th>MERCHANTID </th>
+                                        <th>MERCHANTNAME </th>
+                                        <th>CARDSCHEME</th>
+                                        <th>TRANAMOUNT</th>
+                                        <th>TERMINALID</th>
+                                        <th>LOCATION</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+@section Scripts {
+    @*@Scripts.Render("~/Scripts/app/authlist.js")*@
+    <script>
+        $(document).ready(function () {
+            var fromdate = $('#fromDate').val();
+            var todate = $('#toDate').val();
+            var settdate = $('#settDate').val();
+            var payref = $('#payRef').val();
+            var tranref = $('#tranRef').val();
+            var tranid = $('#tranID').val();
+            var crbank = $('#crBank').val();
+            var drbank = $('#drBank').val();
+            var merchantid = $('#merchantID').val();
+            var merchantname = $('#merchantName').val();
+            var cardscheme = $('#cardScheme').val();
+            var tranamt = $('#tranAmt').val();
+            var acquirer = $('#acquirer').val();
+            var issuer = $('#issuer').val();
+            var settacct = $('#settAcct').val();
+            var channel = $('#channel').val();
+            var maskpan = $('#maskPan').val();
+            var terminalid = $('#terminalID').val();
+            var location = $('#mlocation').val();
+            var invoiceno = $('#invoiceNo').val();
+            var table = $('#example').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "pageLength": 100,
+                "bFilter": false,
+                dom: 'Bfrtip',
+                "info": true,
+                "stateSave": true,
+                "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+                "ajax": {
+                    "url": "@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))/RPTDownload/GetSettlementEnquiry?fromdate=" + fromdate + '&todate=' + todate + '&settdate=' + settdate + '&payref=' + payref + '&tranref=' + tranref + '&tranid=' + tranid + '&crbank=' + crbank + '&drbank=' + drbank + '&merchantid=' + merchantid + '&merchantname=' + merchantname + '&tranamt=' + tranamt + '&cardscheme=' + cardscheme + '&acquirer=' + acquirer + '&issuer=' + issuer + '&settacct=' + settacct + '&channel=' + channel + '&maskpan=' + maskpan + '&terminalid=' + terminalid + '&mlocation=' + location + '&invoiceno=' + invoiceno,
+                    "type": "GET",
+                },
+                "columns": [
+                    { "data": "SETTLEMENTID", "orderable": false },
+                    { "data": "TRANSID", "orderable": false },
+                    { "data": "PAYMENTREFERENCE", "orderable": false },
+                    { "data": "TRANDATETIME", "orderable": false },
+                    { "data": "SETDATE", "orderable": false },
+                    { "data": "VALDATE", "orderable": false },
+                    { "data": "MERCHANTID", "orderable": false },
+                    { "data": "MERCHANTNAME", "orderable": false },
+                    { "data": "CARDSCHEME", "orderable": false },
+                     {
+                         data: null,
+                         className: "align-right",
+                         //defaultContent: '<a class="btn btn-primary btn-xs editor_edit" data-key="' + data.RoleId + '"><i class="fa fa-edit"></i></a>' +
+                         //    '  <a class="btn btn-warning btn-xs editor_remove" data-key="' + data.RoleId + '"><i class="fa fa-trash-o"></i></a>',
+                         render: function (data, type, row) {
+                             // Combine the first and last names into a single table field
+
+                            // var encodedUrl = url + 'Add/' + data.ITBID + '?m=' + encodeURIComponent(menuId);
+                             //alert(encodedUrl);
+                            // var html = '<a class="btn btn-primary btn-xs editor_edit" href="' + encodedUrl + '"><i class="fa fa-edit"></i></a>';
+                             return data.TRANAMT;
+                         }
+                     },
+                   // { "data": "TRANAMT", "orderable": false },
+                    { "data": "TERMINALID", "orderable": false },
+                    { "data": "LOCATION", "orderable": false },
+
+                ],
+                //"order": [[0, "asc"]]
+            });
+
+            $('#btnSearch').on('click', function (e) {
+                e.preventDefault();
+                var fromdate = $('#fromDate').val();
+                var todate = $('#toDate').val();
+                var settdate = $('#settDate').val();
+                var payref = $('#payRef').val();
+                var tranref = $('#tranRef').val();
+                var tranid = $('#tranID').val();
+                var crbank = $('#crBank').val();
+                var drbank = $('#drBank').val();
+                var merchantid = $('#merchantID').val();
+                var merchantname = $('#merchantName').val();
+                var cardscheme = $('#cardScheme').val();
+                var tranamt = $('#tranAmt').val();
+                var acquirer = $('#acquirer').val();
+                var issuer = $('#issuer').val();
+                var settacct = $('#settAcct').val();
+                var channel = $('#channel').val();
+                var maskpan = $('#maskPan').val();
+                var terminalid = $('#terminalID').val();
+                var location = $('#mlocation').val();
+                var invoiceno = $('#invoiceNo').val();
+                //console.log(table);
+                var urlP = "@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))/RPTDownload/GetSettlementEnquiry?fromdate=" + fromdate + '&todate=' + todate + '&settdate=' + settdate + '&payref=' + payref + '&tranref=' + tranref + '&tranid=' + tranid + '&crbank=' + crbank + '&drbank=' + drbank + '&merchantid=' + merchantid + '&merchantname=' + merchantname + '&tranamt=' + tranamt + '&cardscheme=' + cardscheme + '&acquirer=' + acquirer + '&issuer=' + issuer + '&settacct=' + settacct + '&channel=' + channel + '&maskpan=' + maskpan + '&terminalid=' + terminalid + '&mlocation=' + location + '&invoiceno=' + invoiceno;
+                table.ajax.url(urlP).load();
+            })
+        });
+    </script>
+}
+
+

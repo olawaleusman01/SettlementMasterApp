@@ -1,0 +1,65 @@
+﻿@model List<Generic.Dapper.Model.NapsObj>
+    <style>
+         .popover{
+              max-width:500px !important
+         }
+    </style>
+<div class="divad2d">
+    <table id="tblNapsUpld" class="table table-condensed table-hover table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th style="width:4%"></th>
+                <th style="width:5%">S/N</th>
+                <th style="width:9%">Debit Acct</th>
+                <th style="width:5%">Debit Bank Code</th>
+                <th style="width:23%">Ben. Name</th>
+                <th style="width:9%">Ben. Acct</th>
+                <th style="width:5%">Ben. Bank Code</th>
+                <th style="width:15%;text-align:right">Credit Amount</th>
+                <th style="width:22%">Ben. Narration</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @{
+            var cnt = 0;
+
+            foreach (var d in Model)
+            {
+                    cnt = cnt + 1;
+        <tr>
+            @*<td style="text-align:center">
+                <a data-key="@d.PID" class="btn btn-info btn-xs editor_edit" style="padding:1px 3px;font-size:10.5px"><i class="fa fa-edit"></i></a>
+            </td>*@
+            <td style="text-align:center">
+
+                <a class="@d.ValidationStatusClass" data-toggle="popover" data-trigger="hover" style="padding:1px 3px;font-size:10.5px" data-html="true" data-content="@d.VALIDATIONERRORMESSAGE">
+                    <i class="@d.ValidationStatusIcon"></i>
+                </a>
+
+            </td>
+            <td style="text-align:center">
+
+                @cnt
+
+            </td>
+            <td>@d.DEBITACCTNO</td>
+            <td>@d.DEBITBANKCODE</td>
+            <td>@d.BENEFICIARYNAME</td>
+            <td>@d.BENEFICIARYACCTNO</td>
+            <td>@d.BENEFICIARYBANKCODE</td>
+            <td style="text-align:right">@d.CREDITAMOUNT.GetValueOrDefault().ToString("F")</td>
+            <td>@d.BENEFICIARYNARRATION</td>
+          
+        </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+ </div>
+<script>
+    $("[data-toggle=popover]").popover();
+</script>
+
+

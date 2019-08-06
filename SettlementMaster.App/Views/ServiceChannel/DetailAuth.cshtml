@@ -1,0 +1,300 @@
+﻿@using Generic.Dapper.Model
+@model SERVICEChannelObj
+
+
+<div id="toolbar">
+    <div class="col-lg-12">
+         <a id="btnCancel" href="@Url.Action("Index","AuthList")" class="btn btn-default editor_return"><i class="fa fa-long-arrow-left"></i> Return to Authorization Queue</a>
+
+    </div>
+</div>
+
+@if (Model != null)
+{
+    var auth = ViewBag.Auth as AuthViewObj;
+    if (auth == null)
+    {
+        auth = new AuthViewObj();
+    }
+
+    <div id="right_sidebar">
+
+        <div class="panel panel-warning">
+
+            <div class="panel-body widget">
+                @if (ViewBag.DisplayAuth == true)
+                {
+                    <div class="divAuth">
+                        <div style="text-align:center">
+                            @using (Html.BeginForm("Approve", "ServiceChannel", FormMethod.Post, new { id = "formApprove", style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="AuthId" value="@auth.AuthId" />
+                                <input type="hidden" name="PostType" value="@auth.PostType" />
+                                <input type="hidden" name="RecordId" value="@auth.RecordId" />
+                                <input type="hidden" name="BatchId" value="@auth.BatchId" />
+                                <input type="hidden" name="m" value="@auth.MenuId" />
+                                <button type="submit" class="btn btn-success btn_disable editor_approve" id="btnApprove"><i class="fa fa-check"></i> Approve</button>
+                            }
+
+                            <button type="submit" class="btn btn-danger btn_disable editor_reject" id="btnReject"><i class="fa fa-times"></i> Reject</button>
+
+                        </div>
+                        <hr />
+                    </div>
+                }
+                <div style="">
+                    <i class="fa fa-chevron-right"></i>
+                    <span class="light-grey">Status:<span class="label label-default status">@auth.Status</span> </span>
+                </div>
+                <div style="margin-top:10px">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Created By: @auth.User</span>
+                </div>
+                <div style="margin-top:10px">
+                    <i class="fa fa-calendar"></i>
+                    <span class="light-grey">Date Created: @auth.DateCreated</span>
+                </div>
+                <div style="margin-top:10px" class="div-authname">
+                    <i class="fa fa-map-marker"></i>
+                    <span class="light-grey">Event Type: @auth.EventType</span>
+                </div>
+               
+            </div>
+        </div>
+
+    </div>
+    <div id="content_new">
+        <div class="row2">
+
+            <div class="col-lg-12">
+                <div class="alert alert-dismissible fade in noty" role="alert" style="display:none">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                        <span aria-hidden="true">×</span>
+
+                    </button>
+                    <span class="notyMsg">
+
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+                      
+
+                    </div>
+                    <div class="panel-body ">
+                        @using (Html.BeginForm("Create", "ServiceChannel", FormMethod.Post, new { id = "formServiceChannel" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="m" id="m" value="@ViewBag.MenuId" />
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Service Code <span class="required"> *</span></label>
+                                    <div class="col-md-4">
+                                        @Html.HiddenFor(model => model.ITBID)
+                                         
+                                            @Html.TextBoxFor(model => model.CODE, new { @class = "form-control input-sm", @readonly = "readonly", style = "width:150px" })
+                                        
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+
+                                    <label class="col-md-3 control-label">Service Name <span class="required"> *</span></label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.DESCRIPTION, new { @class = "form-control input-sm" })
+                                    </div>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Channel <span class="required"> *</span></label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.ChannelID , ViewBag.Channel as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                    </div>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Bank <span class="required"> *</span></label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.BankCode, ViewBag.Bank as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                    </div>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+
+                                    <label class="col-md-3 control-label">DR Bank Account<span class="required"> *</span></label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.BankAccount, new { @class = "form-control input-sm" })
+                                    </div>
+
+                                </div>
+                             
+                                <div class="clearfix"></div>
+                                @if (ViewBag.StatusVisible == true)
+                                {
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Status</label>
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(model => model.STATUS, ViewBag.RecordStatus as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                        </div>
+                                    </div>
+                                }
+                                <div class="clearfix"></div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="myModalReject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:450px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalRejectLabel"><i class="fa fa-plus"></i> Rejection Reason</h4>
+                </div>
+
+                @using (Html.BeginForm("Reject", "ServiceChannel", FormMethod.Post, new { id = "formReject", style = "display:inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="AuthId" value="@auth.AuthId" />
+                    <input type="hidden" name="PostType" value="@auth.PostType" />
+                    <input type="hidden" name="RecordId" value="@auth.RecordId" />
+                    <input type="hidden" name="BatchId" value="@auth.BatchId" />
+                    <input type="hidden" name="m" value="@auth.MenuId" />
+                    <div class="modal-body">
+
+                        <div class="form-horizontala">
+                            <div class="form-group">
+                                <label class="control-label">Rejection Reason<span style="color:red">*</span></label>
+                                <div class="">
+                                    <textarea name="Narration" id="Narration" class="form-control"></textarea>
+                                    <label class="error error_reject" style="display:none">Please enter rejection reason.</label>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="editor_reject_final" class="btn btn-danger editor_reject_final btn_disable"><i class="fa fa-times"></i> Reject</button>
+                    </div>
+                }
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+}
+<div class="clearfix"></div>
+
+
+@section Scripts {
+    @if (ViewBag.Message != null)
+    {
+        var msg = @Html.Raw(Json.Encode(ViewBag.Message));
+        <script>
+        displayDialogNoty('Notification',@msg) ;
+        </script>
+    }
+    <script>
+                                          $(document).on('click', '.editor_approve', function (e) {
+                                              e.preventDefault();
+                                              loaderSpin2(true);
+
+                                              var $reqLogin = {
+                                                  url: '@Url.Action("Approve", "ServiceChannel")',
+
+                                                  data: $('#formApprove').serialize(),
+                                                  type: 'POST',
+                                                  contentType: "application/x-www-form-urlencoded"
+                                              };
+                                              //console.log($reqLogin.url);
+                                              //console.log($('#formApprove').serialize());
+                                              //return;
+                                              loaderSpin2(true);
+                                              //disableButton(true);
+                                              var ajax = new Ajax();
+                                              ajax.send($reqLogin).done(function (response) {
+                                                  loaderSpin2(false);
+                                                  //disableButton(false);
+                                                  if (response.RespCode === 0) {
+                                                      $('.status').html(response.status);
+                                                      $('.divAuth').hide();
+                                                      displayDialogNoty('Notification', response.RespMessage);
+                                                  }
+                                                  else {
+                                                      displayDialogNoty('Notification', response.RespMessage);
+                                                  }
+                                              }).fail(function (xhr, status, err) {
+                                                  loaderSpin2(false);
+                                                  //disableButton(false);
+                                                  displayDialogNoty('Notification', 'No network connectivity. Please check your network connections.', true);
+                                              });
+                                          })
+
+
+                                          $(document).on('click', '.editor_reject', function (e) {
+                                              e.preventDefault();
+
+                                              $('#myModalReject').modal({ backdrop: 'static', keyboard: false });
+                                          })
+                                                         $(document).on('click', '.editor_reject_final', function (e) {
+                                              //e.preventDefault();
+                                              loaderSpin();
+                                              if ($.trim($('#Narration').val()) == '') {
+                                                $('.error_reject').show();
+                                                return;
+                                            }
+                                            $('.error_reject').hide();
+                                            var $reqLogin = {
+                                                url: '@Url.Action("Reject","ServiceChannel")',
+                                                data: $('#formReject').serialize(),
+                                                type: 'POST',
+                                                contentType: "application/x-www-form-urlencoded"
+                                            };
+                                            console.log($reqLogin.url);
+                                            //console.log($('#formReject').serialize());
+                                            //return;
+                                            loaderSpin(true);
+                                            disableButton2(true,'editor_reject_final');
+                                            var ajax = new Ajax();
+                                            ajax.send($reqLogin).done(function (response) {
+                                                loaderSpin2(false);
+                                                disableButton2(false,'editor_reject_final');
+                                                if (response.RespCode === 0) {
+                                                    $('.status').html(response.status);
+                                                    $('.divAuth').hide();
+                                                    $('#myModalReject').modal('hide');
+                                                    displayDialogNoty('Notification', response.RespMessage);
+                                                }
+                                                else {
+                                                    displayDialogNoty('Notification', response.RespMessage);
+                                                }
+                                            }).fail(function (xhr, status, err) {
+                                                loaderSpin(false);
+                                                disableButton2(false,'editor_reject_final');
+                                                displayDialogNoty('Notification', 'No network connectivity. Please check your network connections.', true);
+                                            });
+
+                                          });
+    </script>
+
+}
+

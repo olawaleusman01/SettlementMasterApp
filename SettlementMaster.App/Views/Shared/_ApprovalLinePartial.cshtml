@@ -1,0 +1,31 @@
+﻿@model List<Generic.Dapper.Model.ApproverLineObj>
+<div id="divApproverLine">
+    <ul class="">
+        @foreach (var d in Model)
+        {
+            if (d.Status == "APPROVED")
+            {
+                <li>
+                    @d.FullName 
+                  <span style="float:right">
+                    <span class="label label-info big_1">
+                        <i class="fa-check fa"></i>  @d.Status
+                    </span>
+                  </span>
+                </li>
+            }
+            else
+            {
+                <li>
+                    @d.FullName
+                    <span style="float:right">
+                        <span class="label label-warning big_1">
+                            <i class="fa-times fa"></i> @d.Status
+                        </span>
+                    </span>
+                </li>
+            }
+        }
+    </ul>
+
+</div>

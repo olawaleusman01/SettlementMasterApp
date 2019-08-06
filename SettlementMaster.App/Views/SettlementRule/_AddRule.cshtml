@@ -1,0 +1,64 @@
+﻿@model Generic.Dapper.Model.SettlementRuleObj
+    <div class="modal-dialog" style="width:450px">
+        <div class="modal-content">
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "formRuleOption" }))
+{
+    @Html.AntiForgeryToken()
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5 class="modal-title" id="myModalLabel"><i class="fa fa-plus"></i>Add Account</h5>
+            </div>
+            
+            <div class="modal-body">
+                <div class="col-lg-12">
+                    <div class="alert alert-dismissable alert-warning" style="display:none" id="notyMsc">
+                        <div id="notyMscMsg">
+                        </div>
+                    </div>
+                    <div class="form-horizontal">
+                       
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label"> Party Type <span class="required">*</span></label>
+                            <div class="col-lg-8">
+                                @Html.HiddenFor(model => model.ITBID)
+                                @Html.DropDownListFor(model => model.PARTYTYPE_CODE, ViewBag.PType as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-lg-4 control-label">Sharing Rate <span class="required">*</span></label>
+                            <div class="col-lg-8 ">
+                                <div class="form-group input-groupa" style="margin:0px">
+                                    @Html.TextBoxFor(model => model.PARTYTYPE_VALUE, new { @class = "form-control input-sm", style = "width:150px" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">CAP <span class="required">*</span></label>
+                            <div class="col-lg-8 ">
+                                <div class="form-group input-groupa" style="margin:0px">
+                                    @Html.TextBoxFor(model => model.PARTYTYPE_CAP, new { @class = "form-control input-sm", style = "width:150px" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button Id="btnAddAcctGrid" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
+            </div>
+}
+        </div>
+        <!-- /.modal-content -->
+    </div>
+
+<script>
+    $('.select2').select2({
+        theme: "classic"
+    });
+   // $('a.editor_return').click();
+</script>

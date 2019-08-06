@@ -1,0 +1,131 @@
+﻿@*<div id="toolbar">
+   
+</div>*@
+<style>
+    td{
+        font-size:10.5px;
+        white-space:nowrap
+        
+    }
+</style>
+<div id="pnlGrid">
+  
+    <div id="content_new" style="margin-right:0px">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-list" style="color:#57ACE7;"></i>  Login Audit Report
+                    </div>
+                    <div class="panel-body ">
+                        <div style="background-color:#F4F4F4;margin-bottom:10px;padding-top:10px">
+                            @using (Html.BeginForm("DownloadLoginAudit", "Report", FormMethod.Post, new { id = "formDownload", }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="col-lg-2">
+                                    <label>From Date</label>
+                                    <div class="form-group input-group" style="width:150px">
+                                        <input type="text" name="fromDate" id="fromDate" value="@DateTime.Now.ToString("dd-MM-yyyy")" class="form-control datepicker input-sm" />                                        <span class="input-group-addon" style="color:red">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-lg-2">
+                                    <label>End Date</label>
+                                    <div class="form-group input-group" style="width:150px">
+                                        <input type="text" name="toDate" id="toDate" value="@DateTime.Now.ToString("dd-MM-yyyy")" class="form-control datepicker input-sm" />                                        <span class="input-group-addon" style="color:red">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>  
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>User</label>
+                                    <div class="form-group">
+                                        @Html.DropDownList("UserId", ViewBag.UserList as SelectList, "--Select User--", new { @class = "form-control select2", style = "width:100%" })
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-5">
+                                    <label>&nbsp;</label>
+                                    <br />
+                                    <button id="btnSearch" type="button" class="btn btn-info input-sm">Search <i class="fa fa-search"></i></button>
+                                    <button id="btnDownload" class="btn btn-default input-sm">Download Excel <i class="fa fa-file-excel-o"></i></button>
+                                </div>
+                                    <div class="clearfix"></div>
+                            }
+                        </div>
+
+                        <div class="col-lg-122">
+                            <div class="table-responsive divad2">
+                                
+                                <table id="example" class="table table-bordered table-striped datatable table-hover table-condensed">
+                                    <thead>
+                                        <tr style="text-align:left;">
+                                            <th class="auto-style1">Login ID</th>
+                                            <th>Full Name </th>
+                                            <th>Login Date </th>
+                                            <th>LogOut Date </th>
+                                            <th>Ip Address </th>
+                                            <th>Browser </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/Scripts/app/authlist.js")*@
+    <script>
+        $(document).ready(function () {
+            var fromdate = $('#fromDate').val();
+            var todate = $('#toDate').val();
+            var userid = $('#UserId').val();
+           var table = $('#example').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "pageLength": 100,
+                "bFilter": false,
+                dom: 'Bfrtip',
+                "info": true,
+                "stateSave": true,
+                "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+                "ajax": {
+                    "url": "@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))/Report/GetLoginAudit?fromdate=" + fromdate + '&todate=' + todate + '&userid=' + userid,
+                    "type": "GET",
+                },
+                "columns": [
+                    { "data": "USERID", "orderable": false },
+                    { "data": "FULLNAME", "orderable": false },
+                    { "data": "LOGINDATESTRING", "orderable": false },
+                    { "data": "LOGOUTDATESTRING", "orderable": false },
+                    { "data": "IP_ADDRESS", "orderable": false },
+                    { "data": "BROWSER", "orderable": false },
+                   
+                ],
+                //"order": [[0, "asc"]]
+            });
+
+            $('#btnSearch').on('click', function (e) {
+                e.preventDefault();
+                 fromdate = $('#fromDate').val();
+                 todate = $('#toDate').val();
+                 userid = $('#UserId').val();
+                //console.log(table);
+                 var urlP = "@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))/Report/GetLoginAudit?fromdate=" + fromdate + '&todate=' + todate + '&userid=' + userid;
+                table.ajax.url(urlP).load();
+            })
+        });
+</script>
+}
+
+

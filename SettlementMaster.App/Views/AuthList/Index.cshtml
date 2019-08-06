@@ -1,0 +1,76 @@
+﻿@*<div id="toolbar">
+   
+</div>*@
+<div id="pnlGrid">
+  
+    <div id="content_new" style="margin-right:0px">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-list" style="color:#57ACE7;"></i>  Authorization Queue
+
+
+                    </div>
+                    <div class="panel-body ">
+                        <div class="col-lg-122">
+                            <div class="table-responsiva divad2">
+                                <table id="example1" class="table table-bordered table-striped datatable table-hover table-condensed">
+                                    <thead>
+
+                                        <tr>
+                                            <th>Action? </th>
+                                            <th title="Authorization Type">Auth. Type</th>
+                                            <th>From</th>
+                                            <th>Form Name</th>
+                                            <th>Institution Name</th>
+                                            <th>Date Created</th>
+                                            <th>Batch Id</th>
+                                            <th>Status</th>
+  
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @*<asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                            <ItemTemplate>
+                                                <tr class="odd gradeDisplayCurrentStatusX">
+
+                                                    <td> <%# Eval("EVENTTYPE")%></td>
+                                                    <td><%# Eval("MENUNAME")%></td>
+                                                    <td><%# Eval("INSTITUTION_NAME")%></td>
+                                                    <td><%# Eval("BATCHID")%></td>
+                                                    <td> <span style="color:#fff" class="btn btn-xs label-success"><%# Eval("STATUS")%></span></td>
+
+
+                                                    <td>
+
+                                                        <%--            <asp:LinkButton ID="btnEdit" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "ITBID")%>' CommandName="EditRowItem" CssClass="btn btn-xs btn-primary" data-rel="tooltip" ToolTip="Edit Record"><i class="fa-edit fa"></i> Edit</asp:LinkButton>--%>
+                                                        <%--                                                <asp:HyperLink ID="HyperLink1" NavigateUrl='<%#  Eval("URL") + "?m=" + HttpUtility.UrlEncode(Eval("MENUID").ToString()) + "&r=" +HttpUtility.UrlEncode(Eval("RECORDID").ToString()) + "&a_i=" + HttpUtility.UrlEncode(Eval("ITBID").ToString())+ "&pt=" + HttpUtility.UrlEncode(Eval("POSTTYPE").ToString()) + "&ReturnUrl=" + Request.RawUrl %>' runat="server">View Detail</asp:HyperLink>--%>
+                                                        <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# EncryptQueryString(Eval("MENUID").ToString() ,Eval("RECORDID").ToString(),Eval("ITBID").ToString(),Eval("POSTTYPE").ToString(),  Eval("URL").ToString(), Request.RawUrl) %>' runat="server">View Detail</asp:HyperLink>
+
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:Repeater>*@
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/authlist.js")
+}
+
+

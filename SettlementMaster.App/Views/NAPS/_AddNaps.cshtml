@@ -1,0 +1,99 @@
+﻿@model Generic.Dapper.Model.NapsObj
+<div class="modal-dialog" style="width:700px">
+    <div class="modal-content">
+        @using (Html.BeginForm("EditNaps", "NAPS", FormMethod.Post, new { id = "formNaps" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5 class="modal-title" id="myModalLabel"><i class="fa fa-plus"></i> @ViewBag.HeaderTitle</h5>
+            </div>
+
+            <div class="modal-body">
+                <div class="col-lg-12a">
+                    <div class="alert alert-dismissable alert-warning" style="display:none" id="notyNaps">
+                        <div id="notyNapsMsg">
+                        </div>
+                    </div>
+                    <div class="form-horizontal">
+                    <table class="table table-bordered table-condensed">
+                        <tr>
+                            <td style="width:15%;text-align:right">
+                                <label>Deposit Bank Code</label>
+                            </td>
+                            <td style="width:35%">
+                                @Html.TextBoxFor(d=> d.DEBITBANKCODE,new  {@class="form-control input-sm" })
+                                @Html.HiddenFor(d=> d.PID)
+                            </td>
+                            <td style="width:15%;text-align:right">
+                                <label>Deposit Acct No</label>
+</td>
+                            <td style="width:35%">
+                                @Html.TextBoxFor(d => d.DEBITACCTNO, new { @class = "form-control input-sm" })
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;text-align:right">
+                                <label>Ben Bank Code</label>
+</td>
+                            <td style="width:35%">
+                                @Html.TextBoxFor(d => d.BENEFICIARYBANKCODE, new { @class = "form-control input-sm" })
+                            </td>
+                            <td style="width:15%;text-align:right">
+                                <label>Ben Acct No</label>
+</td>
+                            <td style="width:35%">
+                                @Html.TextBoxFor(d => d.BENEFICIARYACCTNO, new { @class = "form-control input-sm" })
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;text-align:right">
+                                <label>Ben Name</label>
+</td>
+                            <td style="width:35%">
+                                @Html.TextBoxFor(d => d.BENEFICIARYNAME, new { @class = "form-control input-sm" })
+                            </td>
+                            <td style="width:15%;text-align:right">
+                                <label>Credit Amount</label>
+</td>
+                            <td style="width:35%">
+                                @Html.TextBoxFor(d => d.CREDITAMOUNT, "{0:0.00}", new { @class = "form-control input-sm" })
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;text-align:right">
+                                <label>Ben Narration</label>
+</td>
+                            <td style="width:35%">
+                                @Html.TextAreaFor(d => d.BENEFICIARYNARRATION, new { @class = "form-control" })
+                            </td>
+                            <td style="width:15%;text-align:right">
+                                <label>Modification Reason</label>
+                            </td>
+                            <td style="width:35%">
+                                @Html.TextAreaFor(d => d.REASON, new { @class = "form-control" })
+                            </td>
+                        </tr>
+                    </table>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button Id="btnAddTermGrid" class="btn btn-primary"><i class="fa fa-plus"></i> @ViewBag.ButtonText</button>
+            </div>
+        }
+    </div>
+    <!-- /.modal-content -->
+</div>
+
+<script>
+    $('.select2').select2({
+        theme: "classic"
+    });
+   // $('a.editor_return').click();
+</script>

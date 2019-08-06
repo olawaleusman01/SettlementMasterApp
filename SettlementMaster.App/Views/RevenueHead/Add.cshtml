@@ -1,0 +1,325 @@
+﻿@using Generic.Dapper.Model
+@model RvGroupObj
+<div class="row" style="margin:10px">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @*<i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle*@
+                <h3 class="" id="hdname" style="display:inline">
+                    MANAGE REVENUE HEAD AND DEBIT ACCOUNT
+                </h3>
+                @*<a id="btnReturn" class="btn btn-warning editor_return pull-right"><i class="fa fa-chevron-left"></i> Return to List</a>
+                    <div class="clearfix"></div>*@
+                <a id="btnCancel" class="btn  btn-warning editor_returna btn-sm" href="@Url.Action("Index","RevenueHead",new {m = ViewBag.MenuId })" style="float:right;text-decoration:none"><i class="fa fa-long-arrow-left"></i> Return</a>
+            </div>
+            <div class="panel-body ">
+                <div class="tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                        <a href="#tabmd" id="tablinka" class="taba" data-toggle="tab"><i class="fa fa-plus"></i> REVENUE HEAD</a>
+                        </li>
+                        <li><a href="#tabda" id="tablink" data-toggle="tab" class="tabb"><i class="fa fa-cog"></i> DEBIT ACCOUNT</a></li>
+                    </ul>
+                    <div class="panel-body tab-content" style="background-color:#fff">
+                        <div class="tab-pane active" id="tabmd">
+                          
+                       
+                        @*<div id="right_sidebar">
+                                @if (Model != null && Model.ITBID != 0)
+                                {
+                                    <div class="panel panel-warning">
+                                        <div class="panel-body widget">
+                                            <div style="">
+                                                <i class="fa fa-user"></i>
+                                                <span class="light-grey">Created By:</span>
+                                            </div>
+                                            <div style="margin-top:10px">
+                                                <i class="fa fa-calendar"></i>
+                                                <span class="light-grey">Date Created:</span>
+                                            </div>
+                                            <div style="margin-top:10px" class="div-authname">
+                                                <i class="fa fa-user"></i>
+                                                <span class="light-grey">Last Authorized By:</span>
+                                            </div>
+                                            <div style="margin-top:10px" class="div-authdate">
+                                                <i class="fa fa-user"></i>
+                                                <span class="light-grey">Last Modified Date:</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>*@
+                        @*<div id="content_new">*@
+                        <div class="row" style="margin:10px">
+                            <div class="col-lg-10">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+
+                                    </div>
+                                    <div class="panel-body ">
+                                        @using (Html.BeginForm("Add", "RevenueHead", FormMethod.Post, new { id = "formRvGroup" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="m" id="m" value="@ViewBag.MenuId" />
+                                            <div class="form-horizontal">
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Merhant ID</label>
+                                                    <div class="col-md-4">
+                                                        @if (Model.ITBID == 0)
+                                                        {
+                                                            @Html.DropDownListFor(model => model.MERCHANTID, ViewBag.MerchantList as SelectList, "Search By Mid/Merchant Name", new { @class = "form-control select2", style = "width:100%" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.DropDownList("MERCHANTID", ViewBag.MerchantList as SelectList, "Search By Mid/Merchant Name", new { @class = "form-control select2", style = "width:100%", @disabled = "disabled" })
+                                                            @Html.HiddenFor(model => model.MERCHANTID);
+                                                        }
+                                                        @Html.HiddenFor(model => model.ITBID)
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Group Code</label>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(model => model.GROUPCODE, new { @class = "form-control input-sm", @readonly = "readonly" })
+                                                        <small>System Generated</small>
+
+                                                    </div>
+                                                    <label class="col-md-2 control-label">Description</label>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(model => model.GROUPNAME, new { @class = "form-control input-sm" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label"> Account No <span class="required">*</span></label>
+                                                    <div class="col-lg-4">
+                                                        @Html.DropDownListFor(model => model.ACCOUNT_ID, ViewBag.MAcctList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                                    </div>
+                                                    <label class="col-lg-2 control-label"> Apply Global Account</label>
+                                                    <div class="col-lg-4">
+                                                        @Html.CheckBoxFor(model => model.GLOBALACCOUNTFLAG)
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label"> Settlement Frequency <span class="required">*</span></label>
+                                                    <div class="col-lg-4">
+                                                        @Html.DropDownListFor(model => model.SETTLEMENT_FREQUENCY, ViewBag.FrequencyList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                                    </div>
+                                                    @if (Model.CUSTOM)
+                                                    {
+                                                        <div id="divCustom">
+                                                            <label class="col-md-2 control-label">Working Days</label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(model => model.SET_DAYS, new { @class = "form-control input-sm", style = "width:150px", type = "number", min = "1" })
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div id="divCustom" style="display:none">
+                                                            <label class="col-md-2 control-label">Working Days</label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(model => model.SET_DAYS, new { @class = "form-control input-sm", style = "width:150px", type = "number", min = "1" })
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="form-group">
+                                                    @if (ViewBag.StatusVisible == true)
+                                                    {
+                                                        <label class="col-md-2 control-label">Status</label>
+                                                        <div class="col-md-2">
+                                                            @Html.DropDownListFor(model => model.STATUS, ViewBag.RecordStatus as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <h4><label>Revenue Code(s)</label></h4>
+                                                <div style="margin-bottom:5px">
+
+                                                    <div class="table-responsive " style="border: 1px solid #f4f4f4;background-color:#f7f7f7;margin-bottom:10px;padding:20px">
+                                                        <div class="divadu">
+                                                            <div id="divAccta">
+                                                                <table id="tableRvHead1" class="table table-condensed table-hover table-bordered" style="width:100%">
+
+                                                                    <thead>
+                                                                        <tr>
+                                                                        <th colspan="8"><a id="btnAddAcct" class="btn btn-info btn-xs"><i class="fa fa-plus"></i> Add Revenue</a>
+                                                                        </th>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Action?</th>
+
+                                                                            <th>
+                                                                                Revenue Code
+                                                                            </th>
+                                                                            <th>
+                                                                                Description
+                                                                            </th>
+                                                                            @*<th>
+                                                                                Payment Item ID
+                                                                            </th>*@
+                                                                            <th>
+                                                                                Account No.
+                                                                            </th>
+                                                                            <th>
+                                                                                Account Name
+                                                                            </th>
+                                                                            <th>
+                                                                                Bank Name
+                                                                            </th>
+                                                                            <th>
+                                                                                Set. Frequency
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody></tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h4>
+                                                    <label>Revenue Code Queue</label>
+                                                    <small style="color:indianred">List of "New/Update" Revenue Codes Item to be forwarded for authorization </small>
+                                                </h4>
+                                                <div style="margin-bottom:5px">
+
+                                                    <div class="table-responsive " style="border: 1px solid #f4f4f4;background-color:#f7f7f7;margin-bottom:10px;padding:20px">
+
+                                                        <div class="divadu">
+                                                            <div id="divAcct">
+                                                                <table id="tableRvHead" class="table table-condensed table-hover table-bordered" style="width:100%">
+
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Action?</th>
+
+                                                                            <th>
+                                                                                Revenue Code
+                                                                            </th>
+                                                                            <th>
+                                                                                Description
+                                                                            </th>
+                                                                            @*<th>
+                                                                                Payment Item ID
+                                                                            </th>*@
+                                                                            <th>
+                                                                                Account No.
+                                                                            </th>
+                                                                            <th>
+                                                                                Account Name
+                                                                            </th>
+                                                                            <th>
+                                                                                Bank Name
+                                                                            </th>
+                                                                            <th>
+                                                                                Set. Frequency
+                                                                            </th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody></tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="clearfix"></div>
+                                                <hr />
+                                                @if (Model.ITBID == 0 && ViewBag.CanAdd == true)
+                                                {
+                                                    <div style="text-align:center">
+                                                        <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+
+                                                    </div>
+                                                }
+                                                @if (Model.ITBID > 0 && ViewBag.CanEdit == true)
+                                                {
+                                                    <div style="text-align:center">
+                                                        <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        @*</div>*@
+                        <div class="modal fade" id="myModalAcct" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                        </div>
+                        <div class="clearfix"></div>
+                        </div>
+                        <div class="tab-pane" id="tabda">
+                            <div id="divDebit">
+                                <table id="tableDebitAcct" class="table table-condensed table-hover table-bordered" style="width:100%">
+
+                                    <thead>
+                                        
+                                        <tr>
+                                           
+                                            <th>
+                                                MERCHANT ID
+                                            </th>
+                                            <th>
+                                                GROUP CODE
+                                            </th>
+                                            <th>
+                                                AGENT CODE
+                                            </th>
+                                            <th>
+                                                BANK CODE
+                                            </th>
+                                            <th>
+                                                BANK NAME
+                                            </th>
+                                            <th>
+                                                BANK ACCT NO
+                                            </th>
+                                            <th>
+                                                BANK ACCT NAME
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*</div>*@
+<div class="modal fade" id="myModalAcct" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+@*<div class="modal fade" id="myModalTerm" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>*@
+<div class="clearfix"></div>
+@section Scripts {
+@if (ViewBag.Message != null)
+{
+
+    var msg = @Html.Raw(Json.Encode(ViewBag.Message));
+    <script>
+        displayDialogNoty('Notification',@msg) ;
+    </script>
+
+}
+    @Scripts.Render("~/Scripts/app/rv_head.js")
+}

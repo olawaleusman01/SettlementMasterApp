@@ -1,0 +1,205 @@
+﻿@model Generic.Dapper.Model.CompanyProfileObj
+
+<div id="right_sidebar">
+    @if (Model != null && Model.ITBID != 0)
+    {
+        <div class="panel panel-warning">
+            <div class="panel-body widget">
+                <div style="">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Created By:<span class="label label-default">@Model.CREATED_BY</span></span>
+                </div>
+                <div style="margin-top:10px">
+                    <i class="fa fa-calendar"></i>
+                    <span class="light-grey">Date Created:<span class="label label-default">@Model.CREATEDATE_STRING</span></span>
+                </div>
+                <div style="margin-top:10px" class="div-authname">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Authorized By:<span class="label label-default">@Model.AUTH_BY</span></span>
+                </div>
+                <div style="margin-top:10px" class="div-authname">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Modified By:<span class="label label-default">@Model.MODIFIED_BY</span></span>
+                </div>
+                <div style="margin-top:10px" class="div-authdate">
+                    <i class="fa fa-calendar"></i>
+                    <span class="light-grey">Last Modified Date:<span class="label label-default">@Model.MODIFIEDDATE_STRING</span></span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+  
+       
+   
+        <div id="content_new">
+            <div class="row2">
+
+                <div class="col-lg-12">
+                    <div class="alert alert-dismissible fade in noty" role="alert" style="display:none">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                            <span aria-hidden="true">×</span>
+
+                        </button>
+                        <span class="notyMsg">
+
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-edit" style="color:#57ACE7;"></i>  Company Profile
+
+
+                        </div>
+                        <div class="panel-body ">
+                            <div class="row">
+                                <div class="col-lg-12">
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "formCompany" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <input type="hidden" name="m" id="m" value="@ViewBag.MenuId" />
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">CBN Code <span class="required">*</span></label>
+                                            <div class="col-md-4">
+
+                                                @Html.TextBoxFor(model => model.COMPANY_CODE, new { @class = "form-control input-sm" })
+
+                                                @Html.HiddenFor(model => model.ITBID)
+                                            </div>
+                                            <label class="col-md-2 control-label">Company Name<span class="required">*</span></label>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.COMPANY_NAME, new { @class = "form-control input-sm" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Email<span class="required">*</span></label>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.COMPANY_EMAIL, new { @class = "form-control input-sm" })
+
+                                            </div>
+                                            <label class="col-md-2 control-label">Website<span class="required">*</span></label>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.COMPANY_WEBSITE, new { @class = "form-control input-sm" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Phone 1<span class="required">*</span></label>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.COMPANY_PHONE1, new { @class = "form-control input-sm" })
+                                            </div>
+                                            <label class="col-md-2 control-label">Phone 2</label>
+                                            <div class="col-md-4">
+
+                                                @Html.TextBoxFor(model => model.COMPANY_PHONE2, new { @class = "form-control input-sm" })
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Address<span class="required">*</span></label>
+                                            <div class="col-md-4">
+                                                @Html.TextAreaFor(model => model.COMPANY_ADDRESS, new { @class = "form-control input-sm" })
+
+
+                                            </div>
+                                            <label class="col-md-2 control-label">Country<span class="required">*</span></label>
+                                            <div class="col-md-4">
+                                                @Html.DropDownListFor(model => model.COMPANY_COUNTRY, ViewBag.Country as SelectList, "Select Country", new { @class = "form-control select2", style = "width:100%" })
+
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+
+                                            <label class="col-md-2 control-label">State<span class="required">*</span></label>
+                                            <div class="col-md-4">
+                                                @Html.DropDownListFor(model => model.COMPANY_STATE, ViewBag.State as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+
+                                            </div>
+                                            <label class="col-md-2 control-label">City<span class="required">*</span></label>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.COMPANY_CITY, new { @class = "form-control input-sm" })
+                                                @*@Html.DropDownListFor(model => model.COMPANY_CITY, ViewBag.CityList as SelectList, "--Select City--", new { @class = "form-control select2", style = "width:100%" })*@
+                                        </div>
+                                    </div>
+                                    <h5 style="margin-top: 0px;margin-bottom: 0px;">
+                                        Bank Account Settings
+                                    </h5>
+                                    <hr />
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" title="Witholding Tax Rate">WTH Tax Rate</label>
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(model => model.WHTAXRATE,"{0:0.00}", new { @class = "form-control input-sm", style = "width:150px" })
+                                        </div>
+                                        <label class="col-md-2 control-label" title="Witholding Tax Account Number">WTH Tax Account No.</label>
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(model => model.WHTACCOUNT, new { @class = "form-control input-sm" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label class="col-md-2 control-label" title="Witholding Tax Bank Code">WTH Tax Bank</label>
+                                        <div class="col-md-4">
+                                             @Html.DropDownListFor(model => model.WHTBANKCODE, ViewBag.BankList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                                        </div>
+                                       
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Nibss Rate</label>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.NIBSSRATE,"{0:0.00}", new { @class = "form-control input-sm", style = "width:150px", })
+                                            </div>
+                                            <label class="col-md-2 control-label">Nibss Account No.</label>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.NIBSSACCOUNT, new { @class = "form-control input-sm" })
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <label class="col-md-2 control-label">Nibss Bank</label>
+                                            <div class="col-md-4">
+                                                @Html.DropDownListFor(model => model.NIBSSBANKCODE, ViewBag.BankList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+
+                                            </div>
+
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <hr />
+@if (Model.ITBID > 0 && ViewBag.CanEdit == true)
+{
+                                        <div style="text-align:right">
+                                            <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> Update</button>
+                                          
+                                        </div>
+}
+
+                                </div>
+}
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
+
+   
+    @section Scripts {
+        @Scripts.Render("~/Scripts/app/company_profile.js")
+    }

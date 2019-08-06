@@ -1,0 +1,73 @@
+﻿@model List<Generic.Dapper.Model.MccMscObj>
+<table id="tableMsc" class="table table-condensed table-hover table-bordered" style="width:100%">
+    @*<colgroup span="1"></colgroup>*@
+    <colgroup span="3"></colgroup>
+    <colgroup span="4" style="background-color:#ddd"></colgroup>
+    <colgroup span="4" style="background-color:lightyellow"></colgroup>
+    <thead>
+        <tr>
+            @*<th colspan="1" style="text-align:center"></th>*@
+            <th colspan="3" style="text-align:center"></th>
+            <th colspan="4" style="text-align:center">Domestic Settings</th>
+            <th colspan="4" style="text-align:center">International Settings</th>
+        </tr>
+        <tr>
+            <th style="width:10%;text-align:center">Action?</th>
+            <th>
+                Channel
+            </th>
+            <th>
+                Card Scheme
+            </th>
+            <th>
+                Calc. Basis
+            </th>
+            <th>Dom. MSC Value <i class="fa fa-info-circle" style="color:orangered" data-toggle="tooltip" title="Domestic MSC Value"></i></th>
+            <th>Dom. CAP </th>
+            <th> Dom. Sett. Currency</th>
+            @*<th> Dom. Frequency</th>*@
+            <th>
+                Calc. Basis
+            </th>
+            <th>Intl. MSC Value</th>
+            <th>Intl. CAP</th>
+
+            <th> Intl. Sett. Currency</th>
+            @*<th data-toggle="tooltip" title="International Frequency"> Int. Frequency</th>*@
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach(var d in Model)
+        {
+            <tr>
+                <td style="text-align:center">
+                    @if (!d.Deleted)
+                    {
+                    <a class="btn btn-info btn-xs" id="edit" data-key="@d.ITBID" title="Edit Record"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" id="delete" data-key="@d.ITBID" title="Delete Record"><i class="fa fa-trash"></i></a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-warning btn-xs" id="undo" title="Undo Delete" data-key="@d.ITBID"><i class="fa fa-undo"></i></a>
+
+                    }
+                </td>
+                <td>@d.ChannelDesc</td>
+                <td>@d.CARDSCHEME</td>
+                <td>@d.MSC_CALCBASIS</td>
+                <td>@d.DOM_MSCVALUE.GetValueOrDefault().ToString("F")</td>
+                <td>@d.DOMCAP.GetValueOrDefault().ToString("F")</td>
+                <td>@d.DomCurrencyDesc</td>
+                @*<td>@d.DomFrequencyDesc</td>*@
+                <td>@d.INTMSC_CALCBASIS</td>
+                <td>@d.INT_MSCVALUE.GetValueOrDefault().ToString("F")</td>
+                <td>@d.INTLCAP.GetValueOrDefault().ToString("F")</td>
+                <td>@d.IntCurrencyDesc</td>
+                @*<td>@d.IntFrequencyDesc</td>*@
+            </tr>
+            
+        }
+    </tbody>
+</table>

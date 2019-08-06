@@ -1,0 +1,123 @@
+﻿@model Generic.Dapper.Model.CompanyProfileObj
+<div id="toolbar">
+    <div class="col-lg-12">
+        @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>
+        <a id="btnCancel" class="btn btn-default editor_return" style="display:none"><i class="fa fa-long-arrow-left"></i> Cancel</a>*@
+
+    </div>
+</div>
+<div id="right_sidebar">
+    @if (Model != null && Model.ITBID != 0)
+    {
+        <div class="panel panel-warning">
+            <div class="panel-body widget">
+                <div style="">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Created By:<span class="label label-default">@Model.CREATED_BY</span></span>
+                </div>
+                <div style="margin-top:10px">
+                    <i class="fa fa-calendar"></i>
+                    <span class="light-grey">Date Created:<span class="label label-default">@Model.CREATEDATE_STRING</span></span>
+                </div>
+                <div style="margin-top:10px" class="div-authname">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Authorized By:<span class="label label-default">@Model.AUTH_BY</span></span>
+                </div>
+                <div style="margin-top:10px" class="div-authname">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Last Modified By:<span class="label label-default">@Model.MODIFIED_BY</span></span>
+                </div>
+                <div style="margin-top:10px" class="div-authdate">
+                    <i class="fa fa-calendar"></i>
+                    <span class="light-grey">Last Modified Date:<span class="label label-default">@Model.MODIFIEDDATE_STRING</span></span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+  
+       
+   
+        <div id="content_new">
+            <div class="row2">
+
+                <div class="col-lg-12">
+                    <div class="alert alert-dismissible fade in noty" role="alert" style="display:none">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                            <span aria-hidden="true">×</span>
+
+                        </button>
+                        <span class="notyMsg">
+
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-key" style="color:#57ACE7;"></i>  Security Policy
+                        </div>
+                        <div class="panel-body ">
+                            <div class="row">
+                                <div class="col-lg-12">
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "formCompany" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <input type="hidden" name="m" id="m" value="@ViewBag.MenuId" />
+                                    <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Password Change Days</label>
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(model => model.PASSWORD_CHANGE_DAYS, new { @class = "form-control input-sm", type = "number", style = "width:70px", min = "0" })
+                                        @Html.HiddenFor(M=> M.ITBID)
+                                        </div>
+                                        <label class="col-md-2 control-label">System Idle Timeout</label>
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(model => model.SYSTEM_IDLE_TIMEOUT, new { @class = "form-control input-sm", type = "number", style = "width:70px", min = "0" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label class="col-md-2 control-label">No Attempts Before Lockout</label>
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(model => model.LOCKOUT_TRIAL_COUNT, new { @class = "form-control input-sm", type = "number", style = "width:70px", min = "0" })
+                                        </div>
+                                        <label class="col-md-2 control-label">Password Length</label>
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(model => model.PASSWORDLENGTH, new { @class = "form-control input-sm", type = "number", style = "width:70px", min = "0" })
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                     
+                                        <hr />
+@if (Model.ITBID > 0 && ViewBag.CanEdit == true)
+{
+                                        <div style="text-align:right">
+                                            <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> Update</button>
+                                          
+                                        </div>
+}
+
+                                </div>
+}
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
+
+   
+    @section Scripts {
+        @Scripts.Render("~/Scripts/app/spolicy.js")
+    }

@@ -1,0 +1,246 @@
+﻿@model Generic.Dapper.Model.UserObj
+<div id="right_sidebar">
+    @if(Model != null && Model.ItbId != 0)
+    {
+    <div class="panel panel-warning">
+        <div class="panel-body widget">
+            <div style="">
+                <i class="fa fa-user"></i>
+                <span class="light-grey">Created By:@Model.CREATED_BY</span>
+            </div>
+            <div style="margin-top:10px">
+                <i class="fa fa-calendar"></i>
+                <span class="light-grey">Date Created:@Model.CREATEDATE_STRING</span>
+            </div>
+            <div style="margin-top:10px" class="div-authname">
+                <i class="fa fa-user"></i>
+                <span class="light-grey">Last Authorized By:</span>
+            </div>
+            <div style="margin-top:10px" class="div-authdate">
+                <i class="fa fa-user"></i>
+                <span class="light-grey">Last Modified Date:</span>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+<div id="content_new">
+    <div class="row2">
+        <div class="col-lg-12">
+            <div class="alert alert-dismissible fade in noty" role="alert" style="display:none">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                    <span aria-hidden="true">×</span>
+
+                </button>
+                <span class="notyMsg">
+
+                </span>
+            </div>
+
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+                    @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
+
+
+                </div>
+                <div class="panel-body ">
+                    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "formUsers" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            <div class="alert alert-dismissible fade in notyModal" role="alert" style="display:none">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                                    <span aria-hidden="true">×</span>
+
+                                </button>
+                                <span class="notyModalMsg">
+
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Institution<span class="required"> *</span></label>
+                                <div class="col-md-4">
+                                    <div class="form-groupp input-groupa">
+                                        @*<select class="form-control select2" name="InstitutionId" id="InstitutionId" style="width:100%"></select>*@
+                                        @Html.DropDownListFor(model=> model.InstitutionId, ViewBag.Institution as SelectList, "Select Institution", new { @class = "form-control select2", style = "width:100%" })
+
+
+                                    </div>
+                                </div>
+                                <label class="col-md-2 control-label">Login ID<span class="required"> *</span></label>
+                                <div class="col-md-4">
+                                    <div class="form-groupp input-groupa">
+                                     @Html.TextBoxFor(m=> m.UserName,new { @class="form-control",placeholder="Login ID",@readonly="readonly"})
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label ">Last Name<span class="required"> *</span></label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-user"></span></span>
+
+                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                                        @Html.HiddenFor(m=> m.ItbId)
+                                        @Html.HiddenFor(m => m.RoleName)
+                                        @Html.HiddenFor(m => m.DeptName)
+                                        
+                                        <input type="hidden" name="m" value="@ViewBag.MenuId" />
+                                    </div>
+                                </div>
+                                <label class="col-md-2 control-label ">First Name<span class="required"> *</span></label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Mobile-No</label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-phone"></span></span>
+
+                                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", placeholder = "Phone No" })
+
+
+                                     </div>
+                                    <div class="clearfix"> </div>
+
+                                </div>
+                                <label class="col-md-2 control-label">
+                                    E-Mail
+                                    <span class="required"> *</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="form-group">
+                                <div id="divDept">
+                                    <label class="col-md-2 control-label">
+                                        Department
+                                        <span class="required"> *</span>
+                                    </label>
+                                    <div class="col-md-4">
+
+                                        @*<select class="form-control select2" name="DeptCode" id="DeptCode" style="width:100%"></select>*@
+                                        @Html.DropDownList("DeptCode", ViewBag.Department as SelectList, "Select Department", new { @class = "form-control select2", style = "width:100%" })
+
+
+                                    </div>
+                                </div>
+                                <label class="col-md-2 control-label">
+                                    Role
+                                    <span class="required"> *</span>
+                                </label>
+                                <div class="col-md-4">
+
+                                    @*<select class="form-control select2" name="RoleId" id="RoleId" style="width:100%"></select>*@
+                                    @Html.DropDownList("RoleId", ViewBag.Role as SelectList, "Select Role", new { @class = "form-control select2", style = "width:100%" })
+
+
+                                </div>
+                            </div>
+<div class="form-group">
+        <label class="col-md-2 control-label">Supervisor</label>
+        <div class="col-md-4">
+            <div class="">
+                @Html.CheckBoxFor(m=> m.Supervisor)
+            </div>
+
+        </div>
+    </div>
+    @*<div class="form-group">
+        <label class="col-md-2 control-label">Enforce Password Change</label>
+        <div class="col-md-4">
+            <div class="">
+
+                <input type="checkbox" name="EnforcePassword" id="EnforcePassword" value="" />
+            </div>
+
+        </div>
+
+        <label class="col-md-2 control-label">Password Change Days</label>
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-addon"><span class="fa fa-money"></span></span>
+                <input type="number" id="txtChangeDays" placeholder="0" style="width:100px" class="form-control" />
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+            </div>
+
+        </div>
+    </div>*@
+@if (ViewBag.StatusVisible == true)
+{
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" id="lblstat">Status</label>
+                                <div class="col-md-4">
+
+                                    @*<select class="form-control select2" name="Status" id="Status">
+                                        <option value="ACTIVE">Active</option>
+                                        <option value="LOCK">Lock</option>
+                                        <option value="DELETE">Delete</option>
+                                    </select>*@
+                                    @Html.DropDownListFor(model => model.Status, ViewBag.RecordStatus as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+
+
+
+                                </div>
+
+
+                            </div>
+}
+                            <div class="clearfix"> </div>
+
+                            <hr />
+@if (Model.ItbId > 0 && ViewBag.CanEdit == true)
+{
+                            <div style="text-align:right">
+                                <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> Save</button>
+                                @*<a class="btn btn-default editor_reset" id="btnRefresh"><i class="fa fa-refresh"></i> Reset</a>*@
+
+                            </div>
+}
+@if (Model.ItbId == 0 && ViewBag.CanAdd == true)
+{
+    <div style="text-align:right">
+        <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> Save</button>
+        @*<a class="btn btn-default editor_reset" id="btnRefresh"><i class="fa fa-refresh"></i> Reset</a>*@
+
+    </div>
+}
+
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="clearfix"></div>
+<script>
+    $('.select2').select2({
+        theme: "classic"
+    });
+</script>
+
