@@ -55,7 +55,8 @@ namespace Generic.Dapper.Utility
         SUBSIDY,
         SUBSIDYINT,
         RVHD,
-        RV
+        RV,
+        ATMCHARGES
     }
         public static class SessionHelper
         {
@@ -133,6 +134,17 @@ namespace Generic.Dapper.Utility
             {
                 myMsc = new MccMsc();
                 Set(session, SessionKey.MCCMSC, myMsc);
+            }
+            return myMsc;
+        }
+
+        public static ATMCharges GetATMCharges(HttpSessionStateBase session)
+        {
+            ATMCharges myMsc = Get<ATMCharges>(session, SessionKey.ATMCHARGES);
+            if (myMsc == null)
+            {
+                myMsc = new ATMCharges();
+                Set(session, SessionKey.ATMCHARGES, myMsc);
             }
             return myMsc;
         }

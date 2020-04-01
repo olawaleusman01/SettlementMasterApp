@@ -17,12 +17,14 @@ namespace SettlementMaster.App.Controllers
         //private readonly IRepository<SchoolApp.Domain.roleAssignment> repoRoleAssig = null;
         //private readonly IRepository<SchoolApp.Domain.state> repoState = null;
         private readonly IDapperGeneralSettings _repoMenu = null;
+        private readonly IDapperATMSettings _repoMenu2 = null;
         //private int menuid;
         int roleid;
       
         public NavController()
         {
             _repoMenu = new DapperGeneralSettings();
+            _repoMenu2 = new DapperATMSettings();
         }
         //
         // GET: /Nav/
@@ -34,9 +36,10 @@ namespace SettlementMaster.App.Controllers
             if (user != null)
             {
                 roleid = user.UserRole; // short.Parse(new ProfileHelper().GetProfile(User.Identity.Name, "roleid").ToString());
-                var parMenu = _repoMenu.GetParentMenu(roleid);
+                var parMenu = _repoMenu2.GetParentMenu(roleid,user.AppKey);
                 //  ViewBag.ParentMenu = parMenu;
-                var childMenu = _repoMenu.GetChildMenu(roleid);
+                var childMenu = _repoMenu2.GetChildMenu(roleid,user.AppKey);
+                
               
                 List<ChildMenu> mn = new List<ChildMenu>();
                 foreach (var d in parMenu)

@@ -63,6 +63,7 @@ namespace Generic.Data
         public Nullable<System.DateTime> LAST_MODIFIED_DATE { get; set; }
         public Nullable<int> SETTLEMENTOPTION_ID { get; set; }
         public Nullable<int> CHANNEL_OLD { get; set; }
+        public Nullable<int> settlementoption { get; set; }
     
         public virtual SM_CARDSCHEME SM_CARDSCHEME { get; set; }
         public virtual SM_MCC SM_MCC { get; set; }

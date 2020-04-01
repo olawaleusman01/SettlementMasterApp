@@ -24,35 +24,35 @@
 
             <div class="panel-body widget">
                 @*@if (ViewBag.DisplayAuth == true)
-                {
-                    <div class="divAuth">
-                        <div style="text-align:center">
-                            @using (Html.BeginForm("Approve", "Institution", FormMethod.Post, new { id = "formApprove", style = "display:inline" }))
-{
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" name="AuthId" value="@auth.AuthId" />
-                    <input type="hidden" name="PostType" value="@auth.PostType" />
-                    <input type="hidden" name="RecordId" value="@auth.RecordId" />
-                    <input type="hidden" name="BatchId" value="@auth.BatchId" />
-                    <input type="hidden" name="m" value="@auth.MenuId" />
-                    <button type="submit" class="btn btn-success btn_disable editor_approve" id="btnApprove"><i class="fa fa-check"></i> Approve</button>
-}
+                        {
+                            <div class="divAuth">
+                                <div style="text-align:center">
+                                    @using (Html.BeginForm("Approve", "Institution", FormMethod.Post, new { id = "formApprove", style = "display:inline" }))
+        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="AuthId" value="@auth.AuthId" />
+                            <input type="hidden" name="PostType" value="@auth.PostType" />
+                            <input type="hidden" name="RecordId" value="@auth.RecordId" />
+                            <input type="hidden" name="BatchId" value="@auth.BatchId" />
+                            <input type="hidden" name="m" value="@auth.MenuId" />
+                            <button type="submit" class="btn btn-success btn_disable editor_approve" id="btnApprove"><i class="fa fa-check"></i> Approve</button>
+        }
 
-                            <button type="submit" class="btn btn-danger btn_disable editor_reject" id="btnReject"><i class="fa fa-times"></i> Reject</button>
+                                    <button type="submit" class="btn btn-danger btn_disable editor_reject" id="btnReject"><i class="fa fa-times"></i> Reject</button>
 
-                        </div>
-                        <hr />
-                    </div>
-                }*@
+                                </div>
+                                <hr />
+                            </div>
+                        }*@
                 <div style="">
                     <i class="fa fa-chevron-right"></i>
                     <span class="light-grey">Status:<span class="label label-default status">@auth.Status</span> </span>
                 </div>
-                <input id="hidAuthId" type="hidden" value="@auth.AuthId"/>
-                        <div style="margin-top:10px">
-                        <i class="fa fa-user"></i>
-                        <span class="light-grey">Created By: @auth.User</span>
-                    </div>
+                <input id="hidAuthId" type="hidden" value="@auth.AuthId" />
+                <div style="margin-top:10px">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Created By: @auth.User</span>
+                </div>
                 <div style="margin-top:10px">
                     <i class="fa fa-calendar"></i>
                     <span class="light-grey">Date Created: @auth.DateCreated</span>
@@ -65,6 +65,19 @@
                     <i class="fa fa-user"></i>
                     <span class="light-grey">Batch ID: @auth.BatchId</span>
                 </div>
+                @* Sulaiman *@
+                <div style="margin-top:10px" class="div-authdate">
+                    <i class="fa fa-user"></i>
+                    @if (ViewBag.EventType == "1")
+                    {
+                    <span class="light-grey">Payment Type: NAPS</span>
+                    }
+                    else
+                    {
+                    <span class="light-grey">Payment Type: NEFT</span>
+                    }
+                </div>
+                @* Sulaiman *@
             </div>
 
             

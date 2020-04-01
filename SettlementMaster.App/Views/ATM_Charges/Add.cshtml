@@ -1,0 +1,94 @@
+﻿@using Generic.Dapper.Model
+
+<div id="toolbar">
+   
+</div>
+
+    <div class="row" style="margin:10px">
+        <div class="col-lg-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+                    @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
+
+                </div>
+                <div class="panel-body ">
+                    @using (Html.BeginForm("Add", "ATM_Charges", FormMethod.Post, new { id = "formATMCharges" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="m" id="m" value="@ViewBag.MenuId" />
+                            <div class="form-horizontal">
+                                <div style="margin-bottom:10px;margin-left:0px;margin-right:0px;padding:10px">
+                                  
+                                    <div>
+                                        <div class="table-responsive">
+                                            <div id="divAcqMsc">
+                                                @{ 
+                                                    var atmChargesObj = ViewBag.ATMCharges as List<ATMChargesObj>;
+                                                    if (atmChargesObj == null)
+                                                    {
+                                                        atmChargesObj = new List<ATMChargesObj>();
+                                                    }
+
+                                                    Html.RenderPartial("_ViewATMCharges", atmChargesObj);
+                                                }
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+@if (ViewBag.ButtonText == "Save" && ViewBag.CanAdd == true)
+{
+                                <div style="text-align:center">
+                                    <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+
+                                </div>
+}
+@if (ViewBag.ButtonText == "Update" && ViewBag.CanEdit == true)
+{
+    <div style="text-align:center">
+        <button type="submit" class="btn btn-primary btn_disable" id="btnSave" value="1"><i class="fa fa-save"></i> @ViewBag.ButtonText</button>
+
+    </div>
+}
+                            </div>
+                  
+
+                            }
+                        </div>
+               
+            </div>
+        </div>
+
+    </div>
+@*</div>*@
+<div class="clearfix"></div>
+                      
+<div class="modal fade" id="myModalCharges"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  
+</div>
+@*<script>
+    $('.select2').select2({
+        theme: "classic"
+    });
+   // $('a.editor_return').click();
+</script>*@
+@section Scripts {
+@if (ViewBag.Message != null)
+{
+
+    var msg = @Html.Raw(Json.Encode(ViewBag.Message));
+    <script>
+        displayDialogNoty('Notification',@msg) ;
+    </script>
+}
+    @if (TempData["msg"] != null)
+    {
+        var  msg = @Html.Raw(Json.Encode(TempData["msg"]));
+        <script>
+        displayDialogNoty('Notification',@msg) ;
+        </script>
+        }
+    @Scripts.Render("~/Scripts/app/atm_charges.js")
+}

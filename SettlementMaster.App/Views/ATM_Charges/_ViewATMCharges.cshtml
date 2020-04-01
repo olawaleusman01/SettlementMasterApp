@@ -1,0 +1,60 @@
+﻿@model List<Generic.Dapper.Model.ATMChargesObj>
+<table id="tableCharges" class="table table-condensed table-hover table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th colspan="6">
+                <button type="button" class="btn btn-info btn-sm" id="btnAddCharges"><i class="fa fa-plus"></i> Add Charges</button>
+            </th>
+        </tr>
+        <tr>
+            <th style="width:10%;text-align:center">Action?</th>
+            <th>
+                Request Type
+            </th>
+            <th>
+                Tran Type
+            </th>
+            <th>
+                ATM Party Type
+            </th>
+            <th>Calc. Basis</th>
+            <th>Value </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach(var d in Model)
+        {
+            <tr>
+                <td style="text-align:center">
+                    @if (!d.Deleted)
+                    {
+                    <a class="btn btn-info btn-xs" id="edit" data-key="@d.ITBID" title="Edit Record"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" id="delete" data-key="@d.ITBID" title="Delete Record"><i class="fa fa-trash"></i></a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-warning btn-xs" id="undo" title="Undo Delete" data-key="@d.ITBID"><i class="fa fa-undo"></i></a>
+
+                    }
+                </td>
+                <td>@d.REQUESTTYPE_DESC</td>
+                <td>@d.TRAN_DESC</td>
+                <td>@d.OPERATORTYPE_DESC</td>
+                <td>@d.CALC_BASIS</td>
+                <td>
+                    @if(d.OPERATIONMODE_ID == null)
+                    {
+                        @Html.Raw(d.CUSTOM_VALUE);
+                    }
+                    else
+                    {
+                        @Html.Raw(d.VALUE.GetValueOrDefault().ToString("F"));
+                    }
+
+                </td>
+            </tr>
+            
+        }
+    </tbody>
+</table>

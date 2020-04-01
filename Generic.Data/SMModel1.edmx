@@ -47,6 +47,189 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Supervisor" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ATM_BANKCHARGES">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INSTITUTION_ITBID" Type="int" Nullable="false" />
+          <Property Name="TRAN_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="REQUESTTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="OPERATORTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CALCBASIS_ITBID" Type="int" Nullable="false" />
+          <Property Name="VALUE" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CUSTOM_VALUE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="IS_PROCESSOR" Type="bit" />
+          <Property Name="LAST_MODIFIED_UID" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="varchar" MaxLength="50" />
+          <Property Name="BATCHID" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ATM_BANKCHARGESTEMP">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INSTITUTION_ITBID" Type="int" Nullable="false" />
+          <Property Name="TRAN_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="REQUESTTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="OPERATORTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CALCBASIS_ITBID" Type="int" Nullable="false" />
+          <Property Name="VALUE" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CUSTOM_VALUE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="IS_PROCESSOR" Type="bit" />
+          <Property Name="LAST_MODIFIED_UID" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="varchar" MaxLength="50" />
+          <Property Name="BATCHID" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ATM_CALCBASIS">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="350" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="LAST_MODIFIED_UID" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="varchar" MaxLength="50" />
+          <Property Name="BATCHID" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ATM_CHARGES">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TRAN_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="REQUESTTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="OPERATORTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CALCBASIS_ITBID" Type="int" Nullable="false" />
+          <Property Name="VALUE" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CUSTOM_VALUE" Type="nvarchar" MaxLength="100" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="IS_PROCESSOR" Type="bit" />
+          <Property Name="LAST_MODIFIED_UID" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="varchar" MaxLength="50" />
+          <Property Name="BATCHID" Type="varchar" MaxLength="30" />
+          <Property Name="OPERATIONMODE_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ATM_CHARGESTEMP">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TRAN_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="REQUESTTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="OPERATORTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CALCBASIS_ITBID" Type="int" Nullable="false" />
+          <Property Name="VALUE" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CUSTOM_VALUE" Type="nvarchar" MaxLength="100" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="IS_PROCESSOR" Type="bit" />
+          <Property Name="LAST_MODIFIED_UID" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="varchar" MaxLength="50" />
+          <Property Name="BATCHID" Type="varchar" MaxLength="30" />
+          <Property Name="RECORDID" Type="int" />
+          <Property Name="EVENTTYPE" Type="varchar" MaxLength="30" />
+          <Property Name="OPERATIONMODE_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ATM_OPERATIONMODE">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="350" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="LAST_MODIFIED_UID" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ATM_OPERATORTYPE">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OPERATORTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="OPERATORTYPE_DESC" Type="nvarchar" MaxLength="350" />
+          <Property Name="OPERATIONMODE_ID" Type="int" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="IS_PROCESSOR" Type="bit" />
+          <Property Name="LAST_MODIFIED_UID" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="varchar" MaxLength="50" />
+          <Property Name="BATCHID" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ATM_REQUESTTYPE">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="REQUESTTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="REQUESTTYPE_DESC" Type="nvarchar" MaxLength="350" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="LAST_MODIFIED_UID" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="varchar" MaxLength="50" />
+          <Property Name="BATCHID" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ATM_REQUESTTYPETEMP">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="REQUESTTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="REQUESTTYPE_DESC" Type="nvarchar" MaxLength="350" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="LAST_MODIFIED_UID" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="varchar" MaxLength="50" />
+          <Property Name="BATCHID" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ATM_TRANSACTTYPE">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TRAN_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TRAN_DESC" Type="nvarchar" MaxLength="350" />
+          <Property Name="SIGN_VALUE" Type="varchar" MaxLength="1" />
+          <Property Name="SIGN_DESC" Type="varchar" MaxLength="2" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="LAST_MODIFIED_UID" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="varchar" MaxLength="50" />
+          <Property Name="BATCHID" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ATM_TRANSACTTYPETEMP">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TRAN_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TRAN_DESC" Type="nvarchar" MaxLength="350" />
+          <Property Name="SIGN_VALUE" Type="varchar" MaxLength="1" />
+          <Property Name="SIGN_DESC" Type="varchar" MaxLength="2" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="LAST_MODIFIED_UID" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="varchar" MaxLength="50" />
+          <Property Name="BATCHID" Type="varchar" MaxLength="30" />
+        </EntityType>
         <EntityType Name="SESS_SETRECONDUALUPLD">
           <Key>
             <PropertyRef Name="PID" />
@@ -981,6 +1164,35 @@
           <Property Name="BATCHID" Type="varchar" MaxLength="20" />
           <Property Name="MCC_CAT" Type="varchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="SM_MENUCONTROL">
+          <Key>
+            <PropertyRef Name="MENUID" />
+          </Key>
+          <Property Name="MENUID" Type="int" Nullable="false" />
+          <Property Name="MENUNAME" Type="varchar" MaxLength="100" />
+          <Property Name="CONTROLLER" Type="varchar" MaxLength="100" />
+          <Property Name="URL" Type="varchar" MaxLength="150" />
+          <Property Name="PARENT" Type="int" />
+          <Property Name="PRIORITY" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="STATUS" Type="varchar" MaxLength="20" />
+          <Property Name="FLAG" Type="bit" />
+          <Property Name="RESOURCEKEY" Type="varchar" MaxLength="100" />
+          <Property Name="NO_OF_CHECKER" Type="smallint" />
+          <Property Name="App" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="SM_MENUPRIVTEMP">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MENUID" Type="int" />
+          <Property Name="App" Type="char" MaxLength="1" />
+          <Property Name="USERID" Type="varchar" MaxLength="50" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="STATUS" Type="varchar" MaxLength="30" />
+          <Property Name="BATCHID" Type="varchar" MaxLength="30" />
+          <Property Name="EVENTTYPE" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="SM_MERCHANTACCT">
           <Key>
             <PropertyRef Name="ITBID" />
@@ -1227,6 +1439,7 @@
           <Property Name="LAST_MODIFIED_DATE" Type="datetime" />
           <Property Name="SETTLEMENTOPTION_ID" Type="int" />
           <Property Name="CHANNEL_OLD" Type="int" />
+          <Property Name="settlementoption" Type="int" />
         </EntityType>
         <EntityType Name="SM_MERCHANTMSCTEMP">
           <Key>
@@ -2455,6 +2668,17 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
         </Association>
         <EntityContainer Name="SettlementMasterModelStoreContainer">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATM_BANKCHARGES" EntityType="Self.ATM_BANKCHARGES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATM_BANKCHARGESTEMP" EntityType="Self.ATM_BANKCHARGESTEMP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATM_CALCBASIS" EntityType="Self.ATM_CALCBASIS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATM_CHARGES" EntityType="Self.ATM_CHARGES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATM_CHARGESTEMP" EntityType="Self.ATM_CHARGESTEMP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATM_OPERATIONMODE" EntityType="Self.ATM_OPERATIONMODE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATM_OPERATORTYPE" EntityType="Self.ATM_OPERATORTYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATM_REQUESTTYPE" EntityType="Self.ATM_REQUESTTYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATM_REQUESTTYPETEMP" EntityType="Self.ATM_REQUESTTYPETEMP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATM_TRANSACTTYPE" EntityType="Self.ATM_TRANSACTTYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATM_TRANSACTTYPETEMP" EntityType="Self.ATM_TRANSACTTYPETEMP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SESS_SETRECONDUALUPLD" EntityType="Self.SESS_SETRECONDUALUPLD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_APPROVAL_ROUTE" EntityType="Self.SM_APPROVAL_ROUTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_APPROVAL_ROUTE_OFFICER" EntityType="Self.SM_APPROVAL_ROUTE_OFFICER" Schema="dbo" store:Type="Tables" />
@@ -2501,6 +2725,8 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
           <EntitySet Name="SM_MCCMSC" EntityType="Self.SM_MCCMSC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_MCCMSCTEMP" EntityType="Self.SM_MCCMSCTEMP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_MCCTEMP" EntityType="Self.SM_MCCTEMP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_MENUCONTROL" EntityType="Self.SM_MENUCONTROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_MENUPRIVTEMP" EntityType="Self.SM_MENUPRIVTEMP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_MERCHANTACCT" EntityType="Self.SM_MERCHANTACCT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_MERCHANTACCTTEMP" EntityType="Self.SM_MERCHANTACCTTEMP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_MERCHANTCONFIG" EntityType="Self.SM_MERCHANTCONFIG" Schema="dbo" store:Type="Tables" />
@@ -2826,6 +3052,19 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
           <EntitySet Name="SESS_SETRECONDUALUPLD" EntityType="SettlementMasterModel.SESS_SETRECONDUALUPLD" />
           <EntitySet Name="SM_SERVICECHANNELS" EntityType="SettlementMasterModel.SM_SERVICECHANNELS" />
           <EntitySet Name="SM_SERVICECHANNELSTEMP" EntityType="SettlementMasterModel.SM_SERVICECHANNELSTEMP" />
+          <EntitySet Name="ATM_BANKCHARGES" EntityType="SettlementMasterModel.ATM_BANKCHARGES" />
+          <EntitySet Name="ATM_BANKCHARGESTEMP" EntityType="SettlementMasterModel.ATM_BANKCHARGESTEMP" />
+          <EntitySet Name="ATM_CALCBASIS" EntityType="SettlementMasterModel.ATM_CALCBASIS" />
+          <EntitySet Name="ATM_CHARGESTEMP" EntityType="SettlementMasterModel.ATM_CHARGESTEMP" />
+          <EntitySet Name="ATM_OPERATIONMODE" EntityType="SettlementMasterModel.ATM_OPERATIONMODE" />
+          <EntitySet Name="ATM_OPERATORTYPE" EntityType="SettlementMasterModel.ATM_OPERATORTYPE" />
+          <EntitySet Name="ATM_REQUESTTYPE" EntityType="SettlementMasterModel.ATM_REQUESTTYPE" />
+          <EntitySet Name="ATM_REQUESTTYPETEMP" EntityType="SettlementMasterModel.ATM_REQUESTTYPETEMP" />
+          <EntitySet Name="ATM_TRANSACTTYPE" EntityType="SettlementMasterModel.ATM_TRANSACTTYPE" />
+          <EntitySet Name="ATM_TRANSACTTYPETEMP" EntityType="SettlementMasterModel.ATM_TRANSACTTYPETEMP" />
+          <EntitySet Name="ATM_CHARGES" EntityType="SettlementMasterModel.ATM_CHARGES" />
+          <EntitySet Name="SM_MENUPRIVTEMP" EntityType="SettlementMasterModel.SM_MENUPRIVTEMP" />
+          <EntitySet Name="SM_MENUCONTROL" EntityType="SettlementMasterModel.SM_MENUCONTROL" />
           </EntityContainer>
         <EntityType Name="SM_ROLES">
           <Key>
@@ -4426,6 +4665,7 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
           <Property Name="SETTLEMENTOPTION_ID" Type="Int32" />
           <NavigationProperty Name="SM_SHAREDMSC2DETAIL" Relationship="SettlementMasterModel.FK_SM_SHAREDMSC2DETAIL_SM_MERCHANTMSC" FromRole="SM_MERCHANTMSC" ToRole="SM_SHAREDMSC2DETAIL" />
           <Property Name="CHANNEL_OLD" Type="Int32" />
+          <Property Name="settlementoption" Type="Int32" />
         </EntityType>
         <EntityType Name="SM_MERCHANTMSCTEMP">
           <Key>
@@ -5375,6 +5615,218 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
           <Property Name="LAST_MODIFIED_DATE" Type="DateTime" Precision="3" />
           <Property Name="RECORDID" Type="Int32" />
           <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ATM_BANKCHARGES">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INSTITUTION_ITBID" Type="Int32" Nullable="false" />
+          <Property Name="TRAN_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REQUESTTYPE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OPERATORTYPE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CALCBASIS_ITBID" Type="Int32" Nullable="false" />
+          <Property Name="VALUE" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CUSTOM_VALUE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IS_PROCESSOR" Type="Boolean" />
+          <Property Name="LAST_MODIFIED_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ATM_BANKCHARGESTEMP">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INSTITUTION_ITBID" Type="Int32" Nullable="false" />
+          <Property Name="TRAN_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REQUESTTYPE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OPERATORTYPE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CALCBASIS_ITBID" Type="Int32" Nullable="false" />
+          <Property Name="VALUE" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CUSTOM_VALUE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IS_PROCESSOR" Type="Boolean" />
+          <Property Name="LAST_MODIFIED_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ATM_CALCBASIS">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ATM_CHARGESTEMP">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TRAN_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REQUESTTYPE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OPERATORTYPE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CALCBASIS_ITBID" Type="Int32" Nullable="false" />
+          <Property Name="VALUE" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CUSTOM_VALUE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IS_PROCESSOR" Type="Boolean" />
+          <Property Name="LAST_MODIFIED_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RECORDID" Type="Int32" />
+          <Property Name="EVENTTYPE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="OPERATIONMODE_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ATM_OPERATIONMODE">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ATM_OPERATORTYPE">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OPERATORTYPE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OPERATORTYPE_DESC" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="OPERATIONMODE_ID" Type="Int32" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IS_PROCESSOR" Type="Boolean" />
+          <Property Name="LAST_MODIFIED_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ATM_REQUESTTYPE">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="REQUESTTYPE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REQUESTTYPE_DESC" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ATM_REQUESTTYPETEMP">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="REQUESTTYPE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REQUESTTYPE_DESC" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ATM_TRANSACTTYPE">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TRAN_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TRAN_DESC" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="SIGN_VALUE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="SIGN_DESC" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ATM_TRANSACTTYPETEMP">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TRAN_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TRAN_DESC" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="SIGN_VALUE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="SIGN_DESC" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ATM_CHARGES">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TRAN_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REQUESTTYPE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OPERATORTYPE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CALCBASIS_ITBID" Type="Int32" Nullable="false" />
+          <Property Name="VALUE" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CUSTOM_VALUE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IS_PROCESSOR" Type="Boolean" />
+          <Property Name="LAST_MODIFIED_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_MODIFIED_AUTHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="OPERATIONMODE_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SM_MENUPRIVTEMP">
+          <Key>
+            <PropertyRef Name="ITBID" />
+          </Key>
+          <Property Name="ITBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MENUID" Type="Int32" />
+          <Property Name="App" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="BATCHID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EVENTTYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SM_MENUCONTROL">
+          <Key>
+            <PropertyRef Name="MENUID" />
+          </Key>
+          <Property Name="MENUID" Type="Int32" Nullable="false" />
+          <Property Name="MENUNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CONTROLLER" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="URL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PARENT" Type="Int32" />
+          <Property Name="PRIORITY" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG" Type="Boolean" />
+          <Property Name="RESOURCEKEY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NO_OF_CHECKER" Type="Int16" />
+          <Property Name="App" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -6819,6 +7271,7 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
           <EntitySetMapping Name="SM_MERCHANTMSC">
             <EntityTypeMapping TypeName="SettlementMasterModel.SM_MERCHANTMSC">
               <MappingFragment StoreEntitySet="SM_MERCHANTMSC">
+                <ScalarProperty Name="settlementoption" ColumnName="settlementoption" />
                 <ScalarProperty Name="CHANNEL_OLD" ColumnName="CHANNEL_OLD" />
                 <ScalarProperty Name="SETTLEMENTOPTION_ID" ColumnName="SETTLEMENTOPTION_ID" />
                 <ScalarProperty Name="LAST_MODIFIED_DATE" ColumnName="LAST_MODIFIED_DATE" />
@@ -7724,6 +8177,231 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
                 <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
                 <ScalarProperty Name="CODE" ColumnName="CODE" />
                 <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATM_BANKCHARGES">
+            <EntityTypeMapping TypeName="SettlementMasterModel.ATM_BANKCHARGES">
+              <MappingFragment StoreEntitySet="ATM_BANKCHARGES">
+                <ScalarProperty Name="BATCHID" ColumnName="BATCHID" />
+                <ScalarProperty Name="LAST_MODIFIED_AUTHID" ColumnName="LAST_MODIFIED_AUTHID" />
+                <ScalarProperty Name="LAST_MODIFIED_UID" ColumnName="LAST_MODIFIED_UID" />
+                <ScalarProperty Name="IS_PROCESSOR" ColumnName="IS_PROCESSOR" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="CUSTOM_VALUE" ColumnName="CUSTOM_VALUE" />
+                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="CALCBASIS_ITBID" ColumnName="CALCBASIS_ITBID" />
+                <ScalarProperty Name="OPERATORTYPE_CODE" ColumnName="OPERATORTYPE_CODE" />
+                <ScalarProperty Name="REQUESTTYPE_CODE" ColumnName="REQUESTTYPE_CODE" />
+                <ScalarProperty Name="TRAN_CODE" ColumnName="TRAN_CODE" />
+                <ScalarProperty Name="INSTITUTION_ITBID" ColumnName="INSTITUTION_ITBID" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATM_BANKCHARGESTEMP">
+            <EntityTypeMapping TypeName="SettlementMasterModel.ATM_BANKCHARGESTEMP">
+              <MappingFragment StoreEntitySet="ATM_BANKCHARGESTEMP">
+                <ScalarProperty Name="BATCHID" ColumnName="BATCHID" />
+                <ScalarProperty Name="LAST_MODIFIED_AUTHID" ColumnName="LAST_MODIFIED_AUTHID" />
+                <ScalarProperty Name="LAST_MODIFIED_UID" ColumnName="LAST_MODIFIED_UID" />
+                <ScalarProperty Name="IS_PROCESSOR" ColumnName="IS_PROCESSOR" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="CUSTOM_VALUE" ColumnName="CUSTOM_VALUE" />
+                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="CALCBASIS_ITBID" ColumnName="CALCBASIS_ITBID" />
+                <ScalarProperty Name="OPERATORTYPE_CODE" ColumnName="OPERATORTYPE_CODE" />
+                <ScalarProperty Name="REQUESTTYPE_CODE" ColumnName="REQUESTTYPE_CODE" />
+                <ScalarProperty Name="TRAN_CODE" ColumnName="TRAN_CODE" />
+                <ScalarProperty Name="INSTITUTION_ITBID" ColumnName="INSTITUTION_ITBID" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATM_CALCBASIS">
+            <EntityTypeMapping TypeName="SettlementMasterModel.ATM_CALCBASIS">
+              <MappingFragment StoreEntitySet="ATM_CALCBASIS">
+                <ScalarProperty Name="BATCHID" ColumnName="BATCHID" />
+                <ScalarProperty Name="LAST_MODIFIED_AUTHID" ColumnName="LAST_MODIFIED_AUTHID" />
+                <ScalarProperty Name="LAST_MODIFIED_UID" ColumnName="LAST_MODIFIED_UID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATM_CHARGESTEMP">
+            <EntityTypeMapping TypeName="SettlementMasterModel.ATM_CHARGESTEMP">
+              <MappingFragment StoreEntitySet="ATM_CHARGESTEMP">
+                <ScalarProperty Name="OPERATIONMODE_ID" ColumnName="OPERATIONMODE_ID" />
+                <ScalarProperty Name="EVENTTYPE" ColumnName="EVENTTYPE" />
+                <ScalarProperty Name="RECORDID" ColumnName="RECORDID" />
+                <ScalarProperty Name="BATCHID" ColumnName="BATCHID" />
+                <ScalarProperty Name="LAST_MODIFIED_AUTHID" ColumnName="LAST_MODIFIED_AUTHID" />
+                <ScalarProperty Name="LAST_MODIFIED_UID" ColumnName="LAST_MODIFIED_UID" />
+                <ScalarProperty Name="IS_PROCESSOR" ColumnName="IS_PROCESSOR" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="CUSTOM_VALUE" ColumnName="CUSTOM_VALUE" />
+                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="CALCBASIS_ITBID" ColumnName="CALCBASIS_ITBID" />
+                <ScalarProperty Name="OPERATORTYPE_CODE" ColumnName="OPERATORTYPE_CODE" />
+                <ScalarProperty Name="REQUESTTYPE_CODE" ColumnName="REQUESTTYPE_CODE" />
+                <ScalarProperty Name="TRAN_CODE" ColumnName="TRAN_CODE" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATM_OPERATIONMODE">
+            <EntityTypeMapping TypeName="SettlementMasterModel.ATM_OPERATIONMODE">
+              <MappingFragment StoreEntitySet="ATM_OPERATIONMODE">
+                <ScalarProperty Name="LAST_MODIFIED_AUTHID" ColumnName="LAST_MODIFIED_AUTHID" />
+                <ScalarProperty Name="LAST_MODIFIED_UID" ColumnName="LAST_MODIFIED_UID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATM_OPERATORTYPE">
+            <EntityTypeMapping TypeName="SettlementMasterModel.ATM_OPERATORTYPE">
+              <MappingFragment StoreEntitySet="ATM_OPERATORTYPE">
+                <ScalarProperty Name="BATCHID" ColumnName="BATCHID" />
+                <ScalarProperty Name="LAST_MODIFIED_AUTHID" ColumnName="LAST_MODIFIED_AUTHID" />
+                <ScalarProperty Name="LAST_MODIFIED_UID" ColumnName="LAST_MODIFIED_UID" />
+                <ScalarProperty Name="IS_PROCESSOR" ColumnName="IS_PROCESSOR" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="OPERATIONMODE_ID" ColumnName="OPERATIONMODE_ID" />
+                <ScalarProperty Name="OPERATORTYPE_DESC" ColumnName="OPERATORTYPE_DESC" />
+                <ScalarProperty Name="OPERATORTYPE_CODE" ColumnName="OPERATORTYPE_CODE" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATM_REQUESTTYPE">
+            <EntityTypeMapping TypeName="SettlementMasterModel.ATM_REQUESTTYPE">
+              <MappingFragment StoreEntitySet="ATM_REQUESTTYPE">
+                <ScalarProperty Name="BATCHID" ColumnName="BATCHID" />
+                <ScalarProperty Name="LAST_MODIFIED_AUTHID" ColumnName="LAST_MODIFIED_AUTHID" />
+                <ScalarProperty Name="LAST_MODIFIED_UID" ColumnName="LAST_MODIFIED_UID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="REQUESTTYPE_DESC" ColumnName="REQUESTTYPE_DESC" />
+                <ScalarProperty Name="REQUESTTYPE_CODE" ColumnName="REQUESTTYPE_CODE" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATM_REQUESTTYPETEMP">
+            <EntityTypeMapping TypeName="SettlementMasterModel.ATM_REQUESTTYPETEMP">
+              <MappingFragment StoreEntitySet="ATM_REQUESTTYPETEMP">
+                <ScalarProperty Name="BATCHID" ColumnName="BATCHID" />
+                <ScalarProperty Name="LAST_MODIFIED_AUTHID" ColumnName="LAST_MODIFIED_AUTHID" />
+                <ScalarProperty Name="LAST_MODIFIED_UID" ColumnName="LAST_MODIFIED_UID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="REQUESTTYPE_DESC" ColumnName="REQUESTTYPE_DESC" />
+                <ScalarProperty Name="REQUESTTYPE_CODE" ColumnName="REQUESTTYPE_CODE" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATM_TRANSACTTYPE">
+            <EntityTypeMapping TypeName="SettlementMasterModel.ATM_TRANSACTTYPE">
+              <MappingFragment StoreEntitySet="ATM_TRANSACTTYPE">
+                <ScalarProperty Name="BATCHID" ColumnName="BATCHID" />
+                <ScalarProperty Name="LAST_MODIFIED_AUTHID" ColumnName="LAST_MODIFIED_AUTHID" />
+                <ScalarProperty Name="LAST_MODIFIED_UID" ColumnName="LAST_MODIFIED_UID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="SIGN_DESC" ColumnName="SIGN_DESC" />
+                <ScalarProperty Name="SIGN_VALUE" ColumnName="SIGN_VALUE" />
+                <ScalarProperty Name="TRAN_DESC" ColumnName="TRAN_DESC" />
+                <ScalarProperty Name="TRAN_CODE" ColumnName="TRAN_CODE" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATM_TRANSACTTYPETEMP">
+            <EntityTypeMapping TypeName="SettlementMasterModel.ATM_TRANSACTTYPETEMP">
+              <MappingFragment StoreEntitySet="ATM_TRANSACTTYPETEMP">
+                <ScalarProperty Name="BATCHID" ColumnName="BATCHID" />
+                <ScalarProperty Name="LAST_MODIFIED_AUTHID" ColumnName="LAST_MODIFIED_AUTHID" />
+                <ScalarProperty Name="LAST_MODIFIED_UID" ColumnName="LAST_MODIFIED_UID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="SIGN_DESC" ColumnName="SIGN_DESC" />
+                <ScalarProperty Name="SIGN_VALUE" ColumnName="SIGN_VALUE" />
+                <ScalarProperty Name="TRAN_DESC" ColumnName="TRAN_DESC" />
+                <ScalarProperty Name="TRAN_CODE" ColumnName="TRAN_CODE" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATM_CHARGES">
+            <EntityTypeMapping TypeName="SettlementMasterModel.ATM_CHARGES">
+              <MappingFragment StoreEntitySet="ATM_CHARGES">
+                <ScalarProperty Name="OPERATIONMODE_ID" ColumnName="OPERATIONMODE_ID" />
+                <ScalarProperty Name="BATCHID" ColumnName="BATCHID" />
+                <ScalarProperty Name="LAST_MODIFIED_AUTHID" ColumnName="LAST_MODIFIED_AUTHID" />
+                <ScalarProperty Name="LAST_MODIFIED_UID" ColumnName="LAST_MODIFIED_UID" />
+                <ScalarProperty Name="IS_PROCESSOR" ColumnName="IS_PROCESSOR" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="CUSTOM_VALUE" ColumnName="CUSTOM_VALUE" />
+                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="CALCBASIS_ITBID" ColumnName="CALCBASIS_ITBID" />
+                <ScalarProperty Name="OPERATORTYPE_CODE" ColumnName="OPERATORTYPE_CODE" />
+                <ScalarProperty Name="REQUESTTYPE_CODE" ColumnName="REQUESTTYPE_CODE" />
+                <ScalarProperty Name="TRAN_CODE" ColumnName="TRAN_CODE" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_MENUPRIVTEMP">
+            <EntityTypeMapping TypeName="SettlementMasterModel.SM_MENUPRIVTEMP">
+              <MappingFragment StoreEntitySet="SM_MENUPRIVTEMP">
+                <ScalarProperty Name="EVENTTYPE" ColumnName="EVENTTYPE" />
+                <ScalarProperty Name="BATCHID" ColumnName="BATCHID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="App" ColumnName="App" />
+                <ScalarProperty Name="MENUID" ColumnName="MENUID" />
+                <ScalarProperty Name="ITBID" ColumnName="ITBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_MENUCONTROL">
+            <EntityTypeMapping TypeName="SettlementMasterModel.SM_MENUCONTROL">
+              <MappingFragment StoreEntitySet="SM_MENUCONTROL">
+                <ScalarProperty Name="App" ColumnName="App" />
+                <ScalarProperty Name="NO_OF_CHECKER" ColumnName="NO_OF_CHECKER" />
+                <ScalarProperty Name="RESOURCEKEY" ColumnName="RESOURCEKEY" />
+                <ScalarProperty Name="FLAG" ColumnName="FLAG" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+                <ScalarProperty Name="PARENT" ColumnName="PARENT" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="CONTROLLER" ColumnName="CONTROLLER" />
+                <ScalarProperty Name="MENUNAME" ColumnName="MENUNAME" />
+                <ScalarProperty Name="MENUID" ColumnName="MENUID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

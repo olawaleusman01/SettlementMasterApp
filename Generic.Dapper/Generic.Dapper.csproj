@@ -91,6 +91,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\ATM_Charges\DapperATMSettings.cs" />
+    <Compile Include="Data\ATM_Charges\IDapperATMSettings.cs" />
     <Compile Include="Data\DapperCart.cs" />
     <Compile Include="Data\DapperGeneralSettings.cs" />
     <Compile Include="Data\DapperReportSettings.cs" />
@@ -111,6 +113,8 @@
     <Compile Include="ExcelUtility\ExcelReader.cs" />
     <Compile Include="ExcelUtility\ExcelReaderHelper.cs" />
     <Compile Include="ExcelUtility\ExxcellReaderClosedXml.cs" />
+    <Compile Include="Model\ATMCharges\ATMChargesObj.cs" />
+    <Compile Include="Model\ATMCharges\MenuPrivObj.cs" />
     <Compile Include="Model\AuthListObj2.cs" />
     <Compile Include="Model\PayResponse.cs" />
     <Compile Include="Model\EmailObj.cs" />

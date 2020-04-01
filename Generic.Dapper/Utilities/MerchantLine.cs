@@ -263,7 +263,6 @@ namespace Generic.Dapper.Utility
                 line.NewRecord = item.NewRecord;
                 line.Updated = item.Updated;
                 line.Institution_Desc = item.Institution_Desc;
-                //line.INSTITUTION_ID = item.INSTITUTION_ID;
                 line.MSC_CALCBASIS = item.MSC_CALCBASIS;
                 line.INTMSC_CALCBASIS = item.INTMSC_CALCBASIS;
                 line.ChannelDesc = item.ChannelDesc;
@@ -281,6 +280,93 @@ namespace Generic.Dapper.Utility
             lineCollection.Clear();
         }
         public List<MccMscObj> Lines
+        {
+            get { return lineCollection; }
+        }
+    }
+    public class ATMCharges
+    {
+        private List<ATMChargesObj> lineCollection = new List<ATMChargesObj>();
+        public void AddItem(ATMChargesObj item)
+        {
+            //CartLine line = lineCollection
+            //.Where(p => p.Item.itemId == item.itemId)
+            //.FirstOrDefault();
+            //if (line == null)
+            //{
+            lineCollection.Add(item);
+            //}
+            //else
+            //{
+            //    line.Quantity += quantity;
+            //}
+        }
+        public void RemoveLine(decimal itemId)
+        {
+            var count = lineCollection.Where(f => f.ITBID == itemId).Count();
+            if (count > 0)
+            {
+                lineCollection.RemoveAll(l => l.ITBID == itemId);
+            }
+        }
+
+        public void MarkForDelete(decimal itemId)
+        {
+            ATMChargesObj line = lineCollection
+              .Where(p => p.ITBID == itemId)
+              .FirstOrDefault();
+            if (line != null)
+            {
+                line.Deleted = true;
+                // lineCollection.RemoveAll(l => l.ITBID == itemId);
+            }
+        }
+        public void UndoDelete(decimal itemId)
+        {
+            ATMChargesObj line = lineCollection
+              .Where(p => p.ITBID == itemId)
+              .FirstOrDefault();
+            if (line != null)
+            {
+                line.Deleted = false;
+            }
+        }
+        public void UpdateItem(ATMChargesObj item)
+        {
+            ATMChargesObj line = lineCollection
+            .Where(p => p.ITBID == item.ITBID)
+            .FirstOrDefault();
+            if (line != null)
+            {
+                line.CALCBASIS_ITBID = item.CALCBASIS_ITBID;
+                line.CALC_BASIS = item.CALC_BASIS;
+                line.CUSTOM_VALUE = item.CUSTOM_VALUE;
+                line.IS_PROCESSOR = item.IS_PROCESSOR;
+                line.OPERATIONMODE_ID = item.OPERATIONMODE_ID;
+                line.OPERATORTYPE_CODE = item.OPERATORTYPE_CODE;
+                line.OPERATORTYPE_DESC = item.OPERATORTYPE_DESC;
+                line.REQUESTTYPE_CODE = item.REQUESTTYPE_CODE;
+                line.REQUESTTYPE_DESC = item.REQUESTTYPE_DESC;
+                line.OPERATORTYPE = item.OPERATORTYPE;
+                line.TRAN_CODE = item.TRAN_CODE;
+                line.TRAN_DESC = item.TRAN_DESC;
+                line.PartyValue = item.PartyValue;
+                line.STATUS = item.USERID;
+                line.VALUE = item.VALUE;
+                line.NewRecord = item.NewRecord;
+                line.Updated = item.Updated;
+            }
+
+        }
+        //public decimal ComputeTotalValue()
+        //{
+        //    return lineCollection.Sum(e => e.Item.Price * e.Quantity);
+        //}
+        public void Clear()
+        {
+            lineCollection.Clear();
+        }
+        public List<ATMChargesObj> Lines
         {
             get { return lineCollection; }
         }

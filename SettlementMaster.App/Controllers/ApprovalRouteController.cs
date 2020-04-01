@@ -511,7 +511,7 @@ namespace SettlementMaster.App.Controllers
                             obj.Status = det.STATUS;
                             obj.EventType = det.EVENTTYPE;
                             obj.DateCreated = det.CREATEDATE.GetValueOrDefault().ToString("dd-MMM-yyyy");
-                            obj.User = model.CREATED_BY;
+                            obj.User = det.USERID;
                             ViewBag.Auth = obj;
                             ViewBag.DisplayAuth = det.STATUS == open && !(model.USERID == User.Identity.Name);
 

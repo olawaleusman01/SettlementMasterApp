@@ -58,8 +58,8 @@ namespace SettlementMaster.App.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
+       // [Display(Name = "Remember me?")]
+        public string App { get; set; }
     }
 
     public class RegisterViewModel

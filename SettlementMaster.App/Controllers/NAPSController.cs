@@ -345,6 +345,7 @@ namespace SettlementMaster.App.Controllers
                             var model = rec.FirstOrDefault();
                             ViewBag.SetDate = model.SETTLEMENTDATE.GetValueOrDefault().ToString("dd-MM-yyyy");
                             ViewBag.ReqType = model.REQUESTTYPE;
+                            ViewBag.EventType = model.EVENTTYPE;//////Sulaiman
                             BindCombo(2, det.ITBID);
                             obj.Status = det.STATUS;
                             obj.EventType = det.EVENTTYPE;

@@ -123,6 +123,19 @@
         <EntityTypeShape EntityType="SettlementMasterModel.SESS_SETRECONDUALUPLD" Width="1.5" PointX="37.375" PointY="37.75" />
         <EntityTypeShape EntityType="SettlementMasterModel.SM_SERVICECHANNELS" Width="1.5" PointX="36.375" PointY="15.75" />
         <EntityTypeShape EntityType="SettlementMasterModel.SM_SERVICECHANNELSTEMP" Width="1.5" PointX="36.375" PointY="20.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.ATM_BANKCHARGES" Width="1.5" PointX="37.375" PointY="31.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.ATM_BANKCHARGESTEMP" Width="1.5" PointX="9.375" PointY="38.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.ATM_CALCBASIS" Width="1.5" PointX="5.375" PointY="29.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.ATM_CHARGESTEMP" Width="1.5" PointX="38.375" PointY="13.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.ATM_OPERATIONMODE" Width="1.5" PointX="38.375" PointY="18.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.ATM_OPERATORTYPE" Width="1.5" PointX="38.375" PointY="22.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.ATM_REQUESTTYPE" Width="1.5" PointX="38.375" PointY="26.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.ATM_REQUESTTYPETEMP" Width="1.5" PointX="21.375" PointY="39.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.ATM_TRANSACTTYPE" Width="1.5" PointX="39.375" PointY="30.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.ATM_TRANSACTTYPETEMP" Width="1.5" PointX="39.375" PointY="34.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.ATM_CHARGES" Width="1.5" PointX="11.375" PointY="38.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MENUPRIVTEMP" Width="1.5" PointX="39.375" PointY="38.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_MENUCONTROL" Width="1.5" PointX="40.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -149,8 +149,8 @@ namespace SettlementMaster.App.Controllers
                         retUrl = Url.Action("ResetPassword", "Account");
                         return Json(new { RespCode = 2, RespMessage = "Password Change Is Required.You will be redirected to another page to change your Password.", ReturnUrl = retUrl,UserName = model.UserName });
                     }
-                  
-                    var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
+                    user.AppKey = model.App;
+                    var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, false, true);
                    
                     switch (result)
                     {

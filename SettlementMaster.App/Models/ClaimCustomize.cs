@@ -119,8 +119,15 @@ namespace SettlementMaster.App.Models
                 return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/Email";
             }
         }
-      
-    
+        public static string AppKey
+        {
+            get
+            {
+                return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/AppKey";
+            }
+        }
+
+
     }
 
     public class UserDataObj
@@ -153,6 +160,7 @@ namespace SettlementMaster.App.Models
         public  DateTime LastLoginDate { get; set; }
         //public string AgentSettlementAcct { get; set; }
         //public string AgentSettlementAcctType { get; set; }
+        public string AppKey { get; set; }
     }
     public  class UserDataSettings
     {
@@ -180,6 +188,7 @@ namespace SettlementMaster.App.Models
                     var deptName = cl.Where(r => r.Type == ClaimTypeCustomize.DeptName).Select(c => c.Value).SingleOrDefault();
                     var instId = cl.Where(r => r.Type == ClaimTypeCustomize.InstitutionId).Select(c => c.Value).SingleOrDefault();
                     var instName = cl.Where(r => r.Type == ClaimTypeCustomize.InstitutionName).Select(c => c.Value).SingleOrDefault();
+                    var appKey = cl.Where(r => r.Type == ClaimTypeCustomize.AppKey).Select(c => c.Value).SingleOrDefault();
 
                     int.TryParse(userRole, out roleId);
                     int.TryParse(instId, out instItbId);
@@ -200,7 +209,8 @@ namespace SettlementMaster.App.Models
                         FirstName = firstName,
                         LastName = lastName,
                         Email = email,
-                        IsUpUser = instItbId == 1 ? true : false
+                        IsUpUser = instItbId == 1 ? true : false,
+                        AppKey = appKey
                     };
                     return obj;
                 }

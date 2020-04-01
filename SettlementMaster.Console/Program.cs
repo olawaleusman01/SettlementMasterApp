@@ -163,7 +163,7 @@ namespace SettlementMaster.Cons
             SettlementProcess_MEB TLAStarter2 = new SettlementProcess_MEB();
 
             NapsConnect connect = new NapsConnect();
-           
+
             // string dtFrom2 = DateTime.Today.ToString("dd-MMM-yyyy");
             // //If Scheduled Time is passed set Schedule for the next day.
             lgfn.loginfoMSG(DateTime.Now.ToString() + " [POS PROCESS] INFO Timer Initializing", null, null);
@@ -175,33 +175,33 @@ namespace SettlementMaster.Cons
                 var random = new Random((int)DateTime.Now.Ticks);
                 var randomValue = random.Next(1000000, 9999999);
                 string batchno = randomValue.ToString();
-                //NapsConnect connect = new NapsConnect();
+
                 // new NapsConnect().TranxEnquiryApi();
                 //////Parallel.Invoke(() =>
                 //////{
                 //////    new SettlementProcess_MEB().SettProcess(batchno, "2019-05-20");
                 //////});
 
-               // TLAStarter.ProcessSettlement(batchno);
+                // TLAStarter.ProcessSettlement(batchno);
                 ///new SettProcess_POS().SettProcessPOS(batchno, "2019-06-10");
                 //Process RuN
 
                 //pull from DWHOUSE
-                ///TLAStarter.ProcessSettlement(batchno);
+                //TLAStarter.ProcessSettlement(batchno);
 
-                // Console.WriteLine("Enter Process Date");
-                // var dt = Console.ReadLine();
-                //TLAStarter2.SettProcess(batchno, dt);
+                ////pull from Traxmaster
+                Console.WriteLine("Enter Process Date");
+                var dt = Console.ReadLine();
+                TLAStarter2.SettProcess(batchno, dt);
 
-                ////////connect.PostNapsXPEApiNeft();
+                ///NEFTData Posting
+                //connect.PostNapsXPEApiNeft();
                 ////////connect.TranxEnquiryApiNeft();
                 ///
 
-                ///connect.PostNapsXPEApi();
-                ///connect.TranxEnquiryApi();
-
-                //NapsConnect connects = new NapsConnect();
-                //connects.PostNapsXPEApiNeft();
+                ///NAPSData Posting
+                //connect.PostNapsXPEApi();
+                //connect.TranxEnquiryApi();
 
 
                 //TLAStarter.ProcessSettlement(batchno);

@@ -18,10 +18,10 @@
             </tr>
             <tr>
                 <th style="width:3%;text-align:center">
-@if (ViewBag.DisplayButton == true)
-{
-                <input type="checkbox" id="chkAll" name="chkAll" checked="checked" />
-}
+                    @if (ViewBag.DisplayButton == true)
+                    {
+                        <input type="checkbox" id="chkAll" name="chkAll" checked="checked" />
+                    }
                 </th>
                 <th style="width:5%">S/N</th>
                 <th style="width:9%">Debit Acct</th>
@@ -34,6 +34,7 @@
                 <th style="width:6%">Schedule ID</th>
                 <th style="width:5%">Resp Code</th>
                 <th style="">Resp Message</th>
+                <th style="">EventType</th>
             </tr>
         </thead>
         <tbody>
@@ -43,29 +44,41 @@
             foreach (var d in Model)
             {
                     cnt = cnt + 1;
-        <tr>
-            <th style="text-align:center">
-                @if (d.DisplayForReprocess)
-                {
-                    <input type="checkbox" id="chkSingle" value="@d.ITBID" name="chkSingle" data-key="@d.ITBID" checked="checked" />
-                }
-            </th>
-            <td style="text-align:center">
+            <tr>
+                <th style="text-align:center">
+                    @if (d.DisplayForReprocess)
+                    {
+                        <input type="checkbox" id="chkSingle" value="@d.ITBID" name="chkSingle" data-key="@d.ITBID" checked="checked" />
+                    }
+                </th>
+                <td style="text-align:center">
 
-                @cnt
+                    @cnt
 
-            </td>
-            <td>@d.DEBITACCTNO</td>
-            <td>@d.DEBITBANKCODE</td>
-            <td>@d.BENEFICIARYNAME</td>
-            <td>@d.BENEFICIARYACCTNO</td>
-            <td>@d.BENEFICIARYBANKCODE</td>
-            <td style="text-align:right">@d.CREDITAMOUNT.GetValueOrDefault().ToString("F")</td>
-            <td>@d.BENEFICIARYNARRATION</td>
-            <td>@d.SCHEDULEID</td>
-          <td>@d.RESPCODE</td>
-            <td>@d.RESPMESSAGE</td>
-        </tr>
+                </td>
+                <td>@d.DEBITACCTNO</td>
+                <td>@d.DEBITBANKCODE</td>
+                <td>@d.BENEFICIARYNAME</td>
+                <td>@d.BENEFICIARYACCTNO</td>
+                <td>@d.BENEFICIARYBANKCODE</td>
+                <td style="text-align:right">@d.CREDITAMOUNT.GetValueOrDefault().ToString("F")</td>
+                <td>@d.BENEFICIARYNARRATION</td>
+                <td>@d.SCHEDULEID</td>
+                <td>@d.RESPCODE</td>
+                <td>@d.RESPMESSAGE</td>
+                @* Sulaiman *@
+                <td>
+                    @if (d.EVENTTYPE == "1")
+                    {
+                        <span>NAPS</span>
+                    }
+                    else
+                    {
+                        <span>NEFT</span>
+                    }
+                </td>
+                @* Sulaiman *@
+            </tr>
 
                 }
             }

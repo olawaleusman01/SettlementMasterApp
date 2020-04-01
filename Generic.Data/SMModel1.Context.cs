@@ -125,6 +125,19 @@ namespace Generic.Data
         public virtual DbSet<SESS_SETRECONDUALUPLD> SESS_SETRECONDUALUPLD { get; set; }
         public virtual DbSet<SM_SERVICECHANNELS> SM_SERVICECHANNELS { get; set; }
         public virtual DbSet<SM_SERVICECHANNELSTEMP> SM_SERVICECHANNELSTEMP { get; set; }
+        public virtual DbSet<ATM_BANKCHARGES> ATM_BANKCHARGES { get; set; }
+        public virtual DbSet<ATM_BANKCHARGESTEMP> ATM_BANKCHARGESTEMP { get; set; }
+        public virtual DbSet<ATM_CALCBASIS> ATM_CALCBASIS { get; set; }
+        public virtual DbSet<ATM_CHARGESTEMP> ATM_CHARGESTEMP { get; set; }
+        public virtual DbSet<ATM_OPERATIONMODE> ATM_OPERATIONMODE { get; set; }
+        public virtual DbSet<ATM_OPERATORTYPE> ATM_OPERATORTYPE { get; set; }
+        public virtual DbSet<ATM_REQUESTTYPE> ATM_REQUESTTYPE { get; set; }
+        public virtual DbSet<ATM_REQUESTTYPETEMP> ATM_REQUESTTYPETEMP { get; set; }
+        public virtual DbSet<ATM_TRANSACTTYPE> ATM_TRANSACTTYPE { get; set; }
+        public virtual DbSet<ATM_TRANSACTTYPETEMP> ATM_TRANSACTTYPETEMP { get; set; }
+        public virtual DbSet<ATM_CHARGES> ATM_CHARGES { get; set; }
+        public virtual DbSet<SM_MENUPRIVTEMP> SM_MENUPRIVTEMP { get; set; }
+        public virtual DbSet<SM_MENUCONTROL> SM_MENUCONTROL { get; set; }
     
         public virtual ObjectResult<SESS_GET_SETRECONUPLD_Result> SESS_GET_SETRECONUPLD(string uSERID)
         {

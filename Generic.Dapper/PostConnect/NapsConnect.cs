@@ -432,7 +432,7 @@ namespace Generic.Dapper.PostConnect
                                     var result = GetTransaction(t.UNIQUEKEY, clientId, clientSecret, destUri, token).Result;
 
                                     string json = JsonConvert.SerializeObject(result);
-                                    lgfn.logNapsinfoMSG(DateTime.Now.ToString() + " Enquiry Response json  Data to from xpdirect " + json.ToString(), null, null);
+                                    lgfn.logNapsinfoMSG(DateTime.Now.ToString() + " Enquiry Response json  Data from xpdirect " + json.ToString(), null, null);
                                     ////response.EnsureSuccessStatusCode();
                                     //if (response.IsSuccessStatusCode)
                                     //{
@@ -616,12 +616,12 @@ namespace Generic.Dapper.PostConnect
                                     //lgfn.logNapsinfoMSG(DateTime.Now.ToString() + "Response Result " + result.ToString(), null, null);
 
                                     //  retObj.RespCode2 = SmartObj.GetNapsMessage2(result.status);
-                                    retObj.RespMessage = result.status;
+                                    retObj.RespMessage = result.status + " ---Transmitted to XPDIRECT";
 
                                     lgfn.logNapsinfoMSG(DateTime.Now.ToString() + " Response Message " + retObj.RespMessage, null, null);
 
                                     string json = JsonConvert.SerializeObject(result);
-                                    lgfn.logNapsinfoMSG(DateTime.Now.ToString() + " Response json  Data to from xpdirect " + json.ToString(), null, null);
+                                    lgfn.logNapsinfoMSG(DateTime.Now.ToString() + " Response json Data from xpdirect " + json.ToString(), null, null);
 
 
                                     PostNapsStatus2(batchId, drBankCode, drAcctNo, null, result.data.payment.uniqueKey, retObj.RespCode2, retObj.RespMessage, scheduleId, 1, conn);
@@ -635,7 +635,7 @@ namespace Generic.Dapper.PostConnect
                                     PostNapsStatus2(batchId, drBankCode, drAcctNo, null, null, retObj.RespCode2, retObj.RespMessage, scheduleId, 1, conn);
 
                                     string json = JsonConvert.SerializeObject(result);
-                                    lgfn.logNapsinfoMSG(DateTime.Now.ToString() + " Response json  Data to from xpdirect " + json.ToString(), null, null);
+                                    lgfn.logNapsinfoMSG(DateTime.Now.ToString() + " Response json  Data from xpdirect " + json.ToString(), null, null);
 
                                 }
                             }
@@ -793,7 +793,7 @@ namespace Generic.Dapper.PostConnect
 
                     var sqlQuery = "proc_GetNapsToPostneft";
                     var rec = conn.Query<NapsObj>(sqlQuery, null, commandTimeout: 0, commandType: CommandType.StoredProcedure);
-                    var recGroup = rec.GroupBy(d => new { d.BATCHID}).ToList();
+                    var recGroup = rec.GroupBy(d => new { d.BATCHID }).ToList();
                     paymentRequestObj requestObj = new paymentRequestObj();
 
 
@@ -886,7 +886,7 @@ namespace Generic.Dapper.PostConnect
                                     // lgfn.logNapsinfoMSG(DateTime.Now.ToString() + " NEFT POSTING TRANSACTION ", null, null);
 
                                     // retObj.RespCode2 = SmartObj.GetNapsMessage2(result.data.payment.status);
-                                    retObj.RespMessage = result.status;
+                                    retObj.RespMessage = result.status + " ---Transmitted to XPDIRECT";
 
                                     lgfn.logNapsinfoMSG(DateTime.Now.ToString() + " Response Message " + retObj.RespMessage, null, null);
 

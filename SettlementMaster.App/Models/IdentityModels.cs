@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web;
 
 namespace SettlementMaster.App.Models
 {
@@ -37,6 +38,8 @@ namespace SettlementMaster.App.Models
         public string CreateUserId { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ItbId { get; set; }
+        [NotMapped]
+        public string AppKey { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -53,6 +56,7 @@ namespace SettlementMaster.App.Models
             userIdentity.AddClaim(new Claim(ClaimTypeCustomize.InstitutionName, InstitutionName ?? ""));
             userIdentity.AddClaim(new Claim(ClaimTypeCustomize.DeptCode, DeptCode ?? ""));
             userIdentity.AddClaim(new Claim(ClaimTypeCustomize.DeptName, DeptName ?? ""));
+            userIdentity.AddClaim(new Claim(ClaimTypeCustomize.AppKey, AppKey ?? ""));
             return userIdentity;
         }
     }

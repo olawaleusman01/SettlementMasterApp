@@ -201,6 +201,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApprovalRouteController.cs" />
+    <Compile Include="Controllers\ATM_ChargesController.cs" />
     <Compile Include="Controllers\AuthListController.cs" />
     <Compile Include="Controllers\BillerController.cs" />
     <Compile Include="Controllers\ExchangeRateController.cs" />
@@ -962,7 +963,11 @@
     <Content Include="Img\activity-background.png" />
     <Content Include="Img\activity_bg1.png" />
     <Content Include="Img\add-note.gif" />
+    <Content Include="Img\bg1.jpg" />
+    <Content Include="Img\bg2.jpg" />
     <Content Include="Img\bg3.jpg" />
+    <Content Include="Img\bg3.png" />
+    <Content Include="Img\lek2.jpg" />
     <Content Include="Img\loaderarrows.gif" />
     <Content Include="Img\bg.jpg" />
     <Content Include="Img\billing-icons.png" />
@@ -991,6 +996,7 @@
     <Content Include="Img\PROMO-GREEN2_09_01.jpg" />
     <Content Include="Img\PROMO-GREEN2_09_02.jpg" />
     <Content Include="Img\PROMO-GREEN2_09_03.jpg" />
+    <Content Include="Img\secure.jpg" />
     <Content Include="Img\sidebar-button.png" />
     <Content Include="Img\sidebar-texture2.png" />
     <Content Include="Img\status-icons.png" />
@@ -1004,7 +1010,9 @@
     <Content Include="Scripts\app\atm_request.js" />
     <Content Include="Scripts\app\authlist.js" />
     <Content Include="Scripts\app\exchange_rate.js" />
+    <Content Include="Scripts\app\atm_charges.js" />
     <Content Include="Scripts\app\reset_process.js" />
+    <Content Include="Scripts\app\menu_priviledge.js" />
     <Content Include="Scripts\app\rvDebitUpld.js" />
     <Content Include="Scripts\app\approvaldetail.js" />
     <Content Include="Scripts\app\servicechannel.js" />
@@ -1440,6 +1448,13 @@
     <Content Include="TableTool\TableTool.js" />
     <Content Include="TableTool\TableTooly.css" />
     <Content Include="Template\EmailTemplate.htm" />
+    <Content Include="Template\EmailTemplate.html" />
+    <Content Include="Template\FailedMerchantUpld.html" />
+    <Content Include="Template\InstitutionTemplate.html" />
+    <Content Include="Template\InstitutionTemplate2.html" />
+    <Content Include="Template\MerchantReportTemplate.html" />
+    <Content Include="Template\UploadNotificationTemplate.html" />
+    <Content Include="Template\UserCreation.html" />
     <Content Include="Template\UserCreationTemplate.html" />
     <Content Include="ui\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="ui\images\ui-icons_222222_256x240.png" />
@@ -1676,6 +1691,18 @@
     <Content Include="Views\ServiceChannel\DetailAuth.cshtml" />
     <Content Include="Views\ServiceChannel\Index.cshtml" />
     <Content Include="Views\NEFT\Index.cshtml" />
+    <Content Include="UploadTemplate\bintemplateformat.xlsx" />
+    <Content Include="UploadTemplate\debittemplateformat.xlsx" />
+    <Content Include="UploadTemplate\NapsUploadFile.xlsx" />
+    <Content Include="UploadTemplate\rvHeadtemplateformat.xlsx" />
+    <Content Include="UploadTemplate\setrecondualuploadtemplateformat.xlsx" />
+    <Content Include="UploadTemplate\setrecontemplateformat.xlsx" />
+    <Content Include="Views\ATM_Charges\_AddCharges.cshtml" />
+    <Content Include="Views\ATM_Charges\_ViewATMCharges.cshtml" />
+    <Content Include="Views\ATM_Charges\Add.cshtml" />
+    <Content Include="Views\ATM_Charges\DetailAuth.cshtml" />
+    <Content Include="Views\Roles\MenuPriviledge.cshtml" />
+    <Content Include="Views\Roles\DetailAuthMPriv.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

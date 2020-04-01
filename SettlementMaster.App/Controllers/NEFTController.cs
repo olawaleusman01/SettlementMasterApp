@@ -314,7 +314,7 @@ namespace SettlementMaster.App.Controllers
                     var det = repoAuth.Find(authId);
                     //var d = _repo.GetSession(0, true);
 
-                    ViewBag.HeaderTitle = "Authorize Detail for Naps";
+                    ViewBag.HeaderTitle = "Authorize Detail for NEFT";
                     //ViewBag.StatusVisible = true;
                     if (det != null)
                     {

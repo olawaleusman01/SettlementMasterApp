@@ -55,6 +55,39 @@
     <Compile Include="AspNetUser.cs">
       <DependentUpon>SMModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ATM_BANKCHARGES.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATM_BANKCHARGESTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATM_CALCBASIS.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATM_CHARGES.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATM_CHARGESTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATM_OPERATIONMODE.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATM_OPERATORTYPE.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATM_REQUESTTYPE.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATM_REQUESTTYPETEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATM_TRANSACTTYPE.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATM_TRANSACTTYPETEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Management\GeneralSettings.cs" />
     <Compile Include="Model\GenericObject.cs" />
     <Compile Include="Model\MerchantObj2.cs" />
@@ -219,6 +252,12 @@
       <DependentUpon>SMModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="SM_MCCTEMP.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MENUCONTROL.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_MENUPRIVTEMP.cs">
       <DependentUpon>SMModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="SM_MERCHANTACCT.cs">

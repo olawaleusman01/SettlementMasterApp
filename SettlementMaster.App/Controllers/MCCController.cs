@@ -628,13 +628,13 @@ namespace SettlementMaster.App.Controllers
 
 
         public async Task<PartialViewResult> ViewDetail(int id = 0, string m = null)
+        {
+            try
             {
-                try
-                {
-                  
-                    ViewBag.MenuId = m;
-                   
-                    var inst = await _repo.GetInstitutionAsync(0, true, "Active");
+
+                ViewBag.MenuId = m;
+
+                var inst = await _repo.GetInstitutionAsync(0, true, "Active");
                 var sector = await _repo.GetSectorAsync(0, true, "Active");
                 ViewBag.Sector = new SelectList(sector, "SECTOR_CODE", "SECTOR_NAME");
                 ViewBag.Acquirer = new SelectList(inst, "CBN_CODE", "INSTITUTION_NAME");
@@ -671,14 +671,14 @@ namespace SettlementMaster.App.Controllers
                     return PartialView("ViewDetail", model);
 
                 }
-                }
-                catch (Exception ex)
-                {
-                    //var obj1 = new { RespCode = 2, RespMessage = ex.Message };
-                    //return Json(obj1, JsonRequestBehavior.AllowGet);
-                    return null;
-                }
             }
+            catch (Exception ex)
+            {
+                //var obj1 = new { RespCode = 2, RespMessage = ex.Message };
+                //return Json(obj1, JsonRequestBehavior.AllowGet);
+                return null;
+            }
+        }
 
         void BindComboMsc()
         {
