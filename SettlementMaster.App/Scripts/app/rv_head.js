@@ -10,6 +10,7 @@
     var gCode = $('#GROUPCODE').val();
     //alert(gCode);
     var key = $('#ITBID').val();
+    //alert(key);
     var url = BaseUrl() + 'RevenueHead/';
     var table2 = $('.datatable').DataTable({
         ajax: url + "RvGroupList",

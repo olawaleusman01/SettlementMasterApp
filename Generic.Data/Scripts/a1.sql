@@ -1,0 +1,6 @@
+
+
+insert into SM_FREQUENCY (FREQ_CODE,FREQUENCY_DESC,WORKDAYS,USERID,STATUS) values ('H','HOURLY',0,'Active');
+
+
+

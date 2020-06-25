@@ -449,6 +449,8 @@ namespace SettlementMaster.App.Controllers
                             USERID = User.Identity.Name,
                             RECORDID = model.ITBID,
                             STATE_CODE = model.STATE_CODE,
+                            SETTLEMENT_FREQUENCY = model.SETTLEMENT_FREQUENCY
+                            
 
                         };
 
@@ -511,6 +513,7 @@ namespace SettlementMaster.App.Controllers
                             RECORDID = model.ITBID,
                             STATUS = open,
                             STATE_CODE = model.STATE_CODE,
+                            SETTLEMENT_FREQUENCY = model.SETTLEMENT_FREQUENCY
 
                         };
                         repoMTemp.Insert(BType);
@@ -1225,7 +1228,8 @@ namespace SettlementMaster.App.Controllers
             var acq = _repo.GetInstitution(0, true, "Active");
             var mcc = _repo.GetMCC(0, true, "Active").Select(d=> new {d.MCC_CODE, MCC_DESC = string.Concat(d.MCC_CODE,"-",d.MCC_DESC) });
             var country = _repo.GetCountry(0, true, "Active");
-
+            var freq = _repo.GetFrequency(0, true, "Active");
+            ViewBag.FrequencyList = new SelectList(freq, "ITBID", "FREQUENCY_DESC");
             ViewBag.AcquirerList = new SelectList(acq, "CBN_CODE", "INSTITUTION_NAME");
             ViewBag.CountryList = new SelectList(country, "COUNTRY_CODE", "COUNTRY_NAME");
             ViewBag.MCCList = new SelectList(mcc, "MCC_CODE", "MCC_DESC");
@@ -1320,16 +1324,16 @@ namespace SettlementMaster.App.Controllers
 
         }
         void BindComboMsc()
-            {
-                //var bankList = _repo.GetInstitution(0, true, "Active").Where(f => f.IS_BANK == "Y").ToList();
-                //var country = _repo.GetCountry(0, true, "Active");
+        {
+            //var bankList = _repo.GetInstitution(0, true, "Active").Where(f => f.IS_BANK == "Y").ToList();
+            //var country = _repo.GetCountry(0, true, "Active");
 
-                //ViewBag.BankList = new SelectList(bankList, "CBN_CODE", "INSTITUTION_NAME");
-                //ViewBag.Country = new SelectList(country, "COUNTRY_CODE", "COUNTRY_NAME");
-                //var schemeList = _repo.GetCardScheme(0, true, "Active");
-                //var country = _repo.GetCountry(0, true, "Active");
+            //ViewBag.BankList = new SelectList(bankList, "CBN_CODE", "INSTITUTION_NAME");
+            //ViewBag.Country = new SelectList(country, "COUNTRY_CODE", "COUNTRY_NAME");
+            //var schemeList = _repo.GetCardScheme(0, true, "Active");
+            //var country = _repo.GetCountry(0, true, "Active");
 
-                //ViewBag.CardScheme = new SelectList(schemeList, "CARDSCHEME", "CARDSCHEME_DESC");
+            //ViewBag.CardScheme = new SelectList(schemeList, "CARDSCHEME", "CARDSCHEME_DESC");
             var call = SmartObj.GetCalculationBasis();
             ViewBag.CalcBasis = new SelectList(call, "Code", "Description");
 
@@ -4178,6 +4182,7 @@ namespace SettlementMaster.App.Controllers
                     INSTITUTION_CBNCODE = d.INSTITUTION_CBNCODE,
                     LAST_MODIFIED_DATE = DateTime.Now,
                     LAST_MODIFIED_UID = d.USERID,
+                    SETTLEMENT_FREQUENCY = d.SETTLEMENT_FREQUENCY
                 };
                 repoM.Insert(BType);
                 return true;
@@ -4214,6 +4219,7 @@ namespace SettlementMaster.App.Controllers
                     d.LAST_MODIFIED_UID = rec.USERID;
                     d.COLLECTION = rec.COLLECTION;
                     d.STATUS = active;
+                    d.SETTLEMENT_FREQUENCY = rec.SETTLEMENT_FREQUENCY;
                     return true;
                 }
                 
@@ -4350,5 +4356,24 @@ namespace SettlementMaster.App.Controllers
                 }
             }
 
+        #region Merchant Revenue
+        public async Task<ActionResult> RvGroupList(string id)
+        {
+            try
+            {
+                ViewBag.Mid = id;
+                var rec = await _repo.GetRvGroupByMidAsync(id);  //repoSession.FindAsync(id);              
+                var html = PartialView("_ViewMerchantRevenue", rec).RenderToString();
+                var ht = new { data_html = html, RespCode = 0, RespMessage = "" };
+                return Json(ht, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var obj1 = new { data = new List<RvGroupObj>(), RespCode = 2, RespMessage = ex.Message };
+                return Json(obj1, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        #endregion Merchant Revenue
     }
 }

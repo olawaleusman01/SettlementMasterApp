@@ -1,5 +1,14 @@
 ﻿$(document).ready(function () {
     var col;
+    $.urlParam = function (name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+            .exec(window.location.search);
+
+        return (results !== null) ? results[1] || 0 : false;
+    };
+
+    console.log($.urlParam('tab')); //edit
+  
     var menuId = $('#menuId').val();
     var url = BaseUrl() + 'Merchant/';
     var url2 = BaseUrl() + 'Settings/';
@@ -30,6 +39,10 @@
             { data: "STATUS" },
         ]
     });
+
+    if ($.urlParam('tab') === 'tabmr') {
+        GetMerchantRevenue("#" + $.urlParam('tab'));
+    }
 
     $(document).on('click', '#formSearch #btnSearch', function (e) {
         e.preventDefault();
@@ -322,7 +335,7 @@
         //alert(selected);
         if(selected !== '')
         {
-            if(selected == "1|I")
+            if(selected === "1|I")
             {
                 $('#divIncomeChk').css('display', 'block');
             }
@@ -363,6 +376,10 @@
             }
             case "#tabmt": {
                 GetMerchantTerminal(a);
+                break;
+            }
+            case "#tabmr": {
+                GetMerchantRevenue(a);
                 break;
             }
             default:
@@ -699,8 +716,8 @@
         $.get(
             urlP, function (response) {
                 loaderSpin2(false);
-                if (response.RespCode == 0) {
-                    //console.log(response.data_html);
+                if (response.RespCode === 0) {
+                    console.log(response.data_html);
                     $('#divMT').html(response.data_html);
                     setActiveTab(tab);
                 }
@@ -1355,5 +1372,28 @@
                 }
             }
         });
-       
+
+    //Merchant Revenue Tab
+    function GetMerchantRevenue(tab) {
+        var mid = $('#MERCHANTID').val();
+        var menuId = $('#m').val();
+        var urlP = url + "RvGroupList/" + mid + "?m=" + menuId;
+        //console.log(urlP);
+        loaderSpin2(true);
+        $.get(
+            urlP, function (response) {
+                loaderSpin2(false);
+                if (response.RespCode === 0) {
+                    //console.log(response.data_html);
+                    $('#divMR').html(response.data_html);
+                    setActiveTab(tab);
+                }
+                else {
+                    displayDialogNoty('Notification', response.RespMessage);
+
+                }
+            });
+    }
+
+  
 });

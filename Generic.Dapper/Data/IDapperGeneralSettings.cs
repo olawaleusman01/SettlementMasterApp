@@ -186,5 +186,6 @@ namespace Generic.Dapper.Data
         //Task<List<RvHeadObj>> GetRvDrAcctTempAsync(string bid, string user_id);
         Task<List<ExchangeRateObj>> GetExchangeRateAsync(int itbid, bool isAll, string cbncode = null);
         List<ExchangeRateObj> GetExchangeRate(int itbid, bool isAll, string cbncode = null);
+        Task<List<RvGroupObj>> GetRvGroupByMidAsync(string mid);
     }
 }
