@@ -1,0 +1,38 @@
+﻿@model List<Generic.Dapper.Model.RvGroupObj>
+
+    <table id="tableRevenue" class="table table-striped datatable table-condensed table-bordered table-hover">
+        <thead>
+            <tr>
+                <th colspan="6">
+                    <a id="btnNew" class="btn btn-success editor_createa" href="@Url.Action("Add", "RevenueHead", new {mid = ViewBag.Mid, m = ViewBag.MenuId })"><i class="fa fa-plus"></i> Add New</a>
+                    @*<a id="btnCancel" class="btn btn-default editor_return" style="display:none"><i class="fa fa-long-arrow-left"></i> Cancel</a>*@
+                    <a class="btn btn-default editor_createa" href="@Url.Action("RvHeadUpld","RevenueHead",new {mid = ViewBag.Mid, })"><i class="fa fa-upload"></i> Upload Revenue Head</a>
+                    <a class="btn btn-info editor_createa" href="@Url.Action("RvDebitAcctUpld","RevenueHead",new { mid = ViewBag.Mid,})"><i class="fa fa-upload"></i> Upload Debit Account</a>
+                 
+                </th>
+            </tr>
+            <tr>
+                <th>Group Code</th>
+                <th>Group Name</th>
+                <th>Merchant Id</th>
+                <th>Merchant Name</th>
+                <th>Account No</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <td><a style="text-decoration:underline" href="@Url.Action("Add","RevenueHead",new { id = d.ITBID})" data-key="@d.ITBID">@d.GROUPCODE</a></td>
+                    <td>@d.GROUPNAME</td>
+                    <td>@d.MERCHANTID</td>
+                    <td>@d.MERCHANTNAME</td>
+                    <td>@d.DEPOSIT_ACCOUNTNO</td>
+                    <td>@d.STATUS</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+

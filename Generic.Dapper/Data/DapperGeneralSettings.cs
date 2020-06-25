@@ -1199,6 +1199,22 @@ namespace Generic.Dapper.Data
             });
             return rec.ToList();
         }
+
+        public async Task<List<RvGroupObj>> GetRvGroupByMidAsync(string mid)
+        {
+            DynamicParameters p = new DynamicParameters();
+            p.Add("@P_MID", mid, DbType.String);
+            // p.Add(":CURSOR_", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
+            string qry = "GET_RVGROUPBYMID";
+            // var rec = Fetch(c => c.Query<DepartmentObj>(qry, p, commandType: CommandType.StoredProcedure), null);
+
+            var rec = await FetchAsync(async c =>
+            {
+                var gh = await c.QueryAsync<RvGroupObj>(qry, p, commandType: CommandType.StoredProcedure);
+                return gh;
+            });
+            return rec.ToList();
+        }
         public string GetNextRVCode()
         {
             var code = "";

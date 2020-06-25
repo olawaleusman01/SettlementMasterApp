@@ -94,103 +94,110 @@
                     @using (Html.BeginForm("Approve", "Merchant", FormMethod.Post, new { id = "formMerchant" }))
                     {
                         @Html.AntiForgeryToken()
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Merchant ID<span style="color:red">*</span></label>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.MERCHANTID, new { @class = "form-control input-sm", @readonly = "readonly" })
-                                    @Html.HiddenFor(model => model.ITBID)
-                                </div>
-                                <label class="col-md-2 control-label">Merchant Name<span style="color:red">*</span></label>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.MERCHANTNAME, new { @class = "form-control input-sm" })
-
-                                </div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Merchant ID<span style="color:red">*</span></label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.MERCHANTID, new { @class = "form-control input-sm", @readonly = "readonly" })
+                                @Html.HiddenFor(model => model.ITBID)
+                            </div>
+                            <label class="col-md-2 control-label">Merchant Name<span style="color:red">*</span></label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.MERCHANTNAME, new { @class = "form-control input-sm" })
 
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Acquiring Institution<span style="color:red">*</span></label>
-                                <div class="col-md-4">
-                                    @Html.DropDownListFor(model => model.INSTITUTION_CBNCODE, ViewBag.AcquirerList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
 
-                                </div>
-
-                                <label class="col-md-2 control-label">Mcc Code<span style="color:red">*</span></label>
-                                <div class="col-md-4">
-                                    @Html.DropDownListFor(model => model.MCC_CODE, ViewBag.MCCList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Contact Title</label>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.CONTACTTITLE, new { @class = "form-control input-sm", style = "width:150px" })
-
-                                </div>
-                                <label class="col-md-2 control-label">Contact Name<span style="color:red">*</span></label>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.CONTACTNAME, new { @class = "form-control input-sm" })
-
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-
-                                <label class="col-md-2 control-label">Business Code<span style="color:red">*</span></label>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.BUSINESS_CODE, new { @class = "form-control input-sm", style = "width:150px" })
-
-                                </div>
-                                <label class="col-md-2 control-label">Old Merchant ID</label>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.OLD_MID, new { @class = "form-control input-sm", style = "width:150px" })
-
-                                </div>
-
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Email<span style="color:red">*</span></label>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control input-sm" })
-
-                                </div>
-                                <label class="col-md-2 control-label">Phone No</label>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.PHONENO, new { @class = "form-control input-sm", style = "width:150px" })
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Address<span style="color:red">*</span></label>
-                                <div class="col-md-4">
-                                    @Html.TextAreaFor(model => model.ADDRESS, new { @class = "form-control input-sm" })
-
-                                </div>
-                                <label class="col-md-2 control-label">Country<span style="color:red">*</span></label>
-                                <div class="col-md-4">
-                                    @Html.DropDownListFor(model => model.COUNTRY_CODE, ViewBag.CountryList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
-
-                                </div>
-
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">State<span style="color:red">*</span></label>
-                                <div class="col-md-4">
-                                    @Html.DropDownListFor(model => model.STATE_CODE, ViewBag.StateList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
-
-                                </div>
-                                <label class="col-md-2 control-label">LGA</label>
-
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.CITY_NAME, new { @class = "form-control input-sm" })
-
-
-                                </div>
-                            </div>
-                          
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Acquiring Institution<span style="color:red">*</span></label>
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.INSTITUTION_CBNCODE, ViewBag.AcquirerList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                            </div>
+
+                            <label class="col-md-2 control-label">Mcc Code<span style="color:red">*</span></label>
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.MCC_CODE, ViewBag.MCCList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Contact Title</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.CONTACTTITLE, new { @class = "form-control input-sm", style = "width:150px" })
+
+                            </div>
+                            <label class="col-md-2 control-label">Contact Name<span style="color:red">*</span></label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.CONTACTNAME, new { @class = "form-control input-sm" })
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-md-2 control-label">Business Code<span style="color:red">*</span></label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.BUSINESS_CODE, new { @class = "form-control input-sm", style = "width:150px" })
+
+                            </div>
+                            <label class="col-md-2 control-label">Old Merchant ID</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.OLD_MID, new { @class = "form-control input-sm", style = "width:150px" })
+
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Email<span style="color:red">*</span></label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control input-sm" })
+
+                            </div>
+                            <label class="col-md-2 control-label">Phone No</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.PHONENO, new { @class = "form-control input-sm", style = "width:150px" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Address<span style="color:red">*</span></label>
+                            <div class="col-md-4">
+                                @Html.TextAreaFor(model => model.ADDRESS, new { @class = "form-control input-sm" })
+
+                            </div>
+                            <label class="col-md-2 control-label">Country<span style="color:red">*</span></label>
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.COUNTRY_CODE, ViewBag.CountryList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">State<span style="color:red">*</span></label>
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.STATE_CODE, ViewBag.StateList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+
+                            </div>
+                            <label class="col-md-2 control-label">LGA</label>
+
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.CITY_NAME, new { @class = "form-control input-sm" })
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Frequency<span style="color:red">*</span></label>
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.SETTLEMENT_FREQUENCY, ViewBag.FrequencyList as SelectList, "Select Frequency", new { @class = "form-control select2", style = "width:100%" })
+
+                            </div>
+                        </div>
+
+                    </div>
                     }
                 </div>
             </div>

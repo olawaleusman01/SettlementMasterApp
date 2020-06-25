@@ -532,7 +532,7 @@ namespace SettlementMaster.App.Controllers
                     }
             }
         }
-        public async Task<ActionResult> Add(int id = 0, string m = null)
+        public async Task<ActionResult> Add(int id = 0, string m = null,string mid = null)
         {
             try
             {
@@ -548,7 +548,7 @@ namespace SettlementMaster.App.Controllers
                     ViewBag.StatusVisible = false;
                     ViewBag.ButtonText = "Save";
                     GetPriv();
-                    return View("Add", new RvGroupObj());
+                    return View("Add", new RvGroupObj() { MERCHANTID = mid });
 
                     // return Json(new { RespCode = 99, RespMessage = "Bad Request" }, JsonRequestBehavior.AllowGet);
                 }
@@ -1627,16 +1627,18 @@ namespace SettlementMaster.App.Controllers
             }
 
         [MyAuthorize]
-        public ActionResult RvHeadUpld()
+        public ActionResult RvHeadUpld(string mid)
         {
-           // BindCombo();
+            // BindCombo();
+            ViewBag.Mid = mid;
             return View();
         }
 
         [MyAuthorize]
-        public ActionResult RvDebitAcctUpld()
+        public ActionResult RvDebitAcctUpld(string mid)
         {
             // BindCombo();
+            ViewBag.Mid = mid;
             return View();
         }
         #region Revenue Head Upload

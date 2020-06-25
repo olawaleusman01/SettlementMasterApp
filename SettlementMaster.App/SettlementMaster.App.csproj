@@ -1703,6 +1703,7 @@
     <Content Include="Views\ATM_Charges\DetailAuth.cshtml" />
     <Content Include="Views\Roles\MenuPriviledge.cshtml" />
     <Content Include="Views\Roles\DetailAuthMPriv.cshtml" />
+    <Content Include="Views\Merchant\_ViewMerchantRevenue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
