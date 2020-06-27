@@ -35,6 +35,9 @@ namespace SettlementMaster.App.Controllers
         private readonly IRepository<SM_REVENUEBANKACCT> repoRvAcct = null;
         private readonly IRepository<SM_MERCHANTACCT> repoMAcct = null;
         private readonly IRepository<SM_REVENUEBANKACCTTEMP> repoRvAcctTemp = null;
+
+        private readonly IRepository<SM_RevenuHeadParty> repoRvHeadParty = null;
+        private readonly IRepository<SM_RevenuHeadPartyTemp> repoRvHeadPartyTemp = null;
         //private readonly IRepository<SM_CHANNELS> repoChannel = null;
 
         //private readonly IRepository<SM_PARTYCATEGORY> repoMC = null;
@@ -75,6 +78,8 @@ namespace SettlementMaster.App.Controllers
             repoRvAcctTemp = new Repository<SM_REVENUEBANKACCTTEMP>(uow);
             repoMAcct = new Repository<SM_MERCHANTACCT>(uow);
             repoInst = new Repository<SM_INSTITUTION>(uow);
+            repoRvHeadParty = new Repository<SM_RevenuHeadParty>(uow);
+            repoRvHeadPartyTemp = new Repository<SM_RevenuHeadPartyTemp>(uow);
             //repoChannel = new Repository<SM_CHANNELS>(uow);
 
             var user = new UserDataSettings().GetUserData();
@@ -466,6 +471,23 @@ namespace SettlementMaster.App.Controllers
                         SETTLEMENT_FREQUENCY = d.SETTLEMENT_FREQUENCY,
                     };
                     repoRvHeadTemp.Insert(obj);
+
+                    var recP = rv.GetRevenueHeadParty(d.CODE, User.Identity.Name);
+                    foreach(var pty in recP)
+                    {
+                        SM_RevenuHeadPartyTemp objParty = new SM_RevenuHeadPartyTemp()
+                        {
+                            PartyAccountId = pty.PartyAccountId,
+                            PartyId = pty.PartyId,
+                            PartyValue = pty.PartyValue,
+                            BatchId = rec.BATCHID,
+                            CreateDate = rec.CREATEDATE,
+                            UserId = User.Identity.Name,
+                            
+                        };
+
+                        repoRvHeadPartyTemp.Insert(objParty);
+                    }
                 }
 
             }
@@ -492,6 +514,23 @@ namespace SettlementMaster.App.Controllers
                         SETTLEMENT_FREQUENCY = d.SETTLEMENT_FREQUENCY,
                     };
                     repoRvHeadTemp.Insert(obj);
+
+                    var recP = rv.GetRevenueHeadParty(d.CODE, User.Identity.Name);
+                    foreach (var pty in recP)
+                    {
+                        SM_RevenuHeadPartyTemp objParty = new SM_RevenuHeadPartyTemp()
+                        {
+                            PartyAccountId = pty.PartyAccountId,
+                            PartyId = pty.PartyId,
+                            PartyValue = pty.PartyValue,
+                            BatchId = rec.BATCHID,
+                            CreateDate = rec.CREATEDATE,
+                            UserId = User.Identity.Name,
+
+                        };
+
+                        repoRvHeadPartyTemp.Insert(objParty);
+                    }
                 }
             }
         }
@@ -704,9 +743,12 @@ namespace SettlementMaster.App.Controllers
                         //PID = model.PID,
                         SETTLEMENT_FREQUENCY = model.SETTLEMENT_FREQUENCY,
                         FREQUENCY_DESC = freqName,
+                        RevenueSharingPartys = model.RevenueSharingPartys
                     };
                     //SessionHelper.GetRvHead(Session).AddItem(obj);
+                    rv.PurgeRevenueHeadParty(User.Identity.Name, model.CODE);
                     var rst = rv.PostRevenueHead(obj, 1);
+                   
                     if (rst != null && rst.RespCode != 0)
                     {
                         msg = rst.RespMessage; // "Revenue Code Already exist. Duplicate Record is not allowed.";
@@ -776,7 +818,8 @@ namespace SettlementMaster.App.Controllers
                         PID = model.PID,
                         EVENTTYPE = model.DB_ITBID > 0 ? eventEdit : eventInsert,
                         SETTLEMENT_FREQUENCY = model.SETTLEMENT_FREQUENCY,
-                        FREQUENCY_DESC = freqName
+                        FREQUENCY_DESC = freqName,
+                        RevenueSharingPartys = model.RevenueSharingPartys
                     };
                     OutPutObj rst;
                     //if (string.IsNullOrEmpty(model.PID))
@@ -785,6 +828,7 @@ namespace SettlementMaster.App.Controllers
                     //}
                     //else
                     //{
+                    rv.PurgeRevenueHeadParty(User.Identity.Name, model.CODE);
                     rst = rv.PostRevenueHead(obj, 2);
                     //}
                     if (rst != null && rst.RespCode != 0)
@@ -972,11 +1016,12 @@ namespace SettlementMaster.App.Controllers
         {
             try
             {
-              
+
                 var rv = new RvHeadSession();
                 var rec = rv.FindRevenueHead(id, User.Identity.Name);
                 if (rec != null)
                 {
+                    rec.RevenueSharingPartys = rv.GetRevenueHeadParty(rec.CODE, User.Identity.Name);
                     BindComboMsc(rec.MID);
                     ViewBag.ButtonText = "Update";
                     ViewBag.HeaderTitle = "Edit Revenue Code";
@@ -997,6 +1042,7 @@ namespace SettlementMaster.App.Controllers
                 var rec = _repo.GetRvHead(id);
                 if (rec != null)
                 {
+                    rec.RevenueSharingPartys = _repo.GetRvHeadParty(rec.ITBID);
                     BindComboMsc(rec.MID);
                     ViewBag.ButtonText = "Update";
                     ViewBag.HeaderTitle = "Edit Revenue Code";
@@ -1418,6 +1464,10 @@ namespace SettlementMaster.App.Controllers
                             SETTLEMENT_FREQUENCY = d.SETTLEMENT_FREQUENCY
                             
                         };
+
+                        ProcessRvHeadParty(eventInsert, batchId, user_id, obj2);
+
+
                         obj.SM_REVENUEHEAD.Add(obj2);
                     }
 
@@ -1474,6 +1524,8 @@ namespace SettlementMaster.App.Controllers
                                             SETTLEMENT_FREQUENCY = dt.SETTLEMENT_FREQUENCY,
                                         };
                                         dm.SM_REVENUEHEAD.Add(obj2);
+                                        //insert revenue party
+                                        ProcessRvHeadParty(eventInsert, batchId, user_id, obj2);
                                     }
                                     else
                                     {
@@ -1482,6 +1534,8 @@ namespace SettlementMaster.App.Controllers
                                         dm2.ACCOUNT_ID = d.ACCOUNT_ID;
                                         dm2.RVGROUPCODE = d.RVGROUPCODE;
                                         dm2.SETTLEMENT_FREQUENCY = d.SETTLEMENT_FREQUENCY;
+                                        //insert revenue party
+                                        ProcessRvHeadParty(eventEdit, batchId, user_id, dm2);
                                     }
                                 }
                                 else
@@ -1494,7 +1548,7 @@ namespace SettlementMaster.App.Controllers
                                         dm2.RVGROUPCODE = d.RVGROUPCODE;
                                         dm2.ACCOUNT_ID = d.ACCOUNT_ID;
                                         //dm2.BATCHID = d.BATCHID;
-
+                                        ProcessRvHeadParty(eventEdit, batchId, user_id, dm2);
                                     }
                                 }
                             }
@@ -1514,6 +1568,57 @@ namespace SettlementMaster.App.Controllers
             return false;
         }
 
+        void ProcessRvHeadParty(string eventType, string batchId, string user_id, SM_REVENUEHEAD objRvHead)
+        {
+            if (eventType == eventInsert)
+            {
+                var ptyList = repoRvHeadPartyTemp.AllEager(e => e.BatchId == batchId && e.UserId != null && e.UserId.ToUpper() == user_id.ToUpper()).ToList();
+                foreach (var pty in ptyList)
+                {
+                    var ptyObj = new SM_RevenuHeadParty()
+                    {
+                        PartyAccountId = pty.PartyAccountId,
+                        PartyId = pty.PartyId,
+                        PartyValue = pty.PartyValue,
+                        UserId = pty.UserId,
+                        CreateDate = DateTime.Now,
+                    };
+                    objRvHead.SM_RevenuHeadParty.Add(ptyObj);
+                }
+            }
+            else
+            {
+                var extRvHeadParty = repoRvHeadParty.AllEager(d => d.RvCodeItbId == objRvHead.ITBID).ToList();
+
+                var ptyList = repoRvHeadPartyTemp.AllEager(e => e.BatchId == batchId && e.UserId != null && e.UserId.ToUpper() == user_id.ToUpper()).ToList();
+                var extRvHeadToBeRemoved = extRvHeadParty.Where(d => !ptyList.Select(f => f.PartyId).Contains(d.PartyId));
+                foreach (var pty in ptyList)
+                {
+                    var extparty = extRvHeadParty.Where(d => d.PartyId == pty.PartyId).FirstOrDefault();
+                    if (extparty != null)
+                    {
+                        extparty.PartyValue = pty.PartyValue;
+                        extparty.PartyAccountId = pty.PartyAccountId;
+                    }
+                    else
+                    {
+                        var ptyObj = new SM_RevenuHeadParty()
+                        {
+                            PartyAccountId = pty.PartyAccountId,
+                            PartyId = pty.PartyId,
+                            PartyValue = pty.PartyValue,
+                            UserId = pty.UserId,
+                            CreateDate = DateTime.Now,
+                        };
+                        objRvHead.SM_RevenuHeadParty.Add(ptyObj);
+                    }
+                }
+                foreach (var pty in extRvHeadToBeRemoved)
+                {
+                    repoRvHeadParty.Delete(pty.ItbId);
+                }
+            }
+        }
 
         [HttpPost]
         // [AllowAnonymous]
@@ -2354,5 +2459,62 @@ namespace SettlementMaster.App.Controllers
         }
 
         #endregion Revenue Debit Account Uploadj 
+
+        #region RevenueSharingParty
+        public ActionResult AddSharingPartyRowView()
+        {
+            try
+            {
+                BindComboSharingParty();
+                var html = PartialView("_AddSharingPartyRow").RenderToString();
+                return Json(new { RespCode = 0, RespMessage = "", data_html = html }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { RespCode = 1, RespMessage = "Problem Processing Request."}, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        void BindComboSharingParty()
+        {
+            var party = _repo.GetParty(0,true,"Active");
+            ViewBag.PartyList = new SelectList(party, "ITBID", "PARTY_DESC");
+        }
+
+        public ActionResult GetPartyAccount(int id)
+        {
+            try
+            {
+                var party = _repo.GetPartyAcct(id).Select(d=> new DropdownObj() {Code = d.ITBID.ToString(),Description = d.DEPOSIT_ACCOUNTNO + "-" + d.DEPOSIT_ACCTNAME });            
+                return Json(new { RespCode = 0, RespMessage = "", data = party }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { RespCode = 1, RespMessage = "Problem Processing Request." }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        public ActionResult ViewRvHeadParty(string id)
+        {
+            try
+            {
+
+                var rv = new RvHeadSession();
+                var rec = _repo.GetRvHeadPartyTemp(id);
+                if (rec != null)
+                {
+                    ViewBag.HeaderTitle = "Revenue Head Party";
+                    return PartialView("_ViewRVHeadParty", rec);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
+        #endregion RevenueSharingParty
     }
 }

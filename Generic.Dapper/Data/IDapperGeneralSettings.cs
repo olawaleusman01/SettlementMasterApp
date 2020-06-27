@@ -133,6 +133,8 @@ namespace Generic.Dapper.Data
         Task<List<RvHeadObj>> GetRvHead_By_GroupCodeAsync(string group_code, int offset = 0, int rows = 50);
         Task<List<RvDrAcctObj>> GetRvDrAcct_By_GroupCodeAsync(string group_code);
         RvHeadObj GetRvHead(int ITBID);
+        List<RevenueSharingPartyObj> GetRvHeadParty(int rvItbid);
+        List<RevenueSharingPartyObj> GetRvHeadPartyTemp(string batchId);
         Task<List<MerchantUpldObj>> GetMerchantUploadTempAsync(string batchId, string source, string userId, string status);
         List<MerchantUpldObj> GetMerchantUploadTemp(string batchId, string source, string userId, string status);
         InstitutionObj GetINSTITUTION_BY_CBNCODE(string P_CBNCODE);

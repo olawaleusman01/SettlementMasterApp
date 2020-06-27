@@ -138,6 +138,8 @@ namespace Generic.Data
         public virtual DbSet<ATM_CHARGES> ATM_CHARGES { get; set; }
         public virtual DbSet<SM_MENUPRIVTEMP> SM_MENUPRIVTEMP { get; set; }
         public virtual DbSet<SM_MENUCONTROL> SM_MENUCONTROL { get; set; }
+        public virtual DbSet<SM_RevenuHeadParty> SM_RevenuHeadParty { get; set; }
+        public virtual DbSet<SM_RevenuHeadPartyTemp> SM_RevenuHeadPartyTemp { get; set; }
     
         public virtual ObjectResult<SESS_GET_SETRECONUPLD_Result> SESS_GET_SETRECONUPLD(string uSERID)
         {

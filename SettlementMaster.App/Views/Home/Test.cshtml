@@ -1,0 +1,187 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        Event Name :
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="Enter Event Name" name="txtEvent" id="txtEvent" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        Event Desc :
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="Enter Event Description" name="txtEventDesc" id="txtEventDesc" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        Start Date :
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group input-append date">
+                            <input type="text" class="form-control" id="datetimepicker1" placeholder="Enter Event Start Date" onblur="restrictDate()" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        End Date :
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group input-append date">
+                            <input type="text" class="form-control" id="datetimepicker2" placeholder="Enter Event End Date" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        Event Organizer :
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="Enter Event Organizer" name="txtOrganizer" id="txtOrganizer" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        Ticket:
+                    </div>
+                    <div class="col-md-7">
+                        <input type="button" class="btn btn-default" onclick="addRow();" name="btnTicket" id="btnTicket" value="Ticket" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-03"></div>
+                    <div class="col-md-7"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-7">
+                        <table class="table table-striped table-bordered" id="tbl">
+                            <tr>
+                                <th>ID</th>
+                                <th>Ticket No</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-7">
+                        <input type="button" class="btn btn-primary" name="btnSave" id="btnSave" onclick="SaveEvent();" value="Save" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/bower_components/jquery/dist/jquery.js"></script>
+    <script>
+        function addRow() {
+            var table = document.getElementById("tbl"); //get the table
+            var rowcount = table.rows.length; //get no. of rows in the table
+            alert(rowcount);
+            //append the controls in the row
+            var tblRow = '<tr id = "row' + rowcount + '">'
+                + '<td><label id="lblID' + rowcount + '">' + rowcount + '</label></td>'
+                + '<td><input type="text" class="form-control" placeholder="Enter Ticket No" id="txtTicketNo' + rowcount + '" /></td>'
+                + '<td><input type="text" class="form-control" placeholder="Enter Price" id="txtPrice' + rowcount + '" /></td> '
+                + '<td><input type="button" class="btn btn-info" id="btnSave' + rowcount + '" onclick="SaveTicket(' + rowcount + ')" value="Save" /></td >'
+                + '</tr>';
+            //append the row to the table.
+            $("#tbl").append(tblRow);
+        }
+
+        function SaveTicket(id) {
+            var id = $("#lblID" + id).html();
+            var tcktNo = $("#txtTicketNo" + id).val();
+            var Price = $("#txtPrice" + id).val();
+            //remove current selected row
+            $("#row" + id).remove();
+            //append new row
+            var tblRow = '<tr id = "row' + id + '">'
+                + '<td><label id="lblID' + id + '">' + id + '</label></td>'
+                + '<td><label id="lblTicketNo' + id + '">' + tcktNo + '</label></td>'
+                + '<td><label id="lblPrice' + id + '" >' + Price + '</label></td>'
+                + '<td><input type="button" class="btn btn-warning" id="btnEdit' + id + '" onclick="EditTicket(' + id + ')" value="Edit" />'
+                + ' |<input type="button" class="btn btn-danger" id="btnDelete' + id + '" onclick="DeleteTicket(' + id + ')" value="Delete" />'
+                + '</td>'
+                + '</tr> ';
+            $("#tbl").append(tblRow);
+        }
+
+        function EditTicket(id) {
+            var id = $("#lblID" + id).html();
+            var tcktNo = $("#lblTicketNo" + id).html();
+            var Price = $("#lblPrice" + id).html();
+            $("#row" + id).remove();
+            var tblRow = '<tr id = "row' + id + '">'
+                + '<td><label id="lblID' + id + '">' + id + '</label></td>'
+                + '<td><input type="text" class="form-control" placeholder="Enter Ticket No" value=' + tcktNo + ' id="txtTicketNo' + id + '" /></td>'
+                + '<td><input type="text" class="form-control" placeholder="Enter Price" value=' + Price + ' id="txtPrice' + id + '" /></td> '
+                + '<td><input type="button" class="btn btn-info" id="btnUpdate' + id + '" onclick="UpdateTicket(' + id + ')" value="Update" /></td>'
+                + '</tr>';
+            $("#tbl").append(tblRow);
+        }
+
+        function UpdateTicket(id) {
+            var id = $("#lblID" + id).html();
+            var tcktNo = $("#txtTicketNo" + id).val();
+            var Price = $("#txtPrice" + id).val();
+            $("#row" + id).remove();
+            var tblRow = '<tr id = "row' + id + '" >'
+                + '<td><label id="lblID' + id + '">' + id + '</label></td>'
+                + '<td><label id="lblTicketNo' + id + '">' + tcktNo + '</label></td>'
+                + '<td><label id="lblPrice' + id + '" >' + Price + '</label></td>'
+                + '<td><input type="button" class="btn btn-warning" id="btnEdit' + id + '" onclick="EditTicket(' + id + ')" value="Edit" /> '
+                + '| <input type = "button" class="btn btn-danger" id = "btnDelete' + id + '" onclick = "DeleteTicket(' + id + ')" value = "Delete" /> </td>'
+                + '</tr>';
+            $("#tbl").append(tblRow);
+        }
+
+        function DeleteTicket(id) {
+            $("#row" + id).remove();
+        }
+    </script>
+</body>
+
+</html>
+
+

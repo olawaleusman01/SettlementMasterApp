@@ -129,6 +129,7 @@ namespace Generic.Dapper.Model
         public string LAST_MOD_FULLNAME { get; set; }
         public string LAST_MOD_DATE { get; set; }
         public string CREATE_DATE { get; set; }
+    
     }
     public class RvHeadObj : SM_REVENUEHEAD
     {
@@ -144,8 +145,23 @@ namespace Generic.Dapper.Model
         public bool NewRecord { get; set; }
         public bool Updated { get; set; }
         public bool Deleted { get; set; }
+        public string BATCHID { get; set; }
+
+        public List<RevenueSharingPartyObj> RevenueSharingPartys {get; set;}
 
     }
+
+    public class RevenueSharingPartyObj
+    {
+        public int ItbId { get; set; }
+        public int PartyId { get; set; }
+        public string PartyName { get; set; }
+        public decimal PartyValue { get; set; }
+        public int PartyAccountId { get; set; }
+        public string PartyAccountName { get; set; }
+    }
+
+
     public class ApprovalRouteObj : SM_APPROVAL_ROUTE
     {
         public string CREATED_BY { get; set; }

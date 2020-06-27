@@ -136,6 +136,10 @@
         <EntityTypeShape EntityType="SettlementMasterModel.ATM_CHARGES" Width="1.5" PointX="11.375" PointY="38.75" />
         <EntityTypeShape EntityType="SettlementMasterModel.SM_MENUPRIVTEMP" Width="1.5" PointX="39.375" PointY="38.75" />
         <EntityTypeShape EntityType="SettlementMasterModel.SM_MENUCONTROL" Width="1.5" PointX="40.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_RevenuHeadParty" Width="1.5" PointX="21.375" PointY="47.625" />
+        <EntityTypeShape EntityType="SettlementMasterModel.SM_RevenuHeadPartyTemp" Width="1.5" PointX="21.375" PointY="44.125" />
+        <AssociationConnector Association="SettlementMasterModel.FK__SM_Revenu__RvCod__0D64F3ED" />
+        <AssociationConnector Association="SettlementMasterModel.FK__SM_Revenu__RvCod__10416098" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

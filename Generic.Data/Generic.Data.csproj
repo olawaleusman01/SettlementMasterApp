@@ -347,6 +347,12 @@
     <Compile Include="SM_REVENUEHEADTEMP.cs">
       <DependentUpon>SMModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="SM_RevenuHeadParty.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SM_RevenuHeadPartyTemp.cs">
+      <DependentUpon>SMModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="SM_ROLEPRIV.cs">
       <DependentUpon>SMModel1.tt</DependentUpon>
     </Compile>

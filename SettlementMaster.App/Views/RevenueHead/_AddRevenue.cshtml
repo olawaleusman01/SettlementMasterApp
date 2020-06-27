@@ -1,5 +1,10 @@
 ﻿@model Generic.Dapper.Model.RvHeadObj
-    <div class="modal-dialog" style="width:500px">
+
+<style>
+    .select2-selection { overflow: hidden!important; }
+.select2-selection__rendered { white-space: normal!important; word-break: break-all!important; }
+</style>
+    <div class="modal-dialog" style="width:700px">
         <div class="modal-content">
 @using (Html.BeginForm("", "", FormMethod.Post, new { id = "formRvCode" }))
 {
@@ -8,7 +13,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h5 class="modal-title" id="myModalLabel"><i class="fa fa-plus"></i> @ViewBag.HeaderTitle</h5>
             </div>
-            
+
             <div class="modal-body">
                 <div class="col-lg-12">
                     <div class="alert alert-dismissable alert-warning" style="display:none" id="notyMsc">
@@ -22,16 +27,16 @@
                             <div class="col-lg-8 ">
                                 <div class="form-group input-groupa" style="margin:0px">
                                     @if (Model.DB_ITBID > 0)
-                                    {
-                                        @Html.TextBoxFor(model => model.CODE, new { @class = "form-control input-sm",@readonly="rreadonly" })
+{
+                                        @Html.TextBoxFor(model => model.CODE, new { @class = "form-control input-sm", @readonly = "rreadonly" })
 
-                                    }
-                                    else
-                                    {
-                                        @Html.TextBoxFor(model => model.CODE, new { @class = "form-control input-sm",  })
+}
+else
+{
+                                        @Html.TextBoxFor(model => model.CODE, new { @class = "form-control input-sm", })
 
-                                    }
-                                    @Html.Hidden("MID",@Model.MID)
+}
+                                    @Html.Hidden("MID", @Model.MID)
                                     @Html.Hidden("RVGROUPCODE", @Model.RVGROUPCODE)
                                 </div>
                             </div>
@@ -50,7 +55,7 @@
                             <label class="col-lg-4 control-label">Payment Item ID <span class="required">*</span></label>
                             <div class="col-lg-8 ">
                                 <div class="form-group input-groupa" style="margin:0px">
-                                    @Html.TextBoxFor(model => model.PAYMENTITEMID, new { @class = "form-control input-sm"})
+                                    @Html.TextBoxFor(model => model.PAYMENTITEMID, new { @class = "form-control input-sm" })
                                 </div>
                             </div>
 
@@ -70,6 +75,54 @@
                                 @Html.DropDownListFor(model => model.SETTLEMENT_FREQUENCY, ViewBag.FrequencyList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
                             </div>
                         </div>
+                        <table id="tblParty" class="table table-bordered table-condensed" cellpadding="0" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th colspan="4" style="text-align:right">
+                                        <a class="btn btn-success btn-xs" id="btnAddRow"><i class="fa fa-plus"></i> Add Record</a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="width:35%">Party</th>
+                                    <th style="width:20%">Amount</th>
+                                    <th style="width:35%">Account No.</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 0;
+
+                                    foreach (var sharing in Model.RevenueSharingPartys ?? new List<Generic.Dapper.Model.RevenueSharingPartyObj>())
+                                    {
+                                        <tr>
+                                                                            <td>
+                                                                                <label style="color:#333" id="lblPty">@sharing.PartyName</label>
+                                                                                <input type="hidden" name="RevenueSharingPartys.Index" value="@i" />
+                                                                                @Html.Hidden("RevenueSharingPartys[" + i + "].PartyId", @sharing.PartyId)
+                                                                                @Html.Hidden("RevenueSharingPartys[" + i + "].ItbId", @sharing.ItbId)
+                                                                            </td>
+                                            <td style="text-align:right">
+                                                @sharing.PartyValue.ToString("F")
+                                                        @Html.Hidden("RevenueSharingPartys[" + i + "].PartyValue",@sharing.PartyValue)
+                                            </td>
+                                            <td>
+                                                @sharing.PartyAccountName
+                                                        @Html.Hidden("RevenueSharingPartys[" + i + "].PartyAccountId",@sharing.PartyAccountId)
+                                            </td>
+                                            <td>
+                                                @*<button type="button" class="btn btn-primary btn-xs" id="btnEditPSharing"><i class="fa fa-plus"></i></button>*@
+                                                <button type="button" class="btn btn-danger btn-xs" id="btnDeletePSharing"><i class="fa fa-times"></i></button>
+                                            </td>
+                                        </tr>
+                                        i += 1;
+                                    }
+                                 }
+                                </tbody>
+                            <tfoot></tfoot>
+                            
+                        </table>
+                        @Html.Hidden("last_count",@i)
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -88,4 +141,5 @@
         theme: "classic"
     });
    // $('a.editor_return').click();
+  
 </script>

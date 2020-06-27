@@ -14,6 +14,13 @@ namespace Generic.Data
     
     public partial class SM_REVENUEHEAD
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SM_REVENUEHEAD()
+        {
+            this.SM_RevenuHeadParty = new HashSet<SM_RevenuHeadParty>();
+            this.SM_RevenuHeadPartyTemp = new HashSet<SM_RevenuHeadPartyTemp>();
+        }
+    
         public int ITBID { get; set; }
         public string CODE { get; set; }
         public string RVGROUPCODE { get; set; }
@@ -46,5 +53,9 @@ namespace Generic.Data
     
         public virtual SM_MERCHANTACCT SM_MERCHANTACCT { get; set; }
         public virtual SM_REVENUEGROUP SM_REVENUEGROUP { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SM_RevenuHeadParty> SM_RevenuHeadParty { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SM_RevenuHeadPartyTemp> SM_RevenuHeadPartyTemp { get; set; }
     }
 }

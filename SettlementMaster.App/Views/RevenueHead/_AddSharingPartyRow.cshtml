@@ -1,0 +1,15 @@
+﻿<tr>
+    <td> @Html.DropDownList("PartyId", ViewBag.PartyList as SelectList, "Select One", new { @class = "party_change form-control select2", style = "width:100%" })</td>
+    <td >  @Html.TextBox("PartyValue", "", new { @class = "form-control input-sm" })</td>
+    <td > 
+    <select id="PartyAccountId" name="PartyAccountId" class = "form-control select2", style = "width:100%" >
+        <option value="">Select One</option>
+    </select>
+    </td>
+
+    <td >
+        <button type="button" class="btn btn-primary btn-xs" id="btnAddPSharing"><i class="fa fa-plus"></i></button>
+        <button type="button" class="btn btn-danger btn-xs" id="btnCancelPSharing"><i class="fa fa-times"></i></button>
+    </td>
+</tr>
+

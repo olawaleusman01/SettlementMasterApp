@@ -1704,6 +1704,9 @@
     <Content Include="Views\Roles\MenuPriviledge.cshtml" />
     <Content Include="Views\Roles\DetailAuthMPriv.cshtml" />
     <Content Include="Views\Merchant\_ViewMerchantRevenue.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\RevenueHead\_AddSharingPartyRow.cshtml" />
+    <Content Include="Views\RevenueHead\_ViewRVHeadParty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

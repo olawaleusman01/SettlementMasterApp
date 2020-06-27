@@ -1955,6 +1955,31 @@
           <Property Name="REVENUESECTOR" Type="varchar" MaxLength="500" />
           <Property Name="PAYMENTITEMID" Type="bigint" />
         </EntityType>
+        <EntityType Name="SM_RevenuHeadParty">
+          <Key>
+            <PropertyRef Name="ItbId" />
+          </Key>
+          <Property Name="ItbId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartyId" Type="int" />
+          <Property Name="PartyValue" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="PartyAccountId" Type="int" />
+          <Property Name="RvCodeItbId" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SM_RevenuHeadPartyTemp">
+          <Key>
+            <PropertyRef Name="ItbId" />
+          </Key>
+          <Property Name="ItbId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartyId" Type="int" />
+          <Property Name="PartyValue" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="PartyAccountId" Type="int" />
+          <Property Name="RvCodeItbId" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" />
+          <Property Name="BatchId" Type="varchar" MaxLength="30" />
+        </EntityType>
         <EntityType Name="SM_ROLEPRIV">
           <Key>
             <PropertyRef Name="ROLEASSIGID" />
@@ -2465,6 +2490,30 @@
           <Property Name="INSTITUTION_ID" Type="int" />
           <Property Name="MAKER_INST_ID" Type="int" />
         </EntityType>
+        <Association Name="FK__SM_Revenu__RvCod__0D64F3ED">
+          <End Role="SM_REVENUEHEAD" Type="Self.SM_REVENUEHEAD" Multiplicity="0..1" />
+          <End Role="SM_RevenuHeadParty" Type="Self.SM_RevenuHeadParty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SM_REVENUEHEAD">
+              <PropertyRef Name="ITBID" />
+            </Principal>
+            <Dependent Role="SM_RevenuHeadParty">
+              <PropertyRef Name="RvCodeItbId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SM_Revenu__RvCod__10416098">
+          <End Role="SM_REVENUEHEAD" Type="Self.SM_REVENUEHEAD" Multiplicity="0..1" />
+          <End Role="SM_RevenuHeadPartyTemp" Type="Self.SM_RevenuHeadPartyTemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SM_REVENUEHEAD">
+              <PropertyRef Name="ITBID" />
+            </Principal>
+            <Dependent Role="SM_RevenuHeadPartyTemp">
+              <PropertyRef Name="RvCodeItbId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BL_FEE1SHARINGPARTY_BL_FEE1SHARINGPARTY">
           <End Role="SM_BILLERMSC" Type="Self.SM_BILLERMSC" Multiplicity="0..1" />
           <End Role="SM_BL_FEE1SHARINGPARTY" Type="Self.SM_BL_FEE1SHARINGPARTY" Multiplicity="*" />
@@ -2756,6 +2805,8 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
           <EntitySet Name="SM_REVENUEGROUPTEMP" EntityType="Self.SM_REVENUEGROUPTEMP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_REVENUEHEAD" EntityType="Self.SM_REVENUEHEAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_REVENUEHEADTEMP" EntityType="Self.SM_REVENUEHEADTEMP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_RevenuHeadParty" EntityType="Self.SM_RevenuHeadParty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_RevenuHeadPartyTemp" EntityType="Self.SM_RevenuHeadPartyTemp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_ROLEPRIV" EntityType="Self.SM_ROLEPRIV" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_ROLEPRIVTEMP" EntityType="Self.SM_ROLEPRIVTEMP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_ROLES" EntityType="Self.SM_ROLES" Schema="dbo" store:Type="Tables" />
@@ -2778,6 +2829,14 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
           <EntitySet Name="SM_UPMERCHANTUPDATEUPLD" EntityType="Self.SM_UPMERCHANTUPDATEUPLD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_UPMERTERMUPLDREC" EntityType="Self.SM_UPMERTERMUPLDREC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SM_UPMERUPDUPLDGLO" EntityType="Self.SM_UPMERUPDUPLDGLO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__SM_Revenu__RvCod__0D64F3ED" Association="Self.FK__SM_Revenu__RvCod__0D64F3ED">
+            <End Role="SM_REVENUEHEAD" EntitySet="SM_REVENUEHEAD" />
+            <End Role="SM_RevenuHeadParty" EntitySet="SM_RevenuHeadParty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SM_Revenu__RvCod__10416098" Association="Self.FK__SM_Revenu__RvCod__10416098">
+            <End Role="SM_REVENUEHEAD" EntitySet="SM_REVENUEHEAD" />
+            <End Role="SM_RevenuHeadPartyTemp" EntitySet="SM_RevenuHeadPartyTemp" />
+          </AssociationSet>
           <AssociationSet Name="FK_BL_FEE1SHARINGPARTY_BL_FEE1SHARINGPARTY" Association="Self.FK_BL_FEE1SHARINGPARTY_BL_FEE1SHARINGPARTY">
             <End Role="SM_BILLERMSC" EntitySet="SM_BILLERMSC" />
             <End Role="SM_BL_FEE1SHARINGPARTY" EntitySet="SM_BL_FEE1SHARINGPARTY" />
@@ -3065,6 +3124,16 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
           <EntitySet Name="ATM_CHARGES" EntityType="SettlementMasterModel.ATM_CHARGES" />
           <EntitySet Name="SM_MENUPRIVTEMP" EntityType="SettlementMasterModel.SM_MENUPRIVTEMP" />
           <EntitySet Name="SM_MENUCONTROL" EntityType="SettlementMasterModel.SM_MENUCONTROL" />
+          <EntitySet Name="SM_RevenuHeadParty" EntityType="SettlementMasterModel.SM_RevenuHeadParty" />
+          <EntitySet Name="SM_RevenuHeadPartyTemp" EntityType="SettlementMasterModel.SM_RevenuHeadPartyTemp" />
+          <AssociationSet Name="FK__SM_Revenu__RvCod__0D64F3ED" Association="SettlementMasterModel.FK__SM_Revenu__RvCod__0D64F3ED">
+            <End Role="SM_REVENUEHEAD" EntitySet="SM_REVENUEHEAD" />
+            <End Role="SM_RevenuHeadParty" EntitySet="SM_RevenuHeadParty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SM_Revenu__RvCod__10416098" Association="SettlementMasterModel.FK__SM_Revenu__RvCod__10416098">
+            <End Role="SM_REVENUEHEAD" EntitySet="SM_REVENUEHEAD" />
+            <End Role="SM_RevenuHeadPartyTemp" EntitySet="SM_RevenuHeadPartyTemp" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="SM_ROLES">
           <Key>
@@ -4186,6 +4255,8 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
           <Property Name="SETTLEMENT_FREQUENCY" Type="Int32" />
           <Property Name="REVENUESECTOR" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="PAYMENTITEMID" Type="Int64" />
+          <NavigationProperty Name="SM_RevenuHeadParty" Relationship="SettlementMasterModel.FK__SM_Revenu__RvCod__0D64F3ED" FromRole="SM_REVENUEHEAD" ToRole="SM_RevenuHeadParty" />
+          <NavigationProperty Name="SM_RevenuHeadPartyTemp" Relationship="SettlementMasterModel.FK__SM_Revenu__RvCod__10416098" FromRole="SM_REVENUEHEAD" ToRole="SM_RevenuHeadPartyTemp" />
         </EntityType>
         <Association Name="FK_SM_REVENUEHEAD_SM_MERCHANTACCT">
           <End Type="SettlementMasterModel.SM_MERCHANTACCT" Role="SM_MERCHANTACCT" Multiplicity="0..1" />
@@ -5828,6 +5899,57 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
           <Property Name="NO_OF_CHECKER" Type="Int16" />
           <Property Name="App" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
+        <EntityType Name="SM_RevenuHeadParty">
+          <Key>
+            <PropertyRef Name="ItbId" />
+          </Key>
+          <Property Name="ItbId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartyId" Type="Int32" />
+          <Property Name="PartyValue" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="PartyAccountId" Type="Int32" />
+          <Property Name="RvCodeItbId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SM_REVENUEHEAD" Relationship="SettlementMasterModel.FK__SM_Revenu__RvCod__0D64F3ED" FromRole="SM_RevenuHeadParty" ToRole="SM_REVENUEHEAD" />
+        </EntityType>
+        <EntityType Name="SM_RevenuHeadPartyTemp">
+          <Key>
+            <PropertyRef Name="ItbId" />
+          </Key>
+          <Property Name="ItbId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartyId" Type="Int32" />
+          <Property Name="PartyValue" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="PartyAccountId" Type="Int32" />
+          <Property Name="RvCodeItbId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BatchId" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SM_REVENUEHEAD" Relationship="SettlementMasterModel.FK__SM_Revenu__RvCod__10416098" FromRole="SM_RevenuHeadPartyTemp" ToRole="SM_REVENUEHEAD" />
+        </EntityType>
+        <Association Name="FK__SM_Revenu__RvCod__0D64F3ED">
+          <End Type="SettlementMasterModel.SM_REVENUEHEAD" Role="SM_REVENUEHEAD" Multiplicity="0..1" />
+          <End Type="SettlementMasterModel.SM_RevenuHeadParty" Role="SM_RevenuHeadParty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SM_REVENUEHEAD">
+              <PropertyRef Name="ITBID" />
+            </Principal>
+            <Dependent Role="SM_RevenuHeadParty">
+              <PropertyRef Name="RvCodeItbId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SM_Revenu__RvCod__10416098">
+          <End Type="SettlementMasterModel.SM_REVENUEHEAD" Role="SM_REVENUEHEAD" Multiplicity="0..1" />
+          <End Type="SettlementMasterModel.SM_RevenuHeadPartyTemp" Role="SM_RevenuHeadPartyTemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SM_REVENUEHEAD">
+              <PropertyRef Name="ITBID" />
+            </Principal>
+            <Dependent Role="SM_RevenuHeadPartyTemp">
+              <PropertyRef Name="RvCodeItbId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8402,6 +8524,33 @@ warning 6035: The relationship 'FK_SM_TERMINAL_SM_CURRENCY1' has columns that ar
                 <ScalarProperty Name="CONTROLLER" ColumnName="CONTROLLER" />
                 <ScalarProperty Name="MENUNAME" ColumnName="MENUNAME" />
                 <ScalarProperty Name="MENUID" ColumnName="MENUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_RevenuHeadParty">
+            <EntityTypeMapping TypeName="SettlementMasterModel.SM_RevenuHeadParty">
+              <MappingFragment StoreEntitySet="SM_RevenuHeadParty">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="RvCodeItbId" ColumnName="RvCodeItbId" />
+                <ScalarProperty Name="PartyAccountId" ColumnName="PartyAccountId" />
+                <ScalarProperty Name="PartyValue" ColumnName="PartyValue" />
+                <ScalarProperty Name="PartyId" ColumnName="PartyId" />
+                <ScalarProperty Name="ItbId" ColumnName="ItbId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_RevenuHeadPartyTemp">
+            <EntityTypeMapping TypeName="SettlementMasterModel.SM_RevenuHeadPartyTemp">
+              <MappingFragment StoreEntitySet="SM_RevenuHeadPartyTemp">
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="RvCodeItbId" ColumnName="RvCodeItbId" />
+                <ScalarProperty Name="PartyAccountId" ColumnName="PartyAccountId" />
+                <ScalarProperty Name="PartyValue" ColumnName="PartyValue" />
+                <ScalarProperty Name="PartyId" ColumnName="PartyId" />
+                <ScalarProperty Name="ItbId" ColumnName="ItbId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
