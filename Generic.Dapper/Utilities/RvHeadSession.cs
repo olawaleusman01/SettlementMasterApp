@@ -39,6 +39,22 @@ namespace Generic.Dapper.Utilities
             using (var con = new RepoBase().OpenConnection(null))
             {
                 ret = con.Query<OutPutObj>("POST_REVENUEHEAD_SESSION", p, commandType:CommandType.StoredProcedure).FirstOrDefault();
+                if (obj.RevenueSharingPartys != null)
+                {
+                    foreach (var pty in obj.RevenueSharingPartys)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("PartyId", pty.PartyId, DbType.Int32);
+                        p.Add("PartyAccountId", pty.PartyAccountId, DbType.Decimal);
+                        p.Add("PartyValue", pty.PartyValue, DbType.Decimal);
+                        p.Add("RvCode", obj.CODE, DbType.String);
+                        p.Add("UserId", obj.USERID, DbType.String);
+                        p.Add("CreateDate", obj.CREATEDATE, DbType.DateTime);
+
+                        ret = con.Query<OutPutObj>("Post_RevenuHeadParty_Session", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    }
+                }
+
                 return ret;
             }
         }
@@ -95,6 +111,20 @@ namespace Generic.Dapper.Utilities
             }
 
         }
+
+        public List<RevenueSharingPartyObj> GetRevenueHeadParty(string rvCode, string userId)
+        {
+            //OutPutObj ret = new OutPutObj();
+            var p = new DynamicParameters();
+            p.Add("UserId", userId, DbType.String);
+            p.Add("RvCode", rvCode, DbType.String);
+            using (var con = new RepoBase().OpenConnection(null))
+            {
+                var ret = con.Query<RevenueSharingPartyObj>("Get_RevenueHeadParty_Sess", p, commandType: CommandType.StoredProcedure).ToList();
+                return ret;
+            }
+
+        }
         public int PurgeRevenueHead(string userId)
         {
             //OutPutObj ret = new OutPutObj();
@@ -103,6 +133,20 @@ namespace Generic.Dapper.Utilities
             using (var con = new RepoBase().OpenConnection(null))
             {
                 var ret = con.Execute("PURGE_REVENUEHEAD_SESSION", p, commandType: CommandType.StoredProcedure);
+                return ret;
+            }
+
+        }
+
+        public int PurgeRevenueHeadParty(string userId, string rvCode)
+        {
+            //OutPutObj ret = new OutPutObj();
+            var p = new DynamicParameters();
+            p.Add("USERID", userId, DbType.String);
+            p.Add("@RvCode", rvCode, DbType.String);
+            using (var con = new RepoBase().OpenConnection(null))
+            {
+                var ret = con.Execute("Purge_RevenueHeadParty_Sess", p, commandType: CommandType.StoredProcedure);
                 return ret;
             }
 

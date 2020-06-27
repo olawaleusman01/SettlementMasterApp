@@ -200,7 +200,7 @@
         $('#myModalAcct').load(
             urlP, function () {
                 loaderSpin2(false);
-                $('#myModalAcct').modal({ backdrop: 'static', keyboard: false });
+                $('#myModalAcct').unbind().modal({ backdrop: 'static', keyboard: false });
                 validateAcctForm();
 
             });
@@ -321,6 +321,8 @@
                 //    event = 'modify';
                 //};
                 //  alert(urlTemp);
+
+                console.log($('#formRvCode').serialize());
                 var $reqLogin = {
                     url: urlTemp,
 
@@ -342,6 +344,7 @@
                         $('#divAcct').html(response.data_html);
                         //console.log(JSON.stringify(response.data));
                         //console.log(JSON.stringify(response.data_msc));
+                        
                     }
                     else {
                         $('#notyMsc').show();
@@ -436,4 +439,155 @@
         }
         $('#divCustom').hide();
     });
+
+
+
+    $(document).on('click', '#tblParty #btnAddRow', function () {
+
+        var table = $('#tblParty'); //get the table
+        //append the row to the table.
+
+        var urlP = BaseUrl() + 'RevenueHead/' + 'AddSharingPartyRowView';
+        //alert(urlP);
+        if ($("#tblParty tfoot tr").length > 0) {
+            alert('A new form row is already opened.');
+            return;
+        }
+        loaderSpin(true);
+        $.get(
+            urlP, function (response) {
+                loaderSpin(false);
+                if (response.RespCode === 0) {
+                    $("#tblParty tfoot").empty();
+                    $("#tblParty tfoot").append(response.data_html);
+                    $('.select2').select2({
+                        theme: "classic",
+                        width: '100%'
+                    });
+                }
+                else {
+                    displayDialogNoty('Notification', response.RespMessage);
+                }
+            });
+
+    })
+    $(document).on('click', '#tblParty #btnCancelPSharing', function () {
+        var row = $(this).closest("tr");
+        // var name = $("TD", row).eq(0).html();
+        //Get the reference of the Table.
+        var table = $("#tblParty")[0];
+        //Delete the Table row using it's Index.
+        table.deleteRow(row[0].rowIndex);
+
+    });
+    $(document).on("click", "#tblParty #btnAddPSharing", function () {
+        //Reference the Name and Country TextBoxes.
+        var $drpPartyId = $("#PartyId");
+        var $txtPartyValue = $("#PartyValue");
+        var $drpPartyAcctId = $("#PartyAccountId");
+
+        ////Get the reference of the Table's TBODY element.
+        //var tBody = $("#tblParty > TBODY")[0];
+
+        ////Add Row.
+        //var row = tBody.insertRow(-1);
+
+        ////Add Name cell.
+        //var cell = $(row.insertCell(-1));
+        //cell.html(txtName.val());
+
+        ////Add Country cell.
+        //cell = $(row.insertCell(-1));
+        //cell.html(txtCountry.val());
+
+        ////Add Button cell.
+        //cell = $(row.insertCell(-1));
+        //var btnRemove = $("<input />");
+        //btnRemove.attr("type", "button");
+        //btnRemove.attr("onclick", "Remove(this);");
+        //btnRemove.val("Remove");
+        //cell.append(btnRemove);
+
+        ////Clear the TextBoxes.
+        //txtName.val("");
+        //txtCountry.val("");
+        var i = parseInt($("#last_count").val());
+        //alert(i);
+        var partyName = $("#PartyId option:selected").text();
+        var partyId  = $("#PartyId").val();
+        var acctId = $("#PartyAccountId").val();
+        var acctName = $("#PartyAccountId option:selected").text();
+        var partyValue = $("#PartyValue").val();
+
+        if (partyId === '' || acctId === '' || partyValue === '') {
+           
+            alert('All fields are required.');
+            return;
+        }
+        else if (isNaN(parseFloat(partyValue))) {
+            alert('Party sharing value must be numeric');
+            return;
+        }
+        var ptyExist = false;
+        $("#tblParty tbody tr").each(function () {
+            var row = $(this);
+            var customer = {};
+            extPtyId = row.find("td").eq(0).find($("[id$='PartyId']")).val();
+            if (extPtyId == partyId) {
+                alert('Party already exist.');
+                ptyExist = true;
+                return;
+            }
+        });
+        if (ptyExist) {
+            return;
+        }
+        var rowElement = '<tr>'
+            + '<td> <label style="color:#333" id="lblPty">' + partyName + '</label><input type="hidden" id="ptyId" name="RevenueSharingPartys[' + i + '].PartyId"'
+            + ' value="' + partyId + '" /> <input type="hidden" id="ptyId" name="RevenueSharingPartys[' + i + '].ItbId" value="" />'
+            + '  <input type="hidden" name="RevenueSharingPartys.Index" value="' + i + '" /></td>'
+            + '<td style="text-align:right"> <label style="color:#333" id="lblPtyValue">' + parseFloat(partyValue).toFixed(2) + '</label> <input type="hidden" id="ptyValue" name="RevenueSharingPartys[' + i + '].PartyValue" value="' + partyValue +'" /> </td>'
+            + '<td> <label style="color:#333" id="lblPtyAccount">' + acctName + '</label> <input type="hidden" id="ptyAccountId" name="RevenueSharingPartys[' + i + '].PartyAccountId" value="' + acctId +'" /> </td>'
+            + '<td>'
+            //+ '<button type="button" class="btn btn-primary btn-xs" id="btnEditPSharing"><i class="fa fa-edit"></i></button>'
+            + ' <button type="button" class="btn btn-danger btn-xs" id="btnDeletePSharing"><i class="fa fa-times"></i></button>'
+            + '</td>'
+            + '</tr>';
+        
+        $("#tblParty tbody").append(rowElement);
+        $("#tblParty tfoot").empty();
+        i += 1;
+
+        $("#last_count").val(i);
+    });
+
+    $(document).on('click', '#tblParty #btnDeletePSharing', function () {
+        var row = $(this).closest("tr");
+        var partyName = $("td", row).eq(0).find('#lblPty').text();
+        //Get the reference of the Table.
+        if (confirm("Do you want to delete: " + partyName)) {
+            var table = $("#tblParty")[0];
+            //Delete the Table row using it's Index.
+            table.deleteRow(row[0].rowIndex);
+        }
+
+    });
+
+    $(document).on('change', '#tblParty #PartyId', function () {
+        var urlP = url + 'GetPartyAccount/' + $(this).val();
+        $.get(
+            urlP, function (response) {
+                //loaderSpin(false);
+                if (response.RespCode === 0) {
+                    $.each(response.data, function () {
+                        $("#PartyAccountId").append($("<option     />").val(this.Code).text(this.Description));
+                    });
+                }
+                else {
+                    displayDialogNoty('Notification', response.RespMessage);
+                }
+            });
+    });
+
+    
 });

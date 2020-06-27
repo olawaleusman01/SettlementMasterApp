@@ -1070,6 +1070,25 @@ namespace Generic.Dapper.Data
             var rec = Fetch(c => c.Query<RvHeadObj>(qry, p, commandType: CommandType.StoredProcedure), null);
             return rec.FirstOrDefault();
         }
+
+        public List<RevenueSharingPartyObj> GetRvHeadParty(int rvItbid)
+        {
+            DynamicParameters p = new DynamicParameters();
+            //p.Add("@P_PARTY_ITBID", party_itbid, DbType.Int32);
+            p.Add("@P_RvItbId", rvItbid, DbType.Int32);
+            string qry = "Get_RVHead_Party";
+            var rec = Fetch(c => c.Query<RevenueSharingPartyObj>(qry, p, commandType: CommandType.StoredProcedure), null);
+            return rec.ToList();
+        }
+        public List<RevenueSharingPartyObj> GetRvHeadPartyTemp(string batchId)
+        {
+            DynamicParameters p = new DynamicParameters();
+            //p.Add("@P_PARTY_ITBID", party_itbid, DbType.Int32);
+            p.Add("@P_BatchId", batchId, DbType.String);
+            string qry = "Get_RVHead_Party_Temp";
+            var rec = Fetch(c => c.Query<RevenueSharingPartyObj>(qry, p, commandType: CommandType.StoredProcedure), null);
+            return rec.ToList();
+        }
         public async Task<List<RvDrAcctUpldObj>> GetRvDrAcctTempAsync(string bid, string user_id)
         {
             DynamicParameters p = new DynamicParameters();

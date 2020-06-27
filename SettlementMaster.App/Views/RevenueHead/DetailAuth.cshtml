@@ -1,11 +1,11 @@
-﻿@using  Generic.Dapper.Model
+﻿@using Generic.Dapper.Model
 @model RvGroupObj
 
 
 <div id="toolbar">
     <div class="col-lg-12">
         @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
-            <a id="btnCancel" href="@Url.Action("Index","AuthList")" class="btn btn-default editor_return"><i class="fa fa-long-arrow-left"></i> Return to Authorization Queue</a>
+        <a id="btnCancel" href="@Url.Action("Index","AuthList")" class="btn btn-default editor_return"><i class="fa fa-long-arrow-left"></i> Return to Authorization Queue</a>
 
     </div>
 </div>
@@ -17,9 +17,9 @@
     {
         auth = new AuthViewObj();
     }
-    
-<div id="right_sidebar">
-   
+
+    <div id="right_sidebar">
+
         <div class="panel panel-warning">
 
             <div class="panel-body widget">
@@ -28,15 +28,15 @@
                     <div class="divAuth">
                         <div style="text-align:center">
                             @using (Html.BeginForm("Approve", "RevenueHead", FormMethod.Post, new { id = "formApprove", style = "display:inline" }))
-{
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" name="AuthId" value="@auth.AuthId" />
-                    <input type="hidden" name="PostType" value="@auth.PostType" />
-                    <input type="hidden" name="RecordId" value="@auth.RecordId" />
-                    <input type="hidden" name="BatchId" value="@auth.BatchId" />
-                    <input type="hidden" name="m" value="@auth.MenuId" />
-                    <button type="submit" class="btn btn-success btn_disable editor_approve" id="btnApprove"><i class="fa fa-check"></i> Approve</button>
-}
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="AuthId" value="@auth.AuthId" />
+                                <input type="hidden" name="PostType" value="@auth.PostType" />
+                                <input type="hidden" name="RecordId" value="@auth.RecordId" />
+                                <input type="hidden" name="BatchId" value="@auth.BatchId" />
+                                <input type="hidden" name="m" value="@auth.MenuId" />
+                                <button type="submit" class="btn btn-success btn_disable editor_approve" id="btnApprove"><i class="fa fa-check"></i> Approve</button>
+                            }
 
                             <button type="submit" class="btn btn-danger btn_disable editor_reject" id="btnReject"><i class="fa fa-times"></i> Reject</button>
 
@@ -48,10 +48,10 @@
                     <i class="fa fa-chevron-right"></i>
                     <span class="light-grey">Status:<span class="label label-default status">@auth.Status</span> </span>
                 </div>
-                        <div style="margin-top:10px">
-                        <i class="fa fa-user"></i>
-                        <span class="light-grey">Created By: @auth.User</span>
-                    </div>
+                <div style="margin-top:10px">
+                    <i class="fa fa-user"></i>
+                    <span class="light-grey">Created By: @auth.User</span>
+                </div>
                 <div style="margin-top:10px">
                     <i class="fa fa-calendar"></i>
                     <span class="light-grey">Date Created: @auth.DateCreated</span>
@@ -61,182 +61,188 @@
                     <span class="light-grey">Event Type: @auth.EventType</span>
                 </div>
                 @*<div style="margin-top:10px" class="div-authdate">
-                    <i class="fa fa-user"></i>
-                    <span class="light-grey">Last Modified Date:</span>
-                </div>*@
-            </div>
-        </div>
-    
-</div>
-<div id="content_new">
-    <div class="row2">
-
-        
-
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
-                    @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
-
-
-                </div>
-                <div class="panel-body ">
-                    @using (Html.BeginForm("Add", "RevenueHead", FormMethod.Post, new { id = "formRv" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="m" id="m" value="@ViewBag.MenuId" />
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Merhant ID</label>
-                                <div class="col-md-4">
-                                   
-                                        @Html.DropDownListFor(model => model.MERCHANTID, ViewBag.MerchantList as SelectList, "Search By Mid/Merchant Name", new { @class = "form-control select2", style = "width:100%", @disabled = "disabled" })
-                                   
-                                    @Html.HiddenFor(model => model.ITBID)
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Group Code</label>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.GROUPCODE, new { @class = "form-control input-sm", @readonly = "readonly" })
-                                    <small>System Generated</small>
-
-                                </div>
-                                <label class="col-md-2 control-label">Description</label>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.GROUPNAME, new { @class = "form-control input-sm" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label"> Account No <span class="required">*</span></label>
-                                <div class="col-lg-4">
-                                    @Html.DropDownListFor(model => model.ACCOUNT_ID, ViewBag.MAcctList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
-                                </div>
-                                <label class="col-lg-2 control-label"> Apply Global Account</label>
-                                <div class="col-lg-4">
-                                    @Html.CheckBoxFor(model => model.GLOBALACCOUNTFLAG)
-                                </div>
-                            </div>  
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label"> Settlement Frequency <span class="required">*</span></label>
-                                <div class="col-lg-4">
-                                    @Html.DropDownListFor(model => model.SETTLEMENT_FREQUENCY, ViewBag.FrequencyList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
-                                </div>
-                                @if (Model.CUSTOM)
-                                {
-                                    <div id="divCustom">
-                                        <label class="col-md-2 control-label">Working Days</label>
-                                        <div class="col-md-4">
-                                            @Html.TextBoxFor(model => model.SET_DAYS, new { @class = "form-control input-sm", style = "width:150px", type = "number", min = "1" })
-                                        </div>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div id="divCustom" style="display:none">
-                                        <label class="col-md-2 control-label">Working Days</label>
-                                        <div class="col-md-4">
-                                            @Html.TextBoxFor(model => model.SET_DAYS, new { @class = "form-control input-sm", style = "width:150px", type = "number", min = "1" })
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-
-                            <div class="form-group">
-                                @if (ViewBag.StatusVisible == true)
-                                {
-                                    <label class="col-md-2 control-label">Status</label>
-                                        <div class="col-md-2">
-                                            @Html.DropDownListFor(model => model.STATUS, ViewBag.RecordStatus as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
-                                        </div>
-                                }
-                            </div>
-                            <div class="clearfix"></div>
-                            <h4>Revenue Code(s)</h4>
-                            <div style="margin-bottom:5px">
-
-                                <div class="table-responsive " style="border: 1px solid #f4f4f4;background-color:#f7f7f7;margin-bottom:10px;padding:20px">
-
-                                    <div class="divadu">
-                                        <div id="divAcct">
-                                            @{
-                                                var mccObj = ViewBag.RvHeadList as List<RvHeadObj>;
-                                                if (mccObj == null)
-                                                {
-                                                    mccObj = new List<RvHeadObj>();
-                                                }
-                                                <table id="tableRvHead" class="table table-condensed table-hover table-bordered" style="width:100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width:10%;text-align:center">Action?</th>
-
-                                                            <th>
-                                                                Revenue Code
-                                                            </th>
-                                                            <th>
-                                                                Description
-                                                            </th>
-                                                            <th>
-                                                                Account No.
-                                                            </th>
-                                                            <th>
-                                                                Account Name
-                                                            </th>
-                                                            <th>
-                                                                Bank Name
-                                                            </th>
-                                                            <th>
-                                                                Set. Frequency
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach (var d in mccObj)
-                                                        {
-                                                            <tr>
-                                                                <td style="text-align:center">
-                                                                   @d.EVENTTYPE
-                                                                </td>
-                                                                <td>@d.CODE</td>
-                                                                <td>@d.DESCRIPTION</td>
-                                                                <td>@d.BANKACCOUNT</td>
-                                                                <td>@d.ACCT_NAME</td>
-                                                                <td>@d.BANK_NAME</td>
-                                                                <td>@d.FREQUENCY_DESC</td>
-                                                            </tr>
-                                                        }
-                                                    </tbody>
-                                                </table>
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            
-                        </div>
-                                                }
-                </div>
+                        <i class="fa fa-user"></i>
+                        <span class="light-grey">Last Modified Date:</span>
+                    </div>*@
             </div>
         </div>
 
     </div>
-</div>
-<div class="modal fade" id="myModalReject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width:450px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalRejectLabel"><i class="fa fa-plus"></i> Rejection Reason</h4>
+    <div id="content_new">
+        <div class="row2">
+
+
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-plus" style="color:#57ACE7;"></i>  @ViewBag.HeaderTitle
+                        @*<a id="btnNew" class="btn btn-default editor_create"><i class="fa fa-plus"></i> Add New</a>*@
+
+
+                    </div>
+                    <div class="panel-body ">
+                        @using (Html.BeginForm("Add", "RevenueHead", FormMethod.Post, new { id = "formRv" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="m" id="m" value="@ViewBag.MenuId" />
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Merhant ID</label>
+                                    <div class="col-md-4">
+
+                                        @Html.DropDownListFor(model => model.MERCHANTID, ViewBag.MerchantList as SelectList, "Search By Mid/Merchant Name", new { @class = "form-control select2", style = "width:100%", @disabled = "disabled" })
+
+                                        @Html.HiddenFor(model => model.ITBID)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Group Code</label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.GROUPCODE, new { @class = "form-control input-sm", @readonly = "readonly" })
+                                        <small>System Generated</small>
+
+                                    </div>
+                                    <label class="col-md-2 control-label">Description</label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.GROUPNAME, new { @class = "form-control input-sm" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label"> Account No <span class="required">*</span></label>
+                                    <div class="col-lg-4">
+                                        @Html.DropDownListFor(model => model.ACCOUNT_ID, ViewBag.MAcctList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                    </div>
+                                    <label class="col-lg-2 control-label"> Apply Global Account</label>
+                                    <div class="col-lg-4">
+                                        @Html.CheckBoxFor(model => model.GLOBALACCOUNTFLAG)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label"> Settlement Frequency <span class="required">*</span></label>
+                                    <div class="col-lg-4">
+                                        @Html.DropDownListFor(model => model.SETTLEMENT_FREQUENCY, ViewBag.FrequencyList as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                    </div>
+                                    @if (Model.CUSTOM)
+                                    {
+                                        <div id="divCustom">
+                                            <label class="col-md-2 control-label">Working Days</label>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.SET_DAYS, new { @class = "form-control input-sm", style = "width:150px", type = "number", min = "1" })
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div id="divCustom" style="display:none">
+                                            <label class="col-md-2 control-label">Working Days</label>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.SET_DAYS, new { @class = "form-control input-sm", style = "width:150px", type = "number", min = "1" })
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="form-group">
+                                    @if (ViewBag.StatusVisible == true)
+                                    {
+                                        <label class="col-md-2 control-label">Status</label>
+                                        <div class="col-md-2">
+                                            @Html.DropDownListFor(model => model.STATUS, ViewBag.RecordStatus as SelectList, "Select One", new { @class = "form-control select2", style = "width:100%" })
+                                        </div>
+                                    }
+                                </div>
+                                <div class="clearfix"></div>
+                                <h4>Revenue Code(s)</h4>
+                                <div style="margin-bottom:5px">
+
+                                    <div class="table-responsive " style="border: 1px solid #f4f4f4;background-color:#f7f7f7;margin-bottom:10px;padding:20px">
+
+                                        <div class="divadu">
+                                            <div id="divAcct">
+                                                @{
+                                                    var mccObj = ViewBag.RvHeadList as List<RvHeadObj>;
+                                                    if (mccObj == null)
+                                                    {
+                                                        mccObj = new List<RvHeadObj>();
+                                                    }
+                                                    <table id="tableRvHead" class="table table-condensed table-hover table-bordered" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width:10%;text-align:center">Action?</th>
+
+                                                                <th>
+                                                                    Revenue Code
+                                                                </th>
+                                                                <th>
+                                                                    Description
+                                                                </th>
+                                                                <th>
+                                                                    Account No.
+                                                                </th>
+                                                                <th>
+                                                                    Account Name
+                                                                </th>
+                                                                <th>
+                                                                    Bank Name
+                                                                </th>
+                                                                <th>
+                                                                    Set. Frequency
+                                                                </th>
+                                                                <th>
+
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var d in mccObj)
+                                                            {
+                                                                <tr>
+                                                                    <td style="text-align:center">
+                                                                        @d.EVENTTYPE
+                                                                    </td>
+                                                                    <td>@d.CODE</td>
+                                                                    <td>@d.DESCRIPTION</td>
+                                                                    <td>@d.BANKACCOUNT</td>
+                                                                    <td>@d.ACCT_NAME</td>
+                                                                    <td>@d.BANK_NAME</td>
+                                                                    <td>@d.FREQUENCY_DESC</td>
+                                                                    <td>
+                                                                        <a id="view" class="btn btn-primary btn-xs" data-key="@d.BATCHID">View Party</a>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
 
-            @using (Html.BeginForm("Reject", "RevenueHead", FormMethod.Post, new { id = "formReject", style = "display:inline" }))
-            {
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="AuthId" value="@auth.AuthId" />
-                <input type="hidden" name="PostType" value="@auth.PostType" />
+        </div>
+    </div>
+    <div class="modal fade" id="myModalReject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:450px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalRejectLabel"><i class="fa fa-plus"></i> Rejection Reason</h4>
+                </div>
+
+                @using (Html.BeginForm("Reject", "RevenueHead", FormMethod.Post, new { id = "formReject", style = "display:inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="AuthId" value="@auth.AuthId" />
+                    <input type="hidden" name="PostType" value="@auth.PostType" />
                     <input type="hidden" name="RecordId" value="@auth.RecordId" />
                     <input type="hidden" name="BatchId" value="@auth.BatchId" />
                     <input type="hidden" name="m" value="@auth.MenuId" />
@@ -259,17 +265,20 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="button" id="editor_reject_final" class="btn btn-danger editor_reject_final btn_disable"><i class="fa fa-times"></i> Reject</button>
                     </div>
-            }
+                }
+            </div>
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-</div>
 }
+<div class="modal fade" id="myModalAcct" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
 <div class="clearfix"></div>
 
 
-    @section Scripts {
+@section Scripts {
     @if (ViewBag.Message != null)
     {
         var msg = @Html.Raw(Json.Encode(ViewBag.Message));
@@ -277,7 +286,7 @@
         displayDialogNoty('Notification',@msg) ;
         </script>
     }
-                                      <script>
+    <script>
                                           //$('form').submit(function(e){  loaderSpin2(true);});
                                           $(document).on('click', '.editor_approve', function (e) {
                                               e.preventDefault();
@@ -356,8 +365,23 @@
                                                   displayDialogNoty('Notification', 'No network connectivity. Please check your network connections.', true);
                                               });
 
-                                          });
-</script>
+                                        });
 
-        }
+                                          $(document).on('click', '#tableRvHead a#view', function (e) {
+                                              e.preventDefault();
+                                              var editLink = $(this).attr('data-key');
+                                             // alert(editLink);
+                                              var urlP = '@Url.Action("ViewRvHeadParty","RevenueHead")' + '/' + editLink ;
+
+                                              //console.log(urlP);
+                                              loaderSpin2(true);
+                                              $('#myModalAcct').load(
+                                                  urlP, function () {
+                                                      loaderSpin2(false);
+                                                      $('#myModalAcct').modal({ backdrop: 'static', keyboard: false });
+                                                  });
+                                          });
+    </script>
+
+}
 
