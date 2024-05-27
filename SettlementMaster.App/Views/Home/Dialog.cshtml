@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Dialog</title>
+    @Styles.Render("~/ui/jquery.ui.css")
+</head>
+<body>
+    <div>
+        <div id="dialog-message" title="Download complete">
+            <p class="notyDialogMsg">
+
+            </p>
+
+        </div>
+    </div>
+
+    <a id="testDialog" href="#" class="btn btn-primary">Test Dialog</a>
+    @Scripts.Render( "~/Content/bower_components/jquery/dist/jquery.js",
+                    "~/ui/jquery.ui.js")
+
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#testDialog', function () {
+             
+                displayDialogNoty('Notification', "testing dialog popup");
+            })
+            function displayDialogNoty(title, msg) {
+                var html = msg;
+                var $noty = $('#dialog-message');
+                var $notyMsg = $('.notyDialogMsg');
+
+                $noty.attr('title', title);
+                $noty.html(html);
+                $("#dialog-message").dialog({
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

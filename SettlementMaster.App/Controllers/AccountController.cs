@@ -105,7 +105,8 @@ namespace SettlementMaster.App.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if(!string.IsNullOrEmpty(User.Identity.Name))
+           
+            if (!string.IsNullOrEmpty(User.Identity.Name))
             {
                 return RedirectToAction("Index","Home");
             }

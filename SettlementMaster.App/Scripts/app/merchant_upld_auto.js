@@ -134,8 +134,8 @@ $(document).on('click', '#btnSave', function (e) {
         displayDialogNoty('Notification', 'Institution selected when validating is different from the selected institution.Please Select the institution or revaildate before saving the record.');
         return;
     }
-    console.log(JSON.stringify(data));
-    return;
+    //console.log(JSON.stringify(data));
+    //return;
     loaderSpin2(true);
     $.ajax({
         type: "POST",
