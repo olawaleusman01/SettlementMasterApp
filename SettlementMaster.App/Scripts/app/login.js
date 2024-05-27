@@ -61,6 +61,7 @@ $(document).ready(function () {
                 if (response.RespCode === 0) {
                    // new Util().clearform('#formRoles');
                     $btnSave.html('Redirecting...');
+
                     window.location.href =  response.ReturnUrl;
 
                 }

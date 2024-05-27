@@ -19,5 +19,10 @@ namespace SettlementMaster.App.Controllers
         {
             return View();
         }
+
+        public ActionResult Dialog()
+        {
+            return View();
+        }
     }
 }

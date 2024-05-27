@@ -952,7 +952,7 @@ namespace SettlementMaster.App.Controllers
                     var rec = repoUpld.AllEager(g => g.BATCHID == batchid && g.USERID == user_id).ToList();
                     var rec2 = repoUpldGlo.AllEager(g => g.BATCHID == batchid && g.USERID == user_id).FirstOrDefault();
                     DateTime curDate = DateTime.Now;
-                    // string batchId = SmartObj.GenRefNo2();
+                    
                     SM_UPMER_UPLDGLO objG = null;
                     int cnt = 0;
                     int grst = 0;

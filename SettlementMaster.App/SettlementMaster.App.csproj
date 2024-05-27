@@ -17,7 +17,7 @@
     <AssemblyName>SettlementMaster.App</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -1707,6 +1707,7 @@
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\RevenueHead\_AddSharingPartyRow.cshtml" />
     <Content Include="Views\RevenueHead\_ViewRVHeadParty.cshtml" />
+    <Content Include="Views\Home\Dialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1757,7 +1758,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3622</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3622/</IISUrl>
+          <IISUrl>http://localhost/SettlementMaster.App</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -582,7 +582,7 @@ namespace SettlementMaster.App.Controllers
 
                 if (id == 0)
                 {
-                    BindCombo();
+                    BindCombo(mid);
                     ViewBag.HeaderTitle = "Add Revenue Group";
                     ViewBag.StatusVisible = false;
                     ViewBag.ButtonText = "Save";
